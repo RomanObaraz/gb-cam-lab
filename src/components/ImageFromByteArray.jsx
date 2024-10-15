@@ -1,30 +1,18 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { getImageDataFromPhoto } from "../utils";
 
 // Photos start at 0x2000 with an interval of 0x1000 per photo
 const photoStartOffset = 0x2000;
 const photoByteLength = 0x1000;
 
-// TODO: wrap in a function and call in useEffect [] or as in comments
-// Canvas for creating an image
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-ctx.imageSmoothingEnabled = false;
-ctx.imageSmoothingQuality = "low";
-
-// const getCanvas = () => {
-//     const canvas = document.getElementById("canvas");
-//     const ctx = canvas.getContext("2d");
-//     return { canvas, ctx };
-// };
-
-// const { canvas, ctx } = getCanvas();
-// Create a temporary canvas to draw the ImageData without scaling
-const tempCanvas = document.getElementById("tempCanvas");
-const tempCtx = tempCanvas.getContext("2d");
+// TODO: new approach
+// create the imageData with a starting palette only ONCE
+// on change palette - swap color in imageData then putImageData()
+// on rescale - just change the css props
+// on download - rescale properly with the tempCanvas and drawImage
 
 export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, palette }) {
-    const [imageSrc, setImageSrc] = useState("");
+    const canvas = useRef();
 
     const photoData = useMemo(() => {
         // Extract one photo data
@@ -33,13 +21,16 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
         return new Uint8Array(byteArray).slice(photoStart, photoEnd);
     }, [byteArray, photoIndex]);
 
-    // Create imageData for canvas context
-    const imageData = useMemo(() => {
-        return getImageDataFromPhoto(photoData, ctx, palette);
-    }, [photoData, palette]);
-
     useEffect(() => {
-        // TODO: don't scale with drawImage() !!!
+        const ctx = canvas.current.getContext("2d");
+        ctx.imageSmoothingEnabled = false;
+        ctx.imageSmoothingQuality = "low";
+
+        // Create a temporary canvas to draw the ImageData without scaling
+        const tempCanvas = document.getElementById("tempCanvas");
+        const tempCtx = tempCanvas.getContext("2d");
+
+        const imageData = getImageDataFromPhoto(photoData, ctx, palette);
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.putImageData(imageData, 0, 0);
@@ -65,17 +56,7 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
             canvas.width,
             canvas.height
         );
-
-        const base64Image = canvas.toDataURL("image/png");
-        setImageSrc(base64Image);
     }, [imageScale, palette]);
 
-    return (
-        <img
-            src={imageSrc}
-            alt="Byte Array"
-            // width={128 * imageScale}
-            // height={112 * imageScale}
-        />
-    );
+    return <canvas ref={canvas} width={128 * imageScale} height={112 * imageScale} />;
 }
