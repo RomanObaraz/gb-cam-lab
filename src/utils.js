@@ -1,5 +1,5 @@
 // If anything remains unclear check this video: https://youtu.be/txkHN6izK2Y?si=Mg0vllVL-3uzrHqh
-export function getImageDataFromPhoto(photoData, canvasCtx, palette) {
+export function getImageDataFromPhoto(photoData, palette) {
     // Gameboy Camera's photos are 128x112 resolution
     const width = 128;
     const height = 112;
@@ -10,7 +10,7 @@ export function getImageDataFromPhoto(photoData, canvasCtx, palette) {
     const hTiles = height >> 3; // 14 tiles
 
     // Create canvas imageData for storing RGBA values
-    const imageData = canvasCtx.createImageData(width, height);
+    const imageData = new ImageData(128, 112);
 
     // Gameboy stores colors as nominal values, that need to be translated to a palette
     // This is a default 4 shades of grey palette, but we use the one from the props

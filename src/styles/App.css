@@ -48,8 +48,9 @@
     margin-top: 40px;
 }
 
-#photoGallery img {
+#photoGallery canvas {
     pointer-events: none;
+    image-rendering: pixelated;
 }
 
 #photoGrid {
