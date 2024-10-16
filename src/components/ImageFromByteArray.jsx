@@ -11,6 +11,8 @@ const photoByteLength = 0x1000;
 // - on change palette - swap color in imageData then putImageData()
 // - on rescale - just change the css props
 // * on download - rescale properly with the tempCanvas and drawImage
+// * search for TODOs
+// * palette presets and ability to create them
 // *** preview should be just a scaled copy of an image, but not the separate image
 
 export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, palette }) {
@@ -43,7 +45,7 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
 
         // Update the ref to the current palette after processing changes
         prevPaletteRef.current = palette;
-    }, [palette]);
+    }, [imageData, palette]);
 
     return (
         <canvas
