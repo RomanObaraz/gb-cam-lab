@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import ColorPalette from "./components/ColorPalette";
 import { hexToRgb } from "./utils";
 import PhotoGallery from "./components/PhotoGallery";
+import ImageDownloader from "./components/ImageDownloader";
 
 export default function App() {
     const fileData = useFileStore((state) => state.fileData);
@@ -31,7 +32,12 @@ export default function App() {
         <>
             <FileLoader />
             <ColorPalette colors={palette} onChange={handlePaletteChange} />
-            {fileData && <PhotoGallery fileData={fileData} palette={paletteRgb} />}
+            {fileData && (
+                <>
+                    <ImageDownloader />
+                    <PhotoGallery fileData={fileData} palette={paletteRgb} />
+                </>
+            )}
         </>
     );
 }

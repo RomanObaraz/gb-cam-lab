@@ -31,9 +31,7 @@ export default function FileLoader() {
     return (
         <div>
             <input type="file" hidden ref={inputRef} onChange={handleFileChange} />
-            <button className="ui button" onClick={onLoadClick}>
-                Load
-            </button>
+            <button onClick={onLoadClick}>Load</button>
             {fileData && <p>File loaded! Length of binary data: {fileData.length} bytes</p>}
         </div>
     );

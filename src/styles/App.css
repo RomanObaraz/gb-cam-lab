@@ -49,7 +49,7 @@
 }
 
 #photoGallery canvas {
-    /* pointer-events: none; */
+    pointer-events: none;
     image-rendering: pixelated;
 }
 

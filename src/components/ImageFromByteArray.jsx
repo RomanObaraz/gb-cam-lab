@@ -50,6 +50,7 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
     return (
         <canvas
             ref={canvas}
+            className="photoImage"
             width={128}
             height={112}
             style={{ width: 128 * imageScale + "px", height: 112 * imageScale + "px" }}
