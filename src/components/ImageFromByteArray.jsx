@@ -10,7 +10,7 @@ const photoByteLength = 0x1000;
 // - create the imageData with a starting palette only ONCE
 // - on change palette - swap color in imageData then putImageData()
 // - on rescale - just change the css props
-// * on download - rescale properly with the tempCanvas and drawImage
+// - on download - rescale properly with the tempCanvas and drawImage
 // * search for TODOs
 // * palette presets and ability to create them
 // *** preview should be just a scaled copy of an image, but not the separate image
@@ -32,7 +32,6 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
     useEffect(() => {
         const ctx = canvas.current.getContext("2d");
         ctx.imageSmoothingEnabled = false;
-        ctx.imageSmoothingQuality = "low";
 
         palette.forEach((color, index) => {
             if (prevPaletteRef.current[index] !== color) {

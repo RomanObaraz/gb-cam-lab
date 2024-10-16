@@ -1,27 +1,33 @@
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
+import { getScaledCanvas } from "../utils";
 
-export default function ImageDownloader() {
+const imageCanvasClassName = "photoImage";
+const fileName = "gb-cam-image";
+
+export default function ImageDownloader({ imageScale }) {
     function downloadCurrent() {
-        const canvas = document.getElementsByClassName("photoImage")[0];
+        const canvas = document.getElementsByClassName(imageCanvasClassName)[0];
 
         if (!canvas) return;
 
-        canvas.toBlob((blob) => saveAs(blob, "canvas-image.png"), "image/png");
+        const scaledCanvas = getScaledCanvas(canvas, imageScale);
+        scaledCanvas.toBlob((blob) => saveAs(blob, `${fileName}.png`), "image/png");
     }
 
     async function downloadAll() {
-        const canvases = document.getElementsByClassName("photoImage");
+        const canvases = document.getElementsByClassName(imageCanvasClassName);
 
         if (!canvases) return;
 
         const zip = new JSZip();
         const zipPromises = [];
 
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 30; i++) {
             const promise = new Promise((resolve) => {
-                canvases[i].toBlob((blob) => {
-                    zip.file(`canvas-image-${i}.png`, blob);
+                const scaledCanvas = getScaledCanvas(canvases[i], imageScale);
+                scaledCanvas.toBlob((blob) => {
+                    zip.file(`${fileName}-${i - 1}.png`, blob);
                     resolve();
                 }, "image/png");
             });
@@ -31,7 +37,7 @@ export default function ImageDownloader() {
 
         await Promise.all(zipPromises);
         const zipBlob = await zip.generateAsync({ type: "blob" });
-        saveAs(zipBlob, "canvas-images.zip");
+        saveAs(zipBlob, `${fileName}s.zip`);
     }
 
     return (

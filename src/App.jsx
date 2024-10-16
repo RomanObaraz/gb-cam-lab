@@ -9,6 +9,7 @@ import ImageDownloader from "./components/ImageDownloader";
 
 export default function App() {
     const fileData = useFileStore((state) => state.fileData);
+    const [imageScale, setImageScale] = useState(3);
     const [palette, setPalette] = useState({
         color0: "#ffffff",
         color1: "#c0c0c0",
@@ -28,14 +29,32 @@ export default function App() {
         setPalette((prev) => ({ ...prev, [colorName]: colorValue }));
     }
 
+    function handleScaleInputChange(e) {
+        setImageScale(Number(e.target.value));
+    }
+
     return (
         <>
             <FileLoader />
             <ColorPalette colors={palette} onChange={handlePaletteChange} />
             {fileData && (
                 <>
-                    <ImageDownloader />
-                    <PhotoGallery fileData={fileData} palette={paletteRgb} />
+                    <div>
+                        Scale:{" "}
+                        <input
+                            type="number"
+                            min={1}
+                            max={10}
+                            value={imageScale}
+                            onChange={handleScaleInputChange}
+                        />
+                    </div>
+                    <ImageDownloader imageScale={imageScale} />
+                    <PhotoGallery
+                        fileData={fileData}
+                        imageScale={imageScale}
+                        palette={paletteRgb}
+                    />
                 </>
             )}
         </>

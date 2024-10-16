@@ -108,3 +108,30 @@ export function hexToRgb(hex) {
 
     return [r, g, b];
 }
+
+export function getScaledCanvas(originalCanvas, scale) {
+    // Create an off-screen canvas for scaling
+    const scaledCanvas = document.createElement("canvas");
+    const ctx = scaledCanvas.getContext("2d");
+
+    // Set the scaled canvas dimensions
+    scaledCanvas.width = originalCanvas.width * scale;
+    scaledCanvas.height = originalCanvas.height * scale;
+
+    ctx.imageSmoothingEnabled = false;
+
+    // Scale the original image onto the scaled canvas
+    ctx.drawImage(
+        originalCanvas,
+        0,
+        0,
+        originalCanvas.width,
+        originalCanvas.height, // Source rectangle
+        0,
+        0,
+        scaledCanvas.width,
+        scaledCanvas.height // Destination rectangle
+    );
+
+    return scaledCanvas;
+}
