@@ -7,7 +7,7 @@ import ColorPalette from "./components/ColorPalette";
 import { hexToRgb } from "./utils";
 
 // TODO: fix performance and remove this
-const paletteRgb = [
+const paletteRgb2 = [
     hexToRgb("#ffffff"),
     hexToRgb("#c0c0c0"),
     hexToRgb("#606060"),
@@ -27,7 +27,7 @@ export default function App() {
 
     // TODO: maybe use debounce for picking colors
 
-    const paletteRgb2 = [
+    const paletteRgb = [
         useMemo(() => hexToRgb(palette.color0), [palette.color0]),
         useMemo(() => hexToRgb(palette.color1), [palette.color1]),
         useMemo(() => hexToRgb(palette.color2), [palette.color2]),
@@ -42,6 +42,7 @@ export default function App() {
         setPalette((prev) => ({ ...prev, [colorName]: colorValue }));
     }
 
+    // TODO: organize this mess (maybe with new component(s))
     return (
         <>
             <FileLoader />
@@ -64,7 +65,7 @@ export default function App() {
                             byteArray={fileData}
                             photoIndex={currentPhotoIndex}
                             imageScale={imageScale}
-                            palette={paletteRgb2}
+                            palette={paletteRgb}
                         />
                         <div id="photoGrid">
                             {[...Array(30)].map((value, index) => (
@@ -80,7 +81,7 @@ export default function App() {
                                         byteArray={fileData}
                                         photoIndex={index}
                                         imageScale={1}
-                                        palette={paletteRgb2}
+                                        palette={paletteRgb}
                                     />
                                 </div>
                             ))}
