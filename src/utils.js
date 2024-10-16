@@ -12,6 +12,14 @@ export function getImageDataFromPhoto(photoData, palette) {
     // Create canvas imageData for storing RGBA values
     const imageData = new ImageData(128, 112);
 
+    // Shade map will contain pixel indexes by shades for palette replacement in imageData in the future
+    imageData.shadeMap = {
+        shade0: [],
+        shade1: [],
+        shade2: [],
+        shade3: [],
+    };
+
     // Gameboy stores colors as nominal values, that need to be translated to a palette
     // This is a default 4 shades of grey palette, but we use the one from the props
     // const palette = [
@@ -64,6 +72,13 @@ export function getImageDataFromPhoto(photoData, palette) {
                 imageData.data[pixelIndex + 1] = palette[shade][1];
                 imageData.data[pixelIndex + 2] = palette[shade][2];
                 imageData.data[pixelIndex + 3] = 255;
+
+                // Save indexes in shade map
+                imageData.shadeMap[`shade${shade}`].push([
+                    pixelIndex + 0,
+                    pixelIndex + 1,
+                    pixelIndex + 2,
+                ]);
             }
         }
     }
@@ -71,11 +86,21 @@ export function getImageDataFromPhoto(photoData, palette) {
     return imageData;
 }
 
+export function replaceImageDataColor(imageData, shadeIndex, newColor) {
+    const data = imageData.data;
+    const [r, g, b] = newColor;
+
+    imageData.shadeMap[`shade${shadeIndex}`].forEach((pixelIndex) => {
+        data[pixelIndex[0]] = r;
+        data[pixelIndex[1]] = g;
+        data[pixelIndex[2]] = b;
+    });
+}
+
 export function hexToRgb(hex) {
     // Remove the hash at the start if it's there
     hex = hex.replace(/^#/, "");
 
-    // Parse the hex values into RGB
     let bigint = parseInt(hex, 16);
     let r = (bigint >> 16) & 255;
     let g = (bigint >> 8) & 255;
