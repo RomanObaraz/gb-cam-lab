@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { useFileStore } from "../stores/useFileStore";
 
 export default function FileLoader() {
-    const fileData = useFileStore((state) => state.fileData); // Access the global fileData state
-    const setFileData = useFileStore((state) => state.setFileData); // Get the action to update state
+    const fileData = useFileStore((state) => state.fileData);
+    const setFileData = useFileStore((state) => state.setFileData);
 
     const inputRef = useRef();
 
@@ -18,12 +18,11 @@ export default function FileLoader() {
             const reader = new FileReader();
 
             reader.onload = (e) => {
-                const arrayBuffer = e.target.result; // Get binary data
-                const byteArray = new Uint8Array(arrayBuffer); // Convert to byte array
-                setFileData(byteArray); // Store the binary data
+                const arrayBuffer = e.target.result;
+                const byteArray = new Uint8Array(arrayBuffer);
+                setFileData(byteArray);
             };
 
-            // Read the file as an ArrayBuffer (binary)
             reader.readAsArrayBuffer(file);
         }
     }
