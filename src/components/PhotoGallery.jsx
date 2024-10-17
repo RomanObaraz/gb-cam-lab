@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ImageFromByteArray from "./ImageFromByteArray";
 
-export default function PhotoGallery({ fileData, imageScale, palette }) {
+export default function PhotoGallery({ fileData, imageScale, paletteRGB }) {
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
     // TODO: organize this better?
@@ -12,7 +12,7 @@ export default function PhotoGallery({ fileData, imageScale, palette }) {
                 byteArray={fileData}
                 photoIndex={currentPhotoIndex}
                 imageScale={imageScale}
-                palette={palette}
+                paletteRGB={paletteRGB}
             />
             <div id="photoGrid">
                 {[...Array(30)].map((value, index) => (
@@ -26,7 +26,7 @@ export default function PhotoGallery({ fileData, imageScale, palette }) {
                             byteArray={fileData}
                             photoIndex={index}
                             imageScale={1}
-                            palette={palette}
+                            paletteRGB={paletteRGB}
                         />
                     </div>
                 ))}

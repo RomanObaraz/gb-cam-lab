@@ -3,40 +3,51 @@ import FileLoader from "./components/FileLoader";
 import { useFileStore } from "./stores/useFileStore";
 import { useMemo, useState } from "react";
 import ColorPalette from "./components/ColorPalette";
-import { hexToRgb } from "./utils";
+import { hexToRgb } from "./utils/utils";
 import PhotoGallery from "./components/PhotoGallery";
 import ImageDownloader from "./components/ImageDownloader";
+import ColorPalettePreset from "./components/ColorPalettePreset";
+import * as palettes from "./utils/palettes.json";
 
 export default function App() {
     const fileData = useFileStore((state) => state.fileData);
     const [imageScale, setImageScale] = useState(3);
-    const [palette, setPalette] = useState({
-        color0: "#ffffff",
-        color1: "#c0c0c0",
-        color2: "#606060",
-        color3: "#000000",
-    });
+    const [palette, setPalette] = useState(structuredClone(palettes.blackAndWhite));
 
-    // TODO: this is bad, cuz array re-inits every App render
-    const paletteRgb = [
-        useMemo(() => hexToRgb(palette.color0), [palette.color0]),
-        useMemo(() => hexToRgb(palette.color1), [palette.color1]),
-        useMemo(() => hexToRgb(palette.color2), [palette.color2]),
-        useMemo(() => hexToRgb(palette.color3), [palette.color3]),
-    ];
-
-    function handlePaletteChange(colorName, colorValue) {
-        setPalette((prev) => ({ ...prev, [colorName]: colorValue }));
-    }
+    const paletteRGB = useMemo(
+        () => [
+            hexToRgb(palette.colors[0]),
+            hexToRgb(palette.colors[1]),
+            hexToRgb(palette.colors[2]),
+            hexToRgb(palette.colors[3]),
+        ],
+        [palette]
+    );
 
     function handleScaleInputChange(e) {
         setImageScale(Number(e.target.value));
     }
 
+    function handlePaletteColorChange(index, colorValue) {
+        const newPalette = { ...palette };
+        newPalette.colors[index] = colorValue;
+        setPalette(newPalette);
+    }
+
+    function handlePalettePresetSelect(newPalette) {
+        // clone preset data so that we don't change the preset itself
+        setPalette(structuredClone(newPalette));
+    }
+
     return (
         <>
             <FileLoader />
-            <ColorPalette colors={palette} onChange={handlePaletteChange} />
+            <ColorPalette colors={palette.colors} onChange={handlePaletteColorChange} />
+            <ColorPalettePreset
+                palette={palettes.blackAndWhite}
+                onSelect={handlePalettePresetSelect}
+            />
+            <ColorPalettePreset palette={palettes.gameboy} onSelect={handlePalettePresetSelect} />
             {fileData && (
                 <>
                     <div>
@@ -53,7 +64,7 @@ export default function App() {
                     <PhotoGallery
                         fileData={fileData}
                         imageScale={imageScale}
-                        palette={paletteRgb}
+                        paletteRGB={paletteRGB}
                     />
                 </>
             )}

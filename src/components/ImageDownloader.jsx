@@ -1,6 +1,6 @@
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
-import { getScaledCanvas } from "../utils";
+import { getScaledCanvas } from "../utils/utils";
 
 const imageCanvasClassName = "photoImage";
 const fileName = "gb-cam-image";

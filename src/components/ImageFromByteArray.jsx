@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
-import { getImageDataFromPhoto, replaceImageDataColor } from "../utils";
+import { getImageDataFromPhoto, replaceImageDataColor } from "../utils/utils";
 
 // Photos start at 0x2000 with an interval of 0x1000 per photo
 const photoStartOffset = 0x2000;
@@ -12,12 +12,13 @@ const photoByteLength = 0x1000;
 // - on rescale - just change the css props
 // - on download - rescale properly with the tempCanvas and drawImage
 // * search for TODOs
-// * palette presets and ability to create them
+// * copy palette preset color on click
+// * create/delete custom palettes
 // *** preview should be just a scaled copy of an image, but not the separate image
 
-export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, palette }) {
+export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, paletteRGB }) {
     const canvas = useRef();
-    const prevPaletteRef = useRef(palette);
+    const prevPaletteRef = useRef(paletteRGB);
 
     const imageData = useMemo(() => {
         // Extract one photo data
@@ -26,14 +27,14 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
         const photoData = new Uint8Array(byteArray).slice(photoStart, photoEnd);
 
         // Create imageData for canvas from, photoData
-        return getImageDataFromPhoto(photoData, palette);
+        return getImageDataFromPhoto(photoData, paletteRGB);
     }, [byteArray, photoIndex]);
 
     useEffect(() => {
         const ctx = canvas.current.getContext("2d");
         ctx.imageSmoothingEnabled = false;
 
-        palette.forEach((color, index) => {
+        paletteRGB.forEach((color, index) => {
             if (prevPaletteRef.current[index] !== color) {
                 replaceImageDataColor(imageData, index, color);
             }
@@ -43,8 +44,8 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
         ctx.putImageData(imageData, 0, 0);
 
         // Update the ref to the current palette after processing changes
-        prevPaletteRef.current = palette;
-    }, [imageData, palette]);
+        prevPaletteRef.current = paletteRGB;
+    }, [imageData, paletteRGB]);
 
     return (
         <canvas

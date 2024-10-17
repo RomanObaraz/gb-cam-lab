@@ -5,32 +5,32 @@ export default function ColorPalette({ colors, onChange }) {
                 Color 1:{" "}
                 <input
                     type="color"
-                    value={colors.color0}
-                    onChange={(e) => onChange("color0", e.target.value)}
+                    value={colors[0]}
+                    onChange={(e) => onChange(0, e.target.value)}
                 />
             </div>
             <div>
                 Color 2:{" "}
                 <input
                     type="color"
-                    value={colors.color1}
-                    onChange={(e) => onChange("color1", e.target.value)}
+                    value={colors[1]}
+                    onChange={(e) => onChange(1, e.target.value)}
                 />
             </div>
             <div>
                 Color 3:{" "}
                 <input
                     type="color"
-                    value={colors.color2}
-                    onChange={(e) => onChange("color2", e.target.value)}
+                    value={colors[2]}
+                    onChange={(e) => onChange(2, e.target.value)}
                 />
             </div>
             <div>
                 Color 4:{" "}
                 <input
                     type="color"
-                    value={colors.color3}
-                    onChange={(e) => onChange("color3", e.target.value)}
+                    value={colors[3]}
+                    onChange={(e) => onChange(3, e.target.value)}
                 />
             </div>
         </div>
