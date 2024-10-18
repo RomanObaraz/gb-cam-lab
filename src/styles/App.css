@@ -84,6 +84,18 @@
     margin: 5px;
 }
 
+.palettePresetHolder {
+    display: flex;
+    align-items: center;
+}
+
+.palettePresetHolder > button {
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+    font-size: 16px;
+}
+
 .palettePreset {
     display: flex;
     align-items: center;
@@ -99,6 +111,7 @@
     display: flex;
     gap: 5px;
     margin-left: 20px;
+    margin-right: 20px;
     padding: 2px;
     /* background: white; */
     /* border: 1px solid rgba(0, 0, 0, 0.2); */

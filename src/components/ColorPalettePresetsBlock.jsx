@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import ColorPalettePreset from "./ColorPalettePreset";
 import { defaultPalettePresets } from "../utils/defaultPalettes";
 
+// TODO: disable delete button for default presets?
+
 export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelect }) {
     const [palettePresets, setPalettePresets] = useState(null);
 
@@ -22,28 +24,39 @@ export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelec
         localStorage.setItem("palettePresets", JSON.stringify(updatedPresets));
     }
 
+    function handleDeletePalettePreset(paletteKey) {
+        const updatedPresets = { ...palettePresets };
+        delete updatedPresets[paletteKey];
+        setPalettePresets(updatedPresets);
+        localStorage.setItem("palettePresets", JSON.stringify(updatedPresets));
+    }
+
     // read custom palettes from local storage
     useEffect(() => {
         const storedPalettePresets = JSON.parse(localStorage.getItem("palettePresets"));
 
-        if (storedPalettePresets) {
+        if (storedPalettePresets && Object.keys(storedPalettePresets).length) {
             setPalettePresets(storedPalettePresets);
         } else {
-            localStorage.setItem("palettePresets", JSON.stringify(defaultPalettePresets));
             setPalettePresets(defaultPalettePresets);
+            localStorage.setItem("palettePresets", JSON.stringify(defaultPalettePresets));
         }
     }, []);
 
     return (
         <>
             {palettePresets &&
-                Object.values(palettePresets).map((palette, i) => {
+                Object.keys(palettePresets).map((paletteKey, i) => {
                     return (
-                        <ColorPalettePreset
-                            key={`palettePreset-${i}`}
-                            palette={palette}
-                            onSelect={onPresetSelect}
-                        />
+                        <div key={`palettePresetHolder-${i}`} className="palettePresetHolder">
+                            <ColorPalettePreset
+                                palette={palettePresets[paletteKey]}
+                                onSelect={onPresetSelect}
+                            />
+                            <button onClick={() => handleDeletePalettePreset(paletteKey)}>
+                                &#9003;
+                            </button>
+                        </div>
                     );
                 })}
 
