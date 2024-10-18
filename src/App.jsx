@@ -6,13 +6,13 @@ import ColorPalette from "./components/ColorPalette";
 import { hexToRgb } from "./utils/utils";
 import PhotoGallery from "./components/PhotoGallery";
 import ImageDownloader from "./components/ImageDownloader";
-import ColorPalettePreset from "./components/ColorPalettePreset";
-import * as palettes from "./utils/palettes.json";
+import ColorPalettePresetsBlock from "./components/ColorPalettePresetsBlock";
+import { defaultPalettePresets } from "./utils/defaultPalettes";
 
 export default function App() {
     const fileData = useFileStore((state) => state.fileData);
     const [imageScale, setImageScale] = useState(3);
-    const [palette, setPalette] = useState(structuredClone(palettes.blackAndWhite));
+    const [palette, setPalette] = useState(structuredClone(defaultPalettePresets.blackAndWhite));
 
     const paletteRGB = useMemo(
         () => [
@@ -43,15 +43,11 @@ export default function App() {
         <>
             <FileLoader />
             <ColorPalette colors={palette.colors} onChange={handlePaletteColorChange} />
-            {Object.values(palettes.default).map((palette, i) => {
-                return (
-                    <ColorPalettePreset
-                        key={`palettePreset-${i}`}
-                        palette={palette}
-                        onSelect={handlePalettePresetSelect}
-                    />
-                );
-            })}
+            <ColorPalettePresetsBlock
+                currentPalette={palette}
+                onPresetSelect={handlePalettePresetSelect}
+            />
+
             {fileData && (
                 <>
                     <div>
