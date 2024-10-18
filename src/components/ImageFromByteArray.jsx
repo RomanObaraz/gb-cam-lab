@@ -12,7 +12,7 @@ const photoByteLength = 0x1000;
 // - on rescale - just change the css props
 // - on download - rescale properly with the tempCanvas and drawImage
 // * search for TODOs
-// * copy palette preset color on click
+// - copy palette preset color on click
 // * create/delete custom palettes
 // *** preview should be just a scaled copy of an image, but not the separate image
 

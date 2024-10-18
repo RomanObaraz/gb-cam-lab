@@ -5,8 +5,10 @@ export default function ColorPalettePreset({ palette, onSelect }) {
         const tooltipElement = e.currentTarget.children[0];
         const tooltipText = tooltipElement.innerText;
 
-        tooltipElement.innerText = "Copied";
-        setTimeout(() => (tooltipElement.innerText = tooltipText), 1500);
+        if (tooltipElement.innerText !== "Copied") {
+            tooltipElement.innerText = "Copied";
+            setTimeout(() => (tooltipElement.innerText = tooltipText), 1500);
+        }
     }
 
     return (

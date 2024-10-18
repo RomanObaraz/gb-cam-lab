@@ -43,11 +43,15 @@ export default function App() {
         <>
             <FileLoader />
             <ColorPalette colors={palette.colors} onChange={handlePaletteColorChange} />
-            <ColorPalettePreset
-                palette={palettes.blackAndWhite}
-                onSelect={handlePalettePresetSelect}
-            />
-            <ColorPalettePreset palette={palettes.gameboy} onSelect={handlePalettePresetSelect} />
+            {Object.values(palettes.default).map((palette, i) => {
+                return (
+                    <ColorPalettePreset
+                        key={`palettePreset-${i}`}
+                        palette={palette}
+                        onSelect={handlePalettePresetSelect}
+                    />
+                );
+            })}
             {fileData && (
                 <>
                     <div>
