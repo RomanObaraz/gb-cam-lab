@@ -84,12 +84,14 @@
     margin: 5px;
 }
 
-.palettePresetHolder {
+.customPalettePresetHolder {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-left: 40px;
 }
 
-.palettePresetHolder > button {
+.customPalettePresetHolder > button {
     width: 40px;
     height: 40px;
     padding: 0px;

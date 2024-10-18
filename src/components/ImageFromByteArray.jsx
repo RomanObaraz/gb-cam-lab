@@ -13,7 +13,7 @@ const photoByteLength = 0x1000;
 // - on download - rescale properly with the tempCanvas and drawImage
 // * search for TODOs
 // - copy palette preset color on click
-// * create/delete custom palettes
+// - create/delete custom palettes
 // *** preview should be just a scaled copy of an image, but not the separate image
 
 export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, paletteRGB }) {

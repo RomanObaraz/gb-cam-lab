@@ -2,55 +2,64 @@ import { useEffect, useState } from "react";
 import ColorPalettePreset from "./ColorPalettePreset";
 import { defaultPalettePresets } from "../utils/defaultPalettes";
 
-// TODO: disable delete button for default presets?
-
 export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelect }) {
-    const [palettePresets, setPalettePresets] = useState(null);
+    const [customPalettePresets, setCustomPalettePresets] = useState({});
+
+    function updatePalettePresetStorage(updatedPresets) {
+        if (Object.keys(updatedPresets).length) {
+            localStorage.setItem("palettePresets", JSON.stringify(updatedPresets));
+        } else {
+            localStorage.removeItem("palettePresets");
+        }
+    }
 
     function handleCreatePalettePreset() {
-        const presetId =
-            Object.values(palettePresets).length - Object.values(defaultPalettePresets).length;
+        const presetId = Object.values(customPalettePresets).length;
 
         const newPreset = {
             name: `Custom-${presetId}`,
             colors: structuredClone(currentPalette.colors),
         };
 
-        const updatedPresets = { ...palettePresets, [`custom${presetId}`]: newPreset };
-
-        setPalettePresets(updatedPresets);
-
-        // write custom palettes to local storage
-        localStorage.setItem("palettePresets", JSON.stringify(updatedPresets));
+        const updatedPresets = { ...customPalettePresets, [`custom${presetId}`]: newPreset };
+        setCustomPalettePresets(updatedPresets);
+        updatePalettePresetStorage(updatedPresets);
     }
 
     function handleDeletePalettePreset(paletteKey) {
-        const updatedPresets = { ...palettePresets };
+        const updatedPresets = { ...customPalettePresets };
         delete updatedPresets[paletteKey];
-        setPalettePresets(updatedPresets);
-        localStorage.setItem("palettePresets", JSON.stringify(updatedPresets));
+        setCustomPalettePresets(updatedPresets);
+        updatePalettePresetStorage(updatedPresets);
     }
 
     // read custom palettes from local storage
     useEffect(() => {
         const storedPalettePresets = JSON.parse(localStorage.getItem("palettePresets"));
 
-        if (storedPalettePresets && Object.keys(storedPalettePresets).length) {
-            setPalettePresets(storedPalettePresets);
-        } else {
-            setPalettePresets(defaultPalettePresets);
-            localStorage.setItem("palettePresets", JSON.stringify(defaultPalettePresets));
+        if (storedPalettePresets) {
+            setCustomPalettePresets(storedPalettePresets);
         }
     }, []);
 
     return (
         <>
-            {palettePresets &&
-                Object.keys(palettePresets).map((paletteKey, i) => {
+            {Object.values(defaultPalettePresets).map((palette, i) => {
+                return (
+                    <ColorPalettePreset
+                        key={`defaultPalette-${i}`}
+                        palette={palette}
+                        onSelect={onPresetSelect}
+                    />
+                );
+            })}
+
+            {customPalettePresets &&
+                Object.keys(customPalettePresets).map((paletteKey, i) => {
                     return (
-                        <div key={`palettePresetHolder-${i}`} className="palettePresetHolder">
+                        <div key={`palettePresetHolder-${i}`} className="customPalettePresetHolder">
                             <ColorPalettePreset
-                                palette={palettePresets[paletteKey]}
+                                palette={customPalettePresets[paletteKey]}
                                 onSelect={onPresetSelect}
                             />
                             <button onClick={() => handleDeletePalettePreset(paletteKey)}>
