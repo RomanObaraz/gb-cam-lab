@@ -4,7 +4,6 @@ import ImageFromByteArray from "./ImageFromByteArray";
 export default function PhotoGallery({ fileData, imageScale, paletteRGB }) {
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
-    // TODO: organize this better?
     return (
         <div id="photoGallery">
             <ImageFromByteArray

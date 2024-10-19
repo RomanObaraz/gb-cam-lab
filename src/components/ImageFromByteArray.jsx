@@ -5,17 +5,6 @@ import { getImageDataFromPhoto, replaceImageDataColor } from "../utils/utils";
 const photoStartOffset = 0x2000;
 const photoByteLength = 0x1000;
 
-// TODO: new approach
-// - create the photoData with a starting palette only ONCE
-// - create the imageData with a starting palette only ONCE
-// - on change palette - swap color in imageData then putImageData()
-// - on rescale - just change the css props
-// - on download - rescale properly with the tempCanvas and drawImage
-// * search for TODOs
-// - copy palette preset color on click
-// - create/delete custom palettes
-// *** preview should be just a scaled copy of an image, but not the separate image
-
 export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, paletteRGB }) {
     const canvas = useRef();
     const prevPaletteRef = useRef(paletteRGB);
