@@ -10,7 +10,7 @@ import ColorPalettePresetsBlock from "./components/ColorPalettePresetsBlock";
 import { defaultPalettePresets } from "./utils/defaultPalettes";
 
 // TODO
-// * make scale input better
+// - make scale input better
 // * preview resulting resolution for scale input
 // * save file validation
 // * color palette shifting
@@ -58,30 +58,46 @@ export default function App() {
 
     return (
         <>
-            <FileLoader />
-            <ColorPalette colors={palette.colors} onChange={handlePaletteColorChange} />
-            <ColorPalettePresetsBlock
-                currentPalette={palette}
-                onPresetSelect={handlePalettePresetSelect}
-            />
+            {/* Top block (all controls) */}
+            <div id="controlBlock">
+                {/* Left block (file loader, scale input, image downloader) */}
+                <div id="fileBlock">
+                    <FileLoader />
+                    {fileData && (
+                        <>
+                            <div>
+                                Scale:{" "}
+                                <input
+                                    type="number"
+                                    pattern="\d*"
+                                    min={1}
+                                    max={10}
+                                    value={imageScale}
+                                    onChange={handleScaleInputChange}
+                                    onKeyDown={(e) =>
+                                        ["e", "E", "+", "-", "."].includes(e.key) &&
+                                        e.preventDefault()
+                                    }
+                                />
+                            </div>
+                            <ImageDownloader imageScale={imageScale} />
+                        </>
+                    )}
+                </div>
 
+                {/* Right block (color palette, presets) */}
+                <div id="colorBlock">
+                    <ColorPalette colors={palette.colors} onChange={handlePaletteColorChange} />
+                    <ColorPalettePresetsBlock
+                        currentPalette={palette}
+                        onPresetSelect={handlePalettePresetSelect}
+                    />
+                </div>
+            </div>
+
+            {/* Bottom block (gallery) */}
             {fileData && (
                 <>
-                    <ImageDownloader imageScale={imageScale} />
-                    <div id="scaleInput">
-                        Scale:{" "}
-                        <input
-                            type="number"
-                            pattern="\d*"
-                            min={1}
-                            max={10}
-                            value={imageScale}
-                            onChange={handleScaleInputChange}
-                            onKeyDown={(e) =>
-                                ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault()
-                            }
-                        />
-                    </div>
                     <PhotoGallery
                         fileData={fileData}
                         imageScale={imageScale}

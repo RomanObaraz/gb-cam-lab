@@ -72,6 +72,7 @@ input[type="color"] {
     width: 60px;
     height: 20px;
     border: 1px solid white;
+    cursor: pointer;
 }
 
 input[type="color"]::-moz-color-swatch {
@@ -85,4 +86,16 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 
 input[type="color"]::-webkit-color-swatch {
     border: none;
+}
+
+input[type="number"] {
+    width: 50px;
+    height: 30px;
+    border: 1px solid white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+    height: 30px;
 }
