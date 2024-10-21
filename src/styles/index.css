@@ -94,6 +94,7 @@ input[type="number"] {
     border: 1px solid white;
     cursor: pointer;
     font-size: 16px;
+    padding-left: 6px;
 }
 
 input[type="number"]::-webkit-inner-spin-button {

@@ -1,20 +1,31 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useFileStore } from "../stores/useFileStore";
 
 export default function FileLoader() {
+    const [errorMessage, setErrorMessage] = useState(null);
+
     const fileData = useFileStore((state) => state.fileData);
     const setFileData = useFileStore((state) => state.setFileData);
 
     const inputRef = useRef();
 
-    function onLoadClick() {
-        inputRef.current.click();
+    function validateFile(file) {
+        // TODO: might need more thorough validation for file content
+        // Gameboy Camera .sav file should always be 131072 bytes (right?)
+        // I can't test other game's .sav files now, so I assume this validation is enough to differ GB Camera saves
+        if (file.size !== 131072) {
+            setErrorMessage("Invalid save file. Ensure you load a Gameboy Camera .sav.");
+            return false;
+        }
+
+        setErrorMessage(null);
+        return true;
     }
 
     function handleFileChange(event) {
         const file = event.target.files[0]; // Get the first selected file
 
-        if (file) {
+        if (file && validateFile(file)) {
             const reader = new FileReader();
 
             reader.onload = (e) => {
@@ -29,9 +40,10 @@ export default function FileLoader() {
 
     return (
         <div>
-            <input type="file" hidden ref={inputRef} onChange={handleFileChange} />
-            <button onClick={onLoadClick}>Load</button>
+            <input type="file" hidden ref={inputRef} accept=".sav" onChange={handleFileChange} />
+            <button onClick={() => inputRef.current.click()}>Load</button>
             {fileData && <p>File loaded! Length of binary data: {fileData.length} bytes</p>}
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         </div>
     );
 }

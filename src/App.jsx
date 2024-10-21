@@ -12,7 +12,7 @@ import { defaultPalettePresets } from "./utils/defaultPalettes";
 // TODO
 // - make scale input better
 // * preview resulting resolution for scale input
-// * save file validation
+// - save file validation
 // * color palette shifting
 
 export default function App() {
