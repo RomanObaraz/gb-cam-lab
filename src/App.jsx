@@ -11,7 +11,7 @@ import { defaultPalettePresets } from "./utils/defaultPalettes";
 
 // TODO
 // - make scale input better
-// * preview resulting resolution for scale input
+// - preview resulting resolution for scale input
 // - save file validation
 // * color palette shifting
 
@@ -78,7 +78,8 @@ export default function App() {
                                         ["e", "E", "+", "-", "."].includes(e.key) &&
                                         e.preventDefault()
                                     }
-                                />
+                                />{" "}
+                                {`(${128 * imageScale}x${112 * imageScale}px)`}
                             </div>
                             <ImageDownloader imageScale={imageScale} />
                         </>
