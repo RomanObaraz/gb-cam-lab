@@ -9,6 +9,12 @@ import ImageDownloader from "./components/ImageDownloader";
 import ColorPalettePresetsBlock from "./components/ColorPalettePresetsBlock";
 import { defaultPalettePresets } from "./utils/defaultPalettes";
 
+// TODO
+// * make scale input better
+// * preview resulting resolution for scale input
+// * save file validation
+// * color palette shifting
+
 export default function App() {
     const fileData = useFileStore((state) => state.fileData);
     const [imageScale, setImageScale] = useState(3);
@@ -25,7 +31,15 @@ export default function App() {
     );
 
     function handleScaleInputChange(e) {
-        setImageScale(Number(e.target.value));
+        let inputValue = e.target.value;
+
+        // Parse to integer to remove leading zeros
+        if (inputValue !== "" && inputValue > 0) {
+            inputValue = inputValue.replace(/^0+/, "") || "0"; // Remove leading zeros to prevent input like "01"
+            setImageScale(inputValue);
+        } else {
+            setImageScale(1);
+        }
     }
 
     function handlePaletteColorChange(index, colorValue) {
