@@ -155,6 +155,6 @@
     opacity: 1;
 }
 
-.filepond--wrapper {
-    width: 300px;
+.downloadButton {
+    margin: 5px;
 }

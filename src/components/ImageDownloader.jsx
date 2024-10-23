@@ -42,8 +42,12 @@ export default function ImageDownloader({ imageScale }) {
 
     return (
         <div>
-            <button onClick={downloadCurrent}>Download Current</button>
-            <button onClick={downloadAll}>Download All</button>
+            <button className="downloadButton" onClick={downloadCurrent}>
+                Download Current
+            </button>
+            <button className="downloadButton" onClick={downloadAll}>
+                Download All
+            </button>
         </div>
     );
 }
