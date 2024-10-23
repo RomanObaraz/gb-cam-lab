@@ -9,12 +9,6 @@ import ImageDownloader from "./components/ImageDownloader";
 import ColorPalettePresetsBlock from "./components/ColorPalettePresetsBlock";
 import { defaultPalettePresets } from "./utils/defaultPalettes";
 
-// TODO
-// - make scale input better
-// - preview resulting resolution for scale input
-// - save file validation
-// * color palette shifting
-
 export default function App() {
     const fileData = useFileStore((state) => state.fileData);
     const [imageScale, setImageScale] = useState(3);

@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import { useFileStore } from "../stores/useFileStore";
+import { FilePond } from "react-filepond";
+import "filepond/dist/filepond.min.css";
 
 export default function FileLoader() {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -23,7 +25,8 @@ export default function FileLoader() {
     }
 
     function handleFileChange(event) {
-        const file = event.target.files[0]; // Get the first selected file
+        const file = event[0].file;
+        // const file = event.target.files[0]; // Get the first selected file
 
         if (file && validateFile(file)) {
             const reader = new FileReader();
@@ -40,10 +43,11 @@ export default function FileLoader() {
 
     return (
         <div>
-            <input type="file" hidden ref={inputRef} accept=".sav" onChange={handleFileChange} />
+            <FilePond maxFiles={1} onupdatefiles={handleFileChange} />
+            {/* <input type="file" hidden ref={inputRef} accept=".sav" onChange={handleFileChange} />
             <button onClick={() => inputRef.current.click()}>Load</button>
             {fileData && <p>File loaded! Length of binary data: {fileData.length} bytes</p>}
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>} */}
         </div>
     );
 }

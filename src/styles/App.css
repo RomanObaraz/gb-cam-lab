@@ -154,3 +154,7 @@
 .colorPreview:hover .colorPreviewTooltip {
     opacity: 1;
 }
+
+.filepond--wrapper {
+    width: 300px;
+}
