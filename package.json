@@ -12,6 +12,7 @@
     "dependencies": {
         "file-saver": "^2.0.5",
         "filepond": "^4.31.4",
+        "filepond-plugin-file-validate-type": "^1.2.9",
         "jszip": "^3.10.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",

@@ -1,15 +1,25 @@
-import { useRef, useState } from "react";
-import { useFileStore } from "../stores/useFileStore";
-import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
+import "../styles/Filepond.css";
+import { useState } from "react";
+import { useFileStore } from "../stores/useFileStore";
+import { FilePond, registerPlugin } from "react-filepond";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+
+registerPlugin(FilePondPluginFileValidateType);
 
 export default function FileLoader() {
     const [errorMessage, setErrorMessage] = useState(null);
-
-    const fileData = useFileStore((state) => state.fileData);
     const setFileData = useFileStore((state) => state.setFileData);
 
-    const inputRef = useRef();
+    function validateFileType(file, type) {
+        return new Promise((resolve) => {
+            if (!type) {
+                type = "." + file.name.split(".").pop();
+            }
+
+            resolve(type);
+        });
+    }
 
     function validateFile(file) {
         // TODO: might need more thorough validation for file content
@@ -24,30 +34,46 @@ export default function FileLoader() {
         return true;
     }
 
-    function handleFileChange(event) {
-        const file = event[0].file;
-        // const file = event.target.files[0]; // Get the first selected file
+    function handleFileChange(files) {
+        const file = files[0]?.file;
 
-        if (file && validateFile(file)) {
-            const reader = new FileReader();
-
-            reader.onload = (e) => {
-                const arrayBuffer = e.target.result;
-                const byteArray = new Uint8Array(arrayBuffer);
-                setFileData(byteArray);
-            };
-
-            reader.readAsArrayBuffer(file);
+        if (!file) {
+            setFileData(null);
+            setErrorMessage(null);
+            return;
         }
+
+        if (!validateFile(file)) {
+            setFileData(null);
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const arrayBuffer = e.target.result;
+            const byteArray = new Uint8Array(arrayBuffer);
+            setFileData(byteArray);
+        };
+
+        reader.readAsArrayBuffer(file);
     }
 
     return (
         <div>
-            <FilePond maxFiles={1} onupdatefiles={handleFileChange} />
+            <FilePond
+                labelIdle={
+                    'Drag & Drop your .sav file or <span class="filepond--label-action"> Browse </span>'
+                }
+                acceptedFileTypes={[".sav"]}
+                maxFiles={1}
+                onupdatefiles={handleFileChange}
+                fileValidateTypeDetectType={validateFileType}
+            />
             {/* <input type="file" hidden ref={inputRef} accept=".sav" onChange={handleFileChange} />
             <button onClick={() => inputRef.current.click()}>Load</button>
-            {fileData && <p>File loaded! Length of binary data: {fileData.length} bytes</p>}
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>} */}
+            {fileData && <p>File loaded! Length of binary data: {fileData.length} bytes</p>} */}
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         </div>
     );
 }
