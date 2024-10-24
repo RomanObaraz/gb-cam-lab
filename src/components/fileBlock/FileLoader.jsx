@@ -1,15 +1,17 @@
 import "filepond/dist/filepond.min.css";
-import "../styles/Filepond.css";
+import "../../styles/Filepond.css";
 import { useState } from "react";
-import { useFileStore } from "../stores/useFileStore";
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import { useStore } from "../../stores/useStore";
 
 registerPlugin(FilePondPluginFileValidateType);
 
+// TODO: review
+
 export default function FileLoader() {
     const [errorMessage, setErrorMessage] = useState(null);
-    const setFileData = useFileStore((state) => state.setFileData);
+    const setFileData = useStore((state) => state.setFileData);
 
     function validateFileType(file, type) {
         return new Promise((resolve) => {

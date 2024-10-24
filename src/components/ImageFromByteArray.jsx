@@ -17,6 +17,7 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
 
         // Create imageData for canvas from photoData
         return getImageDataFromPhoto(photoData, paletteRGB);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [byteArray, photoIndex]);
 
     useEffect(() => {

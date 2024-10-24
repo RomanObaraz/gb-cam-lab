@@ -1,19 +1,17 @@
 import "./styles/App.css";
-import FileLoader from "./components/FileLoader";
-import { useFileStore } from "./stores/useFileStore";
 import { useMemo, useState } from "react";
-import ColorPalette from "./components/ColorPalette";
 import { hexToRgb } from "./utils/utils";
 import PhotoGallery from "./components/PhotoGallery";
-import ImageDownloader from "./components/ImageDownloader";
-import ColorPalettePresetsBlock from "./components/ColorPalettePresetsBlock";
+import { useStore } from "./stores/useStore";
+import FileBlock from "./components/fileBlock";
+import ColorBlock from "./components/colorBlock";
 import { defaultPalettePresets } from "./utils/defaultPalettes";
 
 export default function App() {
-    const fileData = useFileStore((state) => state.fileData);
-    const [imageScale, setImageScale] = useState(3);
+    const fileData = useStore((state) => state.fileData);
     const [palette, setPalette] = useState(structuredClone(defaultPalettePresets.blackAndWhite));
 
+    // const paletteRGB = useMemo(() => palette.colors.map((color) => hexToRgb(color)), [palette]);
     const paletteRGB = useMemo(
         //TODO: use map
         () => [
@@ -24,21 +22,6 @@ export default function App() {
         ],
         [palette]
     );
-
-    function handleScaleInputChange(e) {
-        let inputValue = e.target.value;
-
-        // Allow empty string so user can clear input
-        if (inputValue === "") {
-            setImageScale("");
-        } else if (inputValue > 0) {
-            // Remove leading zeros to prevent input like "01"
-            inputValue = inputValue.replace(/^0+/, "");
-            setImageScale(inputValue);
-        } else {
-            setImageScale(1);
-        }
-    }
 
     function handlePaletteColorChange(index, colorValue) {
         const newPalette = { ...palette };
@@ -53,50 +36,15 @@ export default function App() {
 
     return (
         <>
-            {/* Top block (all controls) */}
-            {/* //TODO: move to control block folder */}
-            <div id="controlBlock">
-                {/* Left block (file loader, scale input, image downloader) */}
-                {/* //TODO: move to file block folder */}
-                <div id="fileBlock">
-                    <FileLoader />
-                    {fileData && (
-                        <>
-                            {/* //TODO: move to separate component */}
-                            <div>
-                                <span>Scale: </span>
-                                <input
-                                    type="number"
-                                    pattern="\d*"
-                                    min={1}
-                                    max={10}
-                                    value={imageScale}
-                                    onChange={handleScaleInputChange}
-                                    onKeyDown={(e) =>
-                                        ["e", "E", "+", "-", "."].includes(e.key) &&
-                                        e.preventDefault()
-                                    }
-                                />
-                                <span>{` (${128 * imageScale}x${112 * imageScale} px)`}</span>
-                            </div>
-                            <ImageDownloader imageScale={imageScale} />
-                        </>
-                    )}
-                </div>
-                {/* Right block (color palette, presets) */}
-                {/* //TODO: move to color block folder */}
-                <div id="colorBlock">
-                    <ColorPalette colors={palette.colors} onChange={handlePaletteColorChange} />
-                    <ColorPalettePresetsBlock
-                        currentPalette={palette}
-                        onPresetSelect={handlePalettePresetSelect}
-                    />
-                </div>
+            <div id="controlsBlock">
+                <FileBlock />
+                <ColorBlock
+                    palette={palette}
+                    onPaletteColorChange={handlePaletteColorChange}
+                    onPalettePresetSelect={handlePalettePresetSelect}
+                />
             </div>
-            {/* Bottom block (gallery) */}
-            {fileData && (
-                <PhotoGallery fileData={fileData} imageScale={imageScale} paletteRGB={paletteRGB} />
-            )}
+            {fileData && <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />}
         </>
     );
 }

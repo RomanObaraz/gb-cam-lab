@@ -1,12 +1,15 @@
 import { saveAs } from "file-saver";
 import JSZip from "jszip";
-import { getScaledCanvas } from "../utils/utils";
+import { getScaledCanvas } from "../../utils/utils";
+import { useStore } from "../../stores/useStore";
 
 //TODO: move to const and use this const everywhere in other places
 const imageCanvasClassName = "photoImage";
 const fileName = "gb-cam-image";
 
-export default function ImageDownloader({ imageScale }) {
+export default function ImageDownloader() {
+    const imageScale = useStore((state) => state.imageScale);
+
     //TODO: move downloads to utils
     function downloadCurrent() {
         const canvas = document.getElementsByClassName(imageCanvasClassName)?.[0];

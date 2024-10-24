@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ColorPalettePreset from "./ColorPalettePreset";
-import { defaultPalettePresets } from "../utils/defaultPalettes";
+import { defaultPalettePresets } from "../../utils/defaultPalettes";
 
 export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});

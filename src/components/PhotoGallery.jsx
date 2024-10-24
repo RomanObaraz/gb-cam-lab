@@ -1,7 +1,9 @@
 import { useState } from "react";
 import ImageFromByteArray from "./ImageFromByteArray";
+import { useStore } from "../stores/useStore";
 
-export default function PhotoGallery({ fileData, imageScale, paletteRGB }) {
+export default function PhotoGallery({ fileData, paletteRGB }) {
+    const imageScale = useStore((state) => state.imageScale);
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
     return (
