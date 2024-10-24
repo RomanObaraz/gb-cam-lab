@@ -14,7 +14,7 @@ export default function PhotoGallery({ fileData, imageScale, paletteRGB }) {
                 paletteRGB={paletteRGB}
             />
             <div id="photoGrid">
-                {[...Array(30)].map((value, index) => (
+                {[...Array(30)].map((_, index) => (
                     <div
                         className={`photoHolder ${index === currentPhotoIndex ? "selected" : ""}`}
                         key={`photoHolder${index}`}

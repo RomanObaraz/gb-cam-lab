@@ -15,6 +15,7 @@ export default function App() {
     const [palette, setPalette] = useState(structuredClone(defaultPalettePresets.blackAndWhite));
 
     const paletteRGB = useMemo(
+        //TODO: use map
         () => [
             hexToRgb(palette.colors[0]),
             hexToRgb(palette.colors[1]),
@@ -53,14 +54,17 @@ export default function App() {
     return (
         <>
             {/* Top block (all controls) */}
+            {/* //TODO: move to control block folder */}
             <div id="controlBlock">
                 {/* Left block (file loader, scale input, image downloader) */}
+                {/* //TODO: move to file block folder */}
                 <div id="fileBlock">
                     <FileLoader />
                     {fileData && (
                         <>
+                            {/* //TODO: move to separate component */}
                             <div>
-                                Scale:{" "}
+                                <span>Scale: </span>
                                 <input
                                     type="number"
                                     pattern="\d*"
@@ -72,15 +76,15 @@ export default function App() {
                                         ["e", "E", "+", "-", "."].includes(e.key) &&
                                         e.preventDefault()
                                     }
-                                />{" "}
-                                {`(${128 * imageScale}x${112 * imageScale}px)`}
+                                />
+                                <span>{` (${128 * imageScale}x${112 * imageScale} px)`}</span>
                             </div>
                             <ImageDownloader imageScale={imageScale} />
                         </>
                     )}
                 </div>
-
                 {/* Right block (color palette, presets) */}
+                {/* //TODO: move to color block folder */}
                 <div id="colorBlock">
                     <ColorPalette colors={palette.colors} onChange={handlePaletteColorChange} />
                     <ColorPalettePresetsBlock
@@ -89,16 +93,9 @@ export default function App() {
                     />
                 </div>
             </div>
-
             {/* Bottom block (gallery) */}
             {fileData && (
-                <>
-                    <PhotoGallery
-                        fileData={fileData}
-                        imageScale={imageScale}
-                        paletteRGB={paletteRGB}
-                    />
-                </>
+                <PhotoGallery fileData={fileData} imageScale={imageScale} paletteRGB={paletteRGB} />
             )}
         </>
     );

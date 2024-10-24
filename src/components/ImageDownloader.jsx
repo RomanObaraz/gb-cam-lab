@@ -2,12 +2,14 @@ import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import { getScaledCanvas } from "../utils/utils";
 
+//TODO: move to const and use this const everywhere in other places
 const imageCanvasClassName = "photoImage";
 const fileName = "gb-cam-image";
 
 export default function ImageDownloader({ imageScale }) {
+    //TODO: move downloads to utils
     function downloadCurrent() {
-        const canvas = document.getElementsByClassName(imageCanvasClassName)[0];
+        const canvas = document.getElementsByClassName(imageCanvasClassName)?.[0];
 
         if (!canvas) return;
 
@@ -23,6 +25,7 @@ export default function ImageDownloader({ imageScale }) {
         const zip = new JSZip();
         const zipPromises = [];
 
+        //TODO: 30 to const
         for (let i = 1; i <= 30; i++) {
             const promise = new Promise((resolve) => {
                 const scaledCanvas = getScaledCanvas(canvases[i], imageScale);

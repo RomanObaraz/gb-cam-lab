@@ -15,6 +15,7 @@
 #fileBlock {
     display: flex;
     flex-direction: column;
+    min-width: 350px;
     gap: 20px;
 }
 
@@ -107,6 +108,7 @@
 }
 
 .colorPreview {
+    /* position: relative; */
     width: 25px;
     height: 25px;
     cursor: pointer;

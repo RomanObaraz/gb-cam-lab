@@ -6,7 +6,7 @@ const photoStartOffset = 0x2000;
 const photoByteLength = 0x1000;
 
 export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, paletteRGB }) {
-    const canvas = useRef();
+    const canvasRef = useRef();
     const prevPaletteRef = useRef(paletteRGB);
 
     const imageData = useMemo(() => {
@@ -15,34 +15,40 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
         const photoEnd = photoStart + photoByteLength;
         const photoData = new Uint8Array(byteArray).slice(photoStart, photoEnd);
 
-        // Create imageData for canvas from, photoData
+        // Create imageData for canvas from photoData
         return getImageDataFromPhoto(photoData, paletteRGB);
     }, [byteArray, photoIndex]);
 
     useEffect(() => {
-        const ctx = canvas.current.getContext("2d");
-        ctx.imageSmoothingEnabled = false;
+        const updateCanvas = () => {
+            const ctx = canvasRef.current.getContext("2d");
+            ctx.imageSmoothingEnabled = false;
 
-        paletteRGB.forEach((color, index) => {
-            if (prevPaletteRef.current[index] !== color) {
-                replaceImageDataColor(imageData, index, color);
-            }
-        });
+            paletteRGB.forEach((color, index) => {
+                if (prevPaletteRef.current[index] !== color) {
+                    //TODO: better to store imageData in useReducer and call actions to change it or use zustand?
+                    replaceImageDataColor(imageData, index, color);
+                }
+            });
 
-        // Draw imageData
-        ctx.putImageData(imageData, 0, 0);
+            // Draw imageData
+            ctx.putImageData(imageData, 0, 0);
 
-        // Update the ref to the current palette after processing changes
-        prevPaletteRef.current = paletteRGB;
+            // Update the ref to the current palette after processing changes
+            prevPaletteRef.current = paletteRGB;
+        };
+
+        updateCanvas();
     }, [imageData, paletteRGB]);
 
     return (
         <canvas
-            ref={canvas}
+            ref={canvasRef}
             className="photoImage"
+            //TODO: use const
             width={128}
             height={112}
-            style={{ width: 128 * imageScale + "px", height: 112 * imageScale + "px" }}
+            style={{ width: 128 * imageScale, height: 112 * imageScale }}
         />
     );
 }

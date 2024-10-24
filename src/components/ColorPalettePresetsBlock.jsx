@@ -5,6 +5,7 @@ import { defaultPalettePresets } from "../utils/defaultPalettes";
 export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
 
+    //TODO: move function out from the component to utils
     function updatePalettePresetStorage(updatedPresets) {
         if (Object.keys(updatedPresets).length) {
             localStorage.setItem("palettePresets", JSON.stringify(updatedPresets));
@@ -18,7 +19,7 @@ export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelec
 
         const newPreset = {
             name: `Custom-${presetId}`,
-            colors: structuredClone(currentPalette.colors),
+            colors: [...currentPalette.colors],
         };
 
         const updatedPresets = { ...customPalettePresets, [`custom${presetId}`]: newPreset };
@@ -35,6 +36,7 @@ export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelec
 
     // read custom palettes from local storage
     useEffect(() => {
+        //TODO: use utils func getFromLocalStorage
         const storedPalettePresets = JSON.parse(localStorage.getItem("palettePresets"));
 
         if (storedPalettePresets) {
@@ -54,7 +56,8 @@ export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelec
                 );
             })}
 
-            {customPalettePresets &&
+            {!!Object.keys(customPalettePresets).length &&
+                //TODO: use Object.entries?
                 Object.keys(customPalettePresets).map((paletteKey, i) => {
                     return (
                         <div key={`palettePresetHolder-${i}`} className="customPalettePresetHolder">
@@ -68,7 +71,6 @@ export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelec
                         </div>
                     );
                 })}
-
             <button onClick={handleCreatePalettePreset}>+</button>
         </>
     );

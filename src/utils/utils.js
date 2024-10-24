@@ -1,5 +1,7 @@
 // If anything remains unclear check this video: https://youtu.be/txkHN6izK2Y?si=Mg0vllVL-3uzrHqh
+
 export function getImageDataFromPhoto(photoData, palette) {
+    //TODO: move to const file
     // Gameboy Camera's photos are 128x112 resolution
     const width = 128;
     const height = 112;
@@ -10,7 +12,7 @@ export function getImageDataFromPhoto(photoData, palette) {
     const hTiles = height >> 3; // 14 tiles
 
     // Create canvas imageData for storing RGBA values
-    const imageData = new ImageData(128, 112);
+    const imageData = new ImageData(width, height);
 
     // Shade map will contain pixel indexes by shades for palette replacement in imageData in the future
     imageData.shadeMap = {
@@ -42,6 +44,7 @@ export function getImageDataFromPhoto(photoData, palette) {
             // but in Gameboy's photo data bytes (and therefore pixels) are ordered by tiles
             const byteIndexOffset = 16 * tileIndex;
 
+            //TODO: move 8 to const
             // Go through a row of 8 pixels (1 row of a tile)
             for (let i = 0; i < 8; i++) {
                 // As photo data bytes are ordered by tiles,
@@ -126,11 +129,11 @@ export function getScaledCanvas(originalCanvas, scale) {
         0,
         0,
         originalCanvas.width,
-        originalCanvas.height, // Source rectangle
+        originalCanvas.height,
         0,
         0,
         scaledCanvas.width,
-        scaledCanvas.height // Destination rectangle
+        scaledCanvas.height
     );
 
     return scaledCanvas;

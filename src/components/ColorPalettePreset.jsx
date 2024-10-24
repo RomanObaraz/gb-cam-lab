@@ -1,4 +1,5 @@
 export default function ColorPalettePreset({ palette, onSelect }) {
+    //TODO: move function out from the component to utils
     function handleCopyToClipboard(e, color) {
         navigator.clipboard.writeText(color);
 
