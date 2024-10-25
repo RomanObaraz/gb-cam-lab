@@ -5,23 +5,15 @@ import PhotoGallery from "./components/PhotoGallery";
 import { useStore } from "./stores/useStore";
 import FileBlock from "./components/fileBlock";
 import ColorBlock from "./components/colorBlock";
-import { defaultPalettePresets } from "./utils/defaultPalettes";
+import { defaultPalettePresets } from "./utils/constants";
+
+// TODO: strange bug with color picker lagging after page reload
 
 export default function App() {
     const fileData = useStore((state) => state.fileData);
     const [palette, setPalette] = useState(structuredClone(defaultPalettePresets.blackAndWhite));
 
-    // const paletteRGB = useMemo(() => palette.colors.map((color) => hexToRgb(color)), [palette]);
-    const paletteRGB = useMemo(
-        //TODO: use map
-        () => [
-            hexToRgb(palette.colors[0]),
-            hexToRgb(palette.colors[1]),
-            hexToRgb(palette.colors[2]),
-            hexToRgb(palette.colors[3]),
-        ],
-        [palette]
-    );
+    const paletteRGB = useMemo(() => palette.colors.map((color) => hexToRgb(color)), [palette]);
 
     function handlePaletteColorChange(index, colorValue) {
         const newPalette = { ...palette };

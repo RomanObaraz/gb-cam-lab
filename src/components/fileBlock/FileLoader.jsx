@@ -4,10 +4,9 @@ import { useState } from "react";
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import { useStore } from "../../stores/useStore";
+import { SAVE_FILE_SIZE } from "../../utils/constants";
 
 registerPlugin(FilePondPluginFileValidateType);
-
-// TODO: review
 
 export default function FileLoader() {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -25,9 +24,8 @@ export default function FileLoader() {
 
     function validateFile(file) {
         // TODO: might need more thorough validation for file content
-        // Gameboy Camera .sav file should always be 131072 bytes (right?)
         // I can't test other game's .sav files now, so I assume this validation is enough to differ GB Camera saves
-        if (file.size !== 131072) {
+        if (file.size !== SAVE_FILE_SIZE) {
             setErrorMessage("Invalid save file. Ensure you load a Gameboy Camera .sav.");
             return false;
         }
@@ -72,9 +70,6 @@ export default function FileLoader() {
                 onupdatefiles={handleFileChange}
                 fileValidateTypeDetectType={validateFileType}
             />
-            {/* <input type="file" hidden ref={inputRef} accept=".sav" onChange={handleFileChange} />
-            <button onClick={() => inputRef.current.click()}>Load</button>
-            {fileData && <p>File loaded! Length of binary data: {fileData.length} bytes</p>} */}
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         </div>
     );

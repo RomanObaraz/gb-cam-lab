@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ImageFromByteArray from "./ImageFromByteArray";
 import { useStore } from "../stores/useStore";
+import { PHOTO_COUNT } from "../utils/constants";
 
 export default function PhotoGallery({ fileData, paletteRGB }) {
     const imageScale = useStore((state) => state.imageScale);
@@ -16,7 +17,7 @@ export default function PhotoGallery({ fileData, paletteRGB }) {
                 paletteRGB={paletteRGB}
             />
             <div id="photoGrid">
-                {[...Array(30)].map((_, index) => (
+                {[...Array(PHOTO_COUNT)].map((_, index) => (
                     <div
                         className={`photoHolder ${index === currentPhotoIndex ? "selected" : ""}`}
                         key={`photoHolder${index}`}

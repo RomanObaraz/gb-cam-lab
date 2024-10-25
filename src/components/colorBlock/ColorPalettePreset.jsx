@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
+
 export default function ColorPalettePreset({ palette, onSelect }) {
-    //TODO: move function out from the component to utils
+    const [timers, setTimers] = useState([]);
+
     function handleCopyToClipboard(e, color) {
         navigator.clipboard.writeText(color);
 
@@ -8,9 +11,16 @@ export default function ColorPalettePreset({ palette, onSelect }) {
 
         if (tooltipElement.innerText !== "Copied") {
             tooltipElement.innerText = "Copied";
-            setTimeout(() => (tooltipElement.innerText = tooltipText), 1500);
+            const timer = setTimeout(() => (tooltipElement.innerText = tooltipText), 1500);
+            setTimers((prev) => [...prev, timer]);
         }
     }
+
+    useEffect(() => {
+        return () => {
+            timers.forEach((timer) => clearTimeout(timer));
+        };
+    }, [timers]);
 
     return (
         <div className="palettePreset">

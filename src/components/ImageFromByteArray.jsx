@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 import { getImageDataFromPhoto, replaceImageDataColor } from "../utils/utils";
+import { IMAGE_CANVAS_CLASSNAME, PHOTO_HEIGHT, PHOTO_WIDTH } from "../utils/constants";
 
 // Photos start at 0x2000 with an interval of 0x1000 per photo
 const photoStartOffset = 0x2000;
@@ -45,11 +46,10 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
     return (
         <canvas
             ref={canvasRef}
-            className="photoImage"
-            //TODO: use const
-            width={128}
-            height={112}
-            style={{ width: 128 * imageScale, height: 112 * imageScale }}
+            className={IMAGE_CANVAS_CLASSNAME}
+            width={PHOTO_WIDTH}
+            height={PHOTO_HEIGHT}
+            style={{ width: PHOTO_WIDTH * imageScale, height: PHOTO_HEIGHT * imageScale }}
         />
     );
 }

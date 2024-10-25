@@ -1,4 +1,5 @@
 import { useStore } from "../../stores/useStore";
+import { PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
 
 export default function ImageScaler() {
     const { imageScale, setImageScale } = useStore();
@@ -30,7 +31,7 @@ export default function ImageScaler() {
                 onChange={handleScaleInputChange}
                 onKeyDown={(e) => ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault()}
             />
-            <span>{` (${128 * imageScale}x${112 * imageScale} px)`}</span>
+            <span>{` (${PHOTO_WIDTH * imageScale}x${PHOTO_HEIGHT * imageScale} px)`}</span>
         </div>
     );
 }

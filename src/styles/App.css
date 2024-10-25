@@ -5,6 +5,8 @@
     text-align: center;
 }
 
+/* TODO: split to multiple css files? */
+
 #controlsBlock {
     display: flex;
     align-items: center;
