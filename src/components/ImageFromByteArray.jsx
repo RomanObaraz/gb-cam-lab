@@ -18,6 +18,7 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
 
         // Create imageData for canvas from photoData
         return getImageDataFromPhoto(photoData, paletteRGB);
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [byteArray, photoIndex]);
 
@@ -28,7 +29,7 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
 
             paletteRGB.forEach((color, index) => {
                 if (prevPaletteRef.current[index] !== color) {
-                    //TODO: better to store imageData in useReducer and call actions to change it or use zustand?
+                    //TODO: look if we can get rid of mutating imageData inside replaceImageDataColor() after performance issue is fixed
                     replaceImageDataColor(imageData, index, color);
                 }
             });
