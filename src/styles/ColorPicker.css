@@ -1,0 +1,59 @@
+.picker {
+    position: relative;
+}
+
+.swatch {
+    width: 60px;
+    height: 20px;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+.popover {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    padding: 14px;
+    border-radius: 10px;
+    background: #3b3b3b;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    z-index: 3;
+}
+
+.popover .react-colorful__saturation-pointer {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+.popover .react-colorful__hue-pointer {
+    width: 16px;
+    border-radius: 3px;
+}
+
+.popover .react-colorful__saturation {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-bottom: none;
+}
+
+.popover .react-colorful__hue {
+    border-radius: 3px;
+}
+
+.popover .colorInput {
+    display: block;
+    box-sizing: border-box;
+    width: 90px;
+    margin: 20px 55px 0;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background: #2c2c2c;
+    outline: none;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.popover .colorInput:focus {
+    border-color: #4298ef;
+}
