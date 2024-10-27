@@ -1,4 +1,8 @@
 import "./styles/App.css";
+import "./styles/ColorPicker.css";
+import "filepond/dist/filepond.min.css";
+import "./styles/Filepond.css";
+
 import { useMemo, useState } from "react";
 import { hexToRgb } from "./utils/utils";
 import PhotoGallery from "./components/PhotoGallery";
@@ -6,8 +10,6 @@ import { useStore } from "./stores/useStore";
 import FileBlock from "./components/fileBlock";
 import ColorBlock from "./components/colorBlock";
 import { defaultPalettePresets } from "./utils/constants";
-
-// TODO: strange bug with color picker lagging after page reload
 
 export default function App() {
     const fileData = useStore((state) => state.fileData);

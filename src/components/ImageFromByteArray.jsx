@@ -34,10 +34,7 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
                 }
             });
 
-            // Draw imageData
             ctx.putImageData(imageData, 0, 0);
-
-            // Update the ref to the current palette after processing changes
             prevPaletteRef.current = paletteRGB;
         };
 
