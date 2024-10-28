@@ -20,7 +20,12 @@ export default function ColorPicker({ color, onChange }) {
             {isOpen && (
                 <div className="popover" ref={popover}>
                     <HexColorPicker color={color} onChange={onChange} />
-                    <HexColorInput className="colorInput" color={color} onChange={onChange} />
+                    <HexColorInput
+                        className="colorInput"
+                        color={color}
+                        onChange={onChange}
+                        onFocus={(e) => e.target.select()}
+                    />
                 </div>
             )}
         </div>
