@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
-import { getImageDataFromPhoto, replaceImageDataColor } from "../utils/utils";
+import { areArraysEqual, getImageDataFromPhoto, replaceImageDataColor } from "../utils/utils";
 import { IMAGE_CANVAS_CLASSNAME, PHOTO_HEIGHT, PHOTO_WIDTH } from "../utils/constants";
 
 // Photos start at 0x2000 with an interval of 0x1000 per photo
@@ -28,7 +28,7 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
             ctx.imageSmoothingEnabled = false;
 
             paletteRGB.forEach((color, index) => {
-                if (prevPaletteRef.current[index] !== color) {
+                if (!areArraysEqual(prevPaletteRef.current[index], color)) {
                     //TODO: look if we can get rid of mutating imageData inside replaceImageDataColor() after performance issue is fixed
                     replaceImageDataColor(imageData, index, color);
                 }
