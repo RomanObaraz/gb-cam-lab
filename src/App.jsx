@@ -10,6 +10,7 @@ import { useStore } from "./stores/useStore";
 import FileBlock from "./components/fileBlock";
 import ColorBlock from "./components/colorBlock";
 import { defaultPalettePresets } from "./utils/constants";
+import { useThrottledCallback } from "use-debounce";
 
 export default function App() {
     const fileData = useStore((state) => state.fileData);
@@ -17,11 +18,11 @@ export default function App() {
 
     const paletteRGB = useMemo(() => palette.colors.map((color) => hexToRgb(color)), [palette]);
 
-    function handlePaletteColorChange(index, colorValue) {
+    const handlePaletteColorChange = useThrottledCallback((index, colorValue) => {
         const newPalette = { ...palette };
         newPalette.colors[index] = colorValue;
         setPalette(newPalette);
-    }
+    }, 50);
 
     function handlePalettePresetSelect(newPalette) {
         // clone preset data so that we don't change the preset itself
