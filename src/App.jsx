@@ -2,6 +2,9 @@ import "./styles/App.css";
 import "./styles/ColorPicker.css";
 import "filepond/dist/filepond.min.css";
 import "./styles/Filepond.css";
+import "./styles/ColorBlock.css";
+import "./styles/FileBlock.css";
+import "./styles/PhotoGallery.css";
 
 import { useMemo, useState } from "react";
 import { hexToRgb } from "./utils/utils";

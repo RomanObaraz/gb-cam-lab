@@ -1,0 +1,10 @@
+#fileBlock {
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+    gap: 20px;
+}
+
+.downloadButton {
+    margin: 5px;
+}
