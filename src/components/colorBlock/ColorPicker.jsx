@@ -1,13 +1,10 @@
-import { useCallback, useRef, useState } from "react";
-import useClickOutside from "../../utils/useClickOutside";
+import { useClickOutside } from "@mantine/hooks";
+import { useState } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 
 export default function ColorPicker({ color, onChange }) {
-    const popover = useRef();
     const [isOpen, toggle] = useState(false);
-
-    const close = useCallback(() => toggle(false), []);
-    useClickOutside(popover, close);
+    const popoverRef = useClickOutside(() => toggle(false));
 
     return (
         <div className="picker">
@@ -18,7 +15,7 @@ export default function ColorPicker({ color, onChange }) {
             />
 
             {isOpen && (
-                <div className="popover" ref={popover}>
+                <div className="popover" ref={popoverRef}>
                     <HexColorPicker color={color} onChange={onChange} />
                     <HexColorInput
                         className="colorInput"

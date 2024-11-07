@@ -1,3 +1,4 @@
+import { Button } from "@mantine/core";
 import { useStore } from "../../stores/useStore";
 import { downloadAll, downloadCurrent } from "../../utils/utils";
 
@@ -6,12 +7,8 @@ export default function ImageDownloader() {
 
     return (
         <div>
-            <button className="downloadButton" onClick={() => downloadCurrent(imageScale)}>
-                Download Current
-            </button>
-            <button className="downloadButton" onClick={() => downloadAll(imageScale)}>
-                Download All
-            </button>
+            <Button onClick={() => downloadCurrent(imageScale)}>Download one</Button>
+            <Button onClick={() => downloadAll(imageScale)}>Download All</Button>
         </div>
     );
 }

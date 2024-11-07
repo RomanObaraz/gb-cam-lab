@@ -1,3 +1,4 @@
+import { Button } from "@mantine/core";
 import { useEffect, useState } from "react";
 
 export default function ColorPalettePreset({ palette, onSelect }) {
@@ -24,7 +25,7 @@ export default function ColorPalettePreset({ palette, onSelect }) {
 
     return (
         <div className="palettePreset">
-            <button onClick={() => onSelect(palette)}>{palette.name}</button>
+            <Button onClick={() => onSelect(palette)}>{palette.name}</Button>
             <div className="palettePreview">
                 {palette.colors.map((color, index) => {
                     return (

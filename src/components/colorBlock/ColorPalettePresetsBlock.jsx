@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ColorPalettePreset from "./ColorPalettePreset";
 import { defaultPalettePresets } from "../../utils/constants";
 import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../utils/utils";
+import { Button } from "@mantine/core";
 
 export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
@@ -52,11 +53,11 @@ export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelec
                     return (
                         <div key={`palettePresetHolder-${i}`} className="customPalettePresetHolder">
                             <ColorPalettePreset palette={palette} onSelect={onPresetSelect} />
-                            <button onClick={() => handleDeletePalettePreset(key)}>&#9003;</button>
+                            <Button onClick={() => handleDeletePalettePreset(key)}>&#9003;</Button>
                         </div>
                     );
                 })}
-            <button onClick={handleCreatePalettePreset}>+</button>
+            <Button onClick={handleCreatePalettePreset}>+</Button>
         </>
     );
 }

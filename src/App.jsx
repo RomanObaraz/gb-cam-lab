@@ -13,7 +13,7 @@ import { useStore } from "./stores/useStore";
 import FileBlock from "./components/fileBlock";
 import ColorBlock from "./components/colorBlock";
 import { defaultPalettePresets } from "./utils/constants";
-import { useThrottledCallback } from "use-debounce";
+import { useThrottledCallback } from "@mantine/hooks";
 
 export default function App() {
     const fileData = useStore((state) => state.fileData);
@@ -34,15 +34,20 @@ export default function App() {
 
     return (
         <>
-            <div id="controlsBlock">
-                <FileBlock />
-                <ColorBlock
-                    palette={palette}
-                    onPaletteColorChange={handlePaletteColorChange}
-                    onPalettePresetSelect={handlePalettePresetSelect}
-                />
-            </div>
-            {fileData && <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />}
+            <FileBlock />
+
+            {fileData && (
+                <>
+                    <div id="controlsBlock">
+                        <ColorBlock
+                            palette={palette}
+                            onPaletteColorChange={handlePaletteColorChange}
+                            onPalettePresetSelect={handlePalettePresetSelect}
+                        />
+                    </div>
+                    <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
+                </>
+            )}
         </>
     );
 }
