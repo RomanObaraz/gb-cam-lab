@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import ColorPalettePreset from "./ColorPalettePreset";
-import { defaultPalettePresets } from "../../utils/constants";
-import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../utils/utils";
 import { Button } from "@mantine/core";
+import { defaultPalettePresets } from "../../../utils/constants";
+import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../../utils/utils";
 
-export default function ColorPalettePresetsBlock({ currentPalette, onPresetSelect }) {
+export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
 
     function handleCreatePalettePreset() {
