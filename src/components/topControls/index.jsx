@@ -16,10 +16,10 @@ export default function TopControls({
                 {isFileLoaded && (
                     <>
                         <ColorPalette colors={palette.colors} onChange={onPaletteColorChange} />
-                        <ColorPresetSelect
+                        {/* <ColorPresetSelect
                             currentPalette={palette}
                             onPresetSelect={onPalettePresetSelect}
-                        />
+                        /> */}
                     </>
                 )}
             </Group>

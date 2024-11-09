@@ -1,3 +1,19 @@
+.filepond--root {
+    width: 350px;
+    font-family: inherit;
+}
+
+.filepond--panel-root {
+    background-color: transparent;
+    border: 4px dashed var(--mantine-color-blue-9);
+    border-radius: 0.5em;
+}
+
+.filepond--item-panel {
+    background-color: #555;
+    border-radius: 0.5em;
+}
+
 /* use a hand cursor intead of arrow for the action buttons */
 .filepond--file-action-button {
     cursor: pointer;
@@ -5,22 +21,7 @@
 
 /* the text color of the drop label*/
 .filepond--drop-label {
-    color: white;
-}
-
-/* the border radius of the drop area */
-.filepond--panel-root {
-    border-radius: 0.5em;
-}
-
-/* the border radius of the file item */
-.filepond--item-panel {
-    border-radius: 0.5em;
-}
-
-/* the background color of the file and file panel (used when dropping an image) */
-.filepond--item-panel {
-    background-color: #555;
+    color: var(--mantine-color-blue-9);
 }
 
 /* the background color of the drop circle */
@@ -42,10 +43,4 @@
 
 [data-filepond-item-state="processing-complete"] .filepond--item-panel {
     background-color: green;
-}
-
-/* bordered drop area */
-.filepond--panel-root {
-    background-color: transparent;
-    border: 2px dashed rgba(255, 255, 255, 0.8);
 }

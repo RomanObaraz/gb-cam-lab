@@ -1,7 +1,3 @@
-.picker {
-    position: relative;
-}
-
 .swatch {
     width: 60px;
     height: 20px;
@@ -20,23 +16,23 @@
     z-index: 3;
 }
 
-.popover .react-colorful__saturation-pointer {
+.popover :global(.react-colorful__saturation-pointer) {
     width: 16px;
     height: 16px;
     border-radius: 3px;
 }
-.popover .react-colorful__hue-pointer {
+.popover :global(.react-colorful__hue-pointer) {
     width: 16px;
     border-radius: 3px;
 }
 
-.popover .react-colorful__saturation {
+.popover :global(.react-colorful__saturation) {
     margin-bottom: 10px;
     border-radius: 5px;
     border-bottom: none;
 }
 
-.popover .react-colorful__hue {
+.popover :global(.react-colorful__hue) {
     border-radius: 3px;
 }
 

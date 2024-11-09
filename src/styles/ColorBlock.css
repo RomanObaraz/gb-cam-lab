@@ -8,12 +8,12 @@
     align-self: center;
 }
 
-#colorPalette {
+/* #colorPalette {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 20px;
-}
+} */
 
 #colorPalette > div {
     display: flex;

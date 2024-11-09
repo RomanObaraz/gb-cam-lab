@@ -34,7 +34,7 @@ export default function App() {
 
     return (
         <>
-            <h1>TITLE</h1>
+            <p id="title">GB Cam Lab</p>
 
             <TopControls
                 isFileLoaded={!!fileData}
@@ -45,7 +45,7 @@ export default function App() {
 
             {fileData && (
                 <>
-                    <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
+                    {/* <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} /> */}
                     <DownloadControls />
                 </>
             )}

@@ -5,9 +5,18 @@
     text-align: center;
 }
 
-#controlsBlock {
+/* #controlsBlock {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 100px;
+} */
+
+#title {
+    font-size: 6rem;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 900;
+    color: #ed2a3a;
+    text-shadow: 5px 5px #232858;
+    -webkit-text-stroke: 2px #f0dec6;
 }
