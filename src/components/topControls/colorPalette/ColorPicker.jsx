@@ -1,11 +1,10 @@
-import { useClickOutside } from "@mantine/hooks";
 import { useState } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import classes from "../../../styles/ColorPicker.module.css";
+import { ClickAwayListener } from "@mui/material";
 
 export default function ColorPicker({ color, onChange }) {
     const [isOpen, toggle] = useState(false);
-    const popoverRef = useClickOutside(() => toggle(false));
 
     return (
         <>
@@ -16,15 +15,17 @@ export default function ColorPicker({ color, onChange }) {
             />
 
             {isOpen && (
-                <div className={classes.popover} ref={popoverRef}>
-                    <HexColorPicker color={color} onChange={onChange} />
-                    <HexColorInput
-                        className={classes.colorInput}
-                        color={color}
-                        onChange={onChange}
-                        onFocus={(e) => e.target.select()}
-                    />
-                </div>
+                <ClickAwayListener onClickAway={() => toggle(false)}>
+                    <div className={classes.popover}>
+                        <HexColorPicker color={color} onChange={onChange} />
+                        <HexColorInput
+                            className={classes.colorInput}
+                            color={color}
+                            onChange={onChange}
+                            onFocus={(e) => e.target.select()}
+                        />
+                    </div>
+                </ClickAwayListener>
             )}
         </>
     );

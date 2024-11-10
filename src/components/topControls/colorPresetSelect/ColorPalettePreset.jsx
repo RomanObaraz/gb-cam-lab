@@ -1,4 +1,4 @@
-import { Button } from "@mantine/core";
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function ColorPalettePreset({ palette, onSelect }) {
@@ -25,7 +25,9 @@ export default function ColorPalettePreset({ palette, onSelect }) {
 
     return (
         <div className="palettePreset">
-            <Button onClick={() => onSelect(palette)}>{palette.name}</Button>
+            <Button variant="outlined" onClick={() => onSelect(palette)}>
+                {palette.name}
+            </Button>
             <div className="palettePreview">
                 {palette.colors.map((color, index) => {
                     return (

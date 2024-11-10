@@ -1,4 +1,4 @@
-import { NumberInput } from "@mantine/core";
+import { TextField } from "@mui/material";
 import { useStore } from "../../stores/useStore";
 import { PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
 
@@ -21,15 +21,7 @@ export default function ImageScaler() {
 
     return (
         <>
-            <NumberInput
-                label="Scale"
-                allowDecimal={false}
-                allowNegative={false}
-                min={1}
-                max={10}
-                value={imageScale}
-                onChange={handleScaleInputChange}
-            />
+            <TextField label="Scale" value={imageScale} onChange={handleScaleInputChange} />
             <span>{` (${PHOTO_WIDTH * imageScale}x${PHOTO_HEIGHT * imageScale} px)`}</span>
         </>
     );

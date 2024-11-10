@@ -1,7 +1,7 @@
-import { Group } from "@mantine/core";
 import FileLoader from "./FileLoader";
 import ColorPresetSelect from "./colorPresetSelect";
 import ColorPalette from "./colorPalette";
+import { Stack } from "@mui/material";
 
 export default function TopControls({
     isFileLoaded,
@@ -11,7 +11,7 @@ export default function TopControls({
 }) {
     return (
         <>
-            <Group>
+            <Stack direction="row">
                 <FileLoader />
                 {isFileLoaded && (
                     <>
@@ -22,7 +22,7 @@ export default function TopControls({
                         /> */}
                     </>
                 )}
-            </Group>
+            </Stack>
         </>
     );
 }

@@ -1,10 +1,10 @@
-import { Group } from "@mantine/core";
+import { Stack } from "@mui/material";
 import ColorPicker from "./ColorPicker";
 
 export default function ColorPalette({ colors, onChange }) {
     return (
         // <div id="colorPalette">
-        <Group h={100} justify="center">
+        <Stack direction={"row"} justify="center">
             {colors.map((color, i) => {
                 return (
                     <ColorPicker
@@ -14,6 +14,6 @@ export default function ColorPalette({ colors, onChange }) {
                     />
                 );
             })}
-        </Group>
+        </Stack>
     );
 }

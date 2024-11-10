@@ -10,8 +10,9 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@mantine/core": "^7.13.4",
-        "@mantine/hooks": "^7.13.4",
+        "@emotion/react": "^11.13.3",
+        "@emotion/styled": "^11.13.0",
+        "@mui/material": "^6.1.6",
         "file-saver": "^2.0.5",
         "filepond": "^4.31.4",
         "filepond-plugin-file-validate-type": "^1.2.9",
@@ -20,6 +21,7 @@
         "react-colorful": "^5.6.1",
         "react-dom": "^18.3.1",
         "react-filepond": "^7.1.2",
+        "use-debounce": "^10.0.4",
         "zustand": "^5.0.0-rc.2"
     },
     "devDependencies": {
@@ -30,9 +32,6 @@
         "eslint-plugin-react-hooks": "^5.1.0-rc.0",
         "eslint-plugin-react-refresh": "^0.4.12",
         "globals": "^15.9.0",
-        "postcss": "^8.4.47",
-        "postcss-preset-mantine": "^1.17.0",
-        "postcss-simple-vars": "^7.0.1",
         "vite": "^5.4.8"
     }
 }

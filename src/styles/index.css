@@ -23,8 +23,10 @@ body {
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
-    background-color: var(--mantine-color-beige-2);
-    color: var(--mantine-color-blue-9);
+    /* background-color: #f0dec6; */
+    background-color: #242424;
+
+    color: #232858;
 }
 
 h1 {

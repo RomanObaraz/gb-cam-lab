@@ -11,9 +11,9 @@ import { hexToRgb } from "./utils/utils";
 import PhotoGallery from "./components/PhotoGallery";
 import { useStore } from "./stores/useStore";
 import { defaultPalettePresets } from "./utils/constants";
-import { useThrottledCallback } from "@mantine/hooks";
 import TopControls from "./components/topControls";
 import DownloadControls from "./components/downloadControls";
+import { useThrottledCallback } from "use-debounce";
 
 export default function App() {
     const fileData = useStore((state) => state.fileData);

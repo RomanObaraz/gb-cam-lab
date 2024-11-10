@@ -5,7 +5,7 @@
 
 .filepond--panel-root {
     background-color: transparent;
-    border: 4px dashed var(--mantine-color-blue-9);
+    border: 4px dashed #232858;
     border-radius: 0.5em;
 }
 
@@ -21,7 +21,7 @@
 
 /* the text color of the drop label*/
 .filepond--drop-label {
-    color: var(--mantine-color-blue-9);
+    color: #232858;
 }
 
 /* the background color of the drop circle */
