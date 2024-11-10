@@ -1,11 +1,27 @@
 .filepond--root {
-    width: 350px;
+    width: 278px;
+    height: 100px;
     font-family: inherit;
+}
+
+.filepond--drop-label {
+    color: white;
+    height: 100px;
+}
+
+.filepond--file {
+    align-items: center;
+}
+
+.filepond--item {
+    width: 240px;
+    height: 64px;
+    justify-self: center;
 }
 
 .filepond--panel-root {
     background-color: transparent;
-    border: 4px dashed #232858;
+    border: 4px dashed white;
     border-radius: 0.5em;
 }
 
@@ -14,28 +30,19 @@
     border-radius: 0.5em;
 }
 
-/* use a hand cursor intead of arrow for the action buttons */
 .filepond--file-action-button {
     cursor: pointer;
 }
 
-/* the text color of the drop label*/
-.filepond--drop-label {
-    color: #232858;
-}
-
-/* the background color of the drop circle */
 .filepond--drip-blob {
     background-color: #999;
 }
 
-/* the color of the focus ring */
 .filepond--file-action-button:hover,
 .filepond--file-action-button:focus {
     box-shadow: 0 0 0 0.125em rgba(255, 255, 255, 0.9);
 }
 
-/* error state color */
 [data-filepond-item-state*="error"] .filepond--item-panel,
 [data-filepond-item-state*="invalid"] .filepond--item-panel {
     background-color: red;
