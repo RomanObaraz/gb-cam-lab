@@ -7,12 +7,8 @@ export default function ImageDownloader() {
 
     return (
         <div>
-            <Button variant="outlined" onClick={() => downloadCurrent(imageScale)}>
-                Download one
-            </Button>
-            <Button variant="outlined" onClick={() => downloadAll(imageScale)}>
-                Download All
-            </Button>
+            <Button onClick={() => downloadCurrent(imageScale)}>Download one</Button>
+            <Button onClick={() => downloadAll(imageScale)}>Download All</Button>
         </div>
     );
 }

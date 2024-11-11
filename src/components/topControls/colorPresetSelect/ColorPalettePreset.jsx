@@ -25,9 +25,7 @@ export default function ColorPalettePreset({ palette, onSelect }) {
 
     return (
         <div className="palettePreset">
-            <Button variant="outlined" onClick={() => onSelect(palette)}>
-                {palette.name}
-            </Button>
+            <Button onClick={() => onSelect(palette)}>{palette.name}</Button>
             <div className="palettePreview">
                 {palette.colors.map((color, index) => {
                     return (

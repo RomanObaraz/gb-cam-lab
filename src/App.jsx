@@ -14,6 +14,7 @@ import { defaultPalettePresets } from "./utils/constants";
 import TopControls from "./components/topControls";
 import DownloadControls from "./components/downloadControls";
 import { useThrottledCallback } from "use-debounce";
+import ColorSchemeSwitch from "./components/ColorSchemeSwitch";
 
 export default function App() {
     const fileData = useStore((state) => state.fileData);
@@ -34,6 +35,7 @@ export default function App() {
 
     return (
         <>
+            <ColorSchemeSwitch />
             <p id="title">GB Cam Lab</p>
 
             <TopControls

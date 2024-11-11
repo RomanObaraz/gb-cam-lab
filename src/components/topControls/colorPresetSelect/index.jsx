@@ -53,18 +53,11 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                     return (
                         <div key={`palettePresetHolder-${i}`} className="customPalettePresetHolder">
                             <ColorPalettePreset palette={palette} onSelect={onPresetSelect} />
-                            <Button
-                                variant="outlined"
-                                onClick={() => handleDeletePalettePreset(key)}
-                            >
-                                &#9003;
-                            </Button>
+                            <Button onClick={() => handleDeletePalettePreset(key)}>&#9003;</Button>
                         </div>
                     );
                 })}
-            <Button variant="outlined" onClick={handleCreatePalettePreset}>
-                +
-            </Button>
+            <Button onClick={handleCreatePalettePreset}>+</Button>
         </>
     );
 }
