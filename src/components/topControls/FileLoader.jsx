@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { FilePond, registerPlugin } from "react-filepond";
+import { registerPlugin } from "react-filepond";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import { useStore } from "../../stores/useStore";
 import { SAVE_FILE_SIZE } from "../../utils/constants";
+import MuiFilepond from "./MuiFilepond";
 
 registerPlugin(FilePondPluginFileValidateType);
 
@@ -59,7 +60,7 @@ export default function FileLoader() {
 
     return (
         <div>
-            <FilePond
+            <MuiFilepond
                 labelIdle={
                     'Drag & Drop your .sav file or <span class="filepond--label-action"> Browse </span>'
                 }

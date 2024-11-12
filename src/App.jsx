@@ -51,6 +51,7 @@ export default function App() {
                     <DownloadControls />
                 </>
             )}
+            <DownloadControls />
         </>
     );
 }
