@@ -42,6 +42,11 @@ const StyledFilePond = styled(FilePond, {
         fontSize: "20px",
         fontWeight: theme.typography.fontWeightMedium,
     },
+    ".filepond--label-action": {
+        fontWeight: theme.typography.fontWeightBold,
+        textDecoration: "underline",
+        cursor: "pointer",
+    },
     ".filepond--item-panel": {
         borderRadius: "14px",
         overflow: "hidden",
