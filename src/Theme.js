@@ -63,9 +63,13 @@ export const theme = createTheme({
                     borderRadius: "8px",
                     borderColor: `${theme.palette.secondary.main}`,
                     boxShadow: `2px 2px ${theme.palette.secondary.main}`,
-                    transitionDuration: "100ms",
-                    transitionProperty:
-                        "background-color, box-shadow, border-color, color, transform",
+                    transition: `${theme.transitions.create(
+                        ["background-color", "box-shadow", "border-color", "color", "transform"],
+                        {
+                            duration: "100ms",
+                            easing: theme.transitions.easing.easeInOut,
+                        }
+                    )}`,
                     "&:hover": {
                         backgroundColor: theme.palette.action.hover,
                     },

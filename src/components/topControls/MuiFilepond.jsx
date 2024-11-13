@@ -2,19 +2,41 @@ import { styled } from "@mui/material/styles";
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import iconRemove from "../../assets/remove.svg?raw";
+import { useEffect } from "react";
 
-const StyledFilePond = styled(FilePond)(({ theme }) => ({
-    width: "278px",
-    height: "100px",
+const StyledFilePond = styled(FilePond, {
+    name: "MuiFilepond",
+    slot: "root",
+})(({ theme }) => ({
+    width: "600px",
+    height: "240px",
     fontFamily: theme.typography.fontFamily,
-    ".filepond--drop-label": {
-        color: theme.palette.primary.main,
+
+    // TODO: what do we do with transition animation?
+    // transition: `${theme.transitions.create(["width", "height"], {
+    //     duration: theme.transitions.duration.standard,
+    //     easing: theme.transitions.easing.easeInOut,
+    //     delay: "300ms",
+    // })}`,
+    "&.hasFile": {
+        width: "278px",
         height: "100px",
     },
     ".filepond--panel-root": {
-        borderRadius: "20px",
+        borderRadius: "24px",
         backgroundColor: "transparent",
-        border: `4px dashed ${theme.palette.primary.main}`,
+        border: `8px dashed ${theme.palette.primary.main}`,
+        backgroundImage: `radial-gradient(${theme.palette.base.dark} 3px, transparent 3px), radial-gradient(${theme.palette.base.dark} 3px, transparent 3px)`,
+        backgroundSize: "20px 20px",
+        backgroundPosition: " 0 0, 10px 10px",
+    },
+    ".filepond--drop-label": {
+        color: theme.palette.primary.main,
+        height: "100%",
+    },
+    ".filepond--drop-label label": {
+        fontSize: "20px",
+        fontWeight: theme.typography.fontWeightMedium,
     },
     ".filepond--item-panel": {
         borderRadius: "14px",
@@ -68,5 +90,18 @@ const StyledFilePond = styled(FilePond)(({ theme }) => ({
 }));
 
 export default function MuiFilepond(props) {
+    //TODO: what to do with animations??
+
+    useEffect(() => {
+        const filepondRoot = document.getElementsByClassName("filepond--root")[0];
+        if (filepondRoot) {
+            if (props.className === "hasFile") {
+                filepondRoot.classList.add("hasFile");
+            } else {
+                filepondRoot.classList.remove("hasFile");
+            }
+        }
+    }, [props.className]);
+
     return <StyledFilePond iconRemove={iconRemove} {...props} />;
 }

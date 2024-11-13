@@ -11,7 +11,7 @@ export default function TopControls({
 }) {
     return (
         <>
-            <Stack direction="row">
+            <Stack direction="row" justifyContent="center">
                 <FileLoader />
                 {isFileLoaded && (
                     <>
