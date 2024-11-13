@@ -30,6 +30,10 @@ const StyledFilePond = styled(FilePond, {
         backgroundSize: "20px 20px",
         backgroundPosition: " 0 0, 10px 10px",
     },
+    // TODO: transition here as well?
+    "&.hasFile .filepond--panel-root": {
+        borderWidth: "4px",
+    },
     ".filepond--drop-label": {
         color: theme.palette.primary.main,
         height: "100%",
