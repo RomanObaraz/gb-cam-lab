@@ -14,6 +14,7 @@ import TopControls from "./components/topControls";
 import DownloadControls from "./components/downloadControls";
 import { useThrottledCallback } from "use-debounce";
 import ColorSchemeSwitch from "./components/ColorSchemeSwitch";
+import Title from "./components/Title";
 
 export default function App() {
     const fileData = useStore((state) => state.fileData);
@@ -35,8 +36,7 @@ export default function App() {
     return (
         <>
             <ColorSchemeSwitch />
-            <p id="title">GB Cam Lab</p>
-
+            <Title />
             <TopControls
                 isFileLoaded={!!fileData}
                 palette={palette}
