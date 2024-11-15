@@ -10,19 +10,28 @@ export default function TopControls({
     onPalettePresetSelect,
 }) {
     return (
-        <>
-            <Stack direction="row" justifyContent="center">
-                <FileLoader />
-                {isFileLoaded && (
-                    <>
-                        <ColorPalette colors={palette.colors} onChange={onPaletteColorChange} />
-                        {/* <ColorPresetSelect
+        <Stack
+            sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+            direction="row"
+        >
+            <FileLoader />
+            {isFileLoaded && (
+                <>
+                    <ColorPalette colors={palette.colors} onChange={onPaletteColorChange} />
+                    {/* <ColorPresetSelect
                             currentPalette={palette}
                             onPresetSelect={onPalettePresetSelect}
                         /> */}
-                    </>
-                )}
-            </Stack>
-        </>
+                </>
+            )}
+        </Stack>
     );
 }

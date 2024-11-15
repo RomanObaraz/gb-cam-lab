@@ -1,7 +1,11 @@
 #root {
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    min-height: 100vh;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
     text-align: center;
 }
 
