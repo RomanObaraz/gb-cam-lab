@@ -1,4 +1,4 @@
-import { styled, Switch, useColorScheme } from "@mui/material";
+import { styled, Switch } from "@mui/material";
 
 const StyledSwitch = styled((props) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -57,17 +57,10 @@ const StyledSwitch = styled((props) => (
     },
 }));
 
-export default function ColorSchemeSwitch() {
-    const { mode, setMode } = useColorScheme();
-    if (!mode) return null;
-
+export default function ColorSchemeSwitch({ colorScheme, onSwitch }) {
     function handleSwitch(event) {
-        setMode(event.target.checked ? "dark" : "light");
+        onSwitch(event.target.checked ? "dark" : "light");
     }
 
-    return (
-        <>
-            <StyledSwitch checked={mode === "dark" ? true : false} onChange={handleSwitch} />
-        </>
-    );
+    return <StyledSwitch checked={colorScheme === "dark" ? true : false} onChange={handleSwitch} />;
 }

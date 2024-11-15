@@ -15,8 +15,11 @@ import DownloadControls from "./components/downloadControls";
 import { useThrottledCallback } from "use-debounce";
 import ColorSchemeSwitch from "./components/ColorSchemeSwitch";
 import Title from "./components/Title";
+import { useColorScheme } from "@mui/material";
 
 export default function App() {
+    const { mode, setMode } = useColorScheme();
+
     const fileData = useStore((state) => state.fileData);
     const [palette, setPalette] = useState(structuredClone(defaultPalettePresets.blackAndWhite));
 
@@ -33,9 +36,11 @@ export default function App() {
         setPalette(structuredClone(newPalette));
     }
 
+    if (!mode) return null;
+
     return (
         <>
-            <ColorSchemeSwitch />
+            <ColorSchemeSwitch colorScheme={mode} onSwitch={setMode} />
             <Title />
             <TopControls
                 isFileLoaded={!!fileData}
