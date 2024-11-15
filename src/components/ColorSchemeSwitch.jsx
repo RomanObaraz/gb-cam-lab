@@ -9,6 +9,7 @@ const StyledSwitch = styled((props) => (
     width: 62,
     height: 34,
     padding: 0,
+    zIndex: 10,
     "& .MuiSwitch-switchBase": {
         padding: 0,
         margin: 2,
