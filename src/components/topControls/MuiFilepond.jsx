@@ -2,8 +2,7 @@ import { styled, useColorScheme } from "@mui/material/styles";
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import iconRemove from "../../assets/remove.svg?raw";
-import { useEffect, useState } from "react";
-import { useTheme } from "@emotion/react";
+import { useEffect } from "react";
 
 const StyledFilePond = styled(FilePond, {
     name: "MuiFilepond",
