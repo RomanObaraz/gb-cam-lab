@@ -11,9 +11,14 @@ const themeColors = {
         main: "#F0DEC6",
         dark: "#E8CCA6",
     },
+    notBeige: {
+        main: "#22323F",
+        dark: "#0f161c",
+    },
 };
 
 export const theme = createTheme({
+    cssVariables: true,
     typography: {
         fontFamily: ["Inter", "sans-serif"].join(","),
         button: {
@@ -28,7 +33,7 @@ export const theme = createTheme({
                 primary: themeColors.blue,
                 secondary: themeColors.red,
                 base: themeColors.beige,
-                background: { default: themeColors.beige.main },
+                background: { default: "#F0DEC6" },
                 action: {
                     hover: themeColors.beige.dark,
                 },
@@ -37,11 +42,12 @@ export const theme = createTheme({
         dark: {
             palette: {
                 primary: {
-                    main: "#232858",
-                },
-                secondary: {
                     main: "#ED2A3A",
                 },
+                secondary: {
+                    main: "#232858",
+                },
+                base: themeColors.notBeige,
                 background: { default: "#22323F" },
                 action: {
                     hover: "#E8CCA6",
