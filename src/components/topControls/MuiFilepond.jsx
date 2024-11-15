@@ -1,8 +1,9 @@
-import { styled } from "@mui/material/styles";
+import { styled, useColorScheme } from "@mui/material/styles";
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import iconRemove from "../../assets/remove.svg?raw";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useTheme } from "@emotion/react";
 
 const StyledFilePond = styled(FilePond, {
     name: "MuiFilepond",
@@ -99,6 +100,8 @@ const StyledFilePond = styled(FilePond, {
 }));
 
 export default function MuiFilepond(props) {
+    const { mode } = useColorScheme(); // this forces Filepond re-render to change colors
+
     //TODO: what to do with animations??
 
     useEffect(() => {
@@ -112,5 +115,5 @@ export default function MuiFilepond(props) {
         }
     }, [props.className]);
 
-    return <StyledFilePond iconRemove={iconRemove} {...props} />;
+    return <StyledFilePond key={mode} iconRemove={iconRemove} {...props} />;
 }
