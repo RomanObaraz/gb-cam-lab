@@ -1,24 +1,7 @@
 import { createTheme } from "@mui/material";
 
-const themeColors = {
-    red: {
-        main: "#ED2A3A",
-    },
-    blue: {
-        main: "#232858",
-    },
-    beige: {
-        main: "#F0DEC6",
-        dark: "#E8CCA6",
-    },
-    notBeige: {
-        main: "#22323F",
-        dark: "#0f161c",
-    },
-};
-
 export const theme = createTheme({
-    cssVariables: true,
+    cssVariables: { cssVarPrefix: "", colorSchemeSelector: "class" },
     typography: {
         fontFamily: ["Inter", "sans-serif"].join(","),
         button: {
@@ -30,12 +13,19 @@ export const theme = createTheme({
     colorSchemes: {
         light: {
             palette: {
-                primary: themeColors.blue,
-                secondary: themeColors.red,
-                base: themeColors.beige,
+                primary: {
+                    main: "#232858",
+                },
+                secondary: {
+                    main: "#ED2A3A",
+                },
+                base: {
+                    main: "#F0DEC6",
+                    dark: "#E8CCA6",
+                },
                 background: { default: "#F0DEC6" },
                 action: {
-                    hover: themeColors.beige.dark,
+                    hover: "#E8CCA6",
                 },
             },
         },
@@ -47,10 +37,13 @@ export const theme = createTheme({
                 secondary: {
                     main: "#232858",
                 },
-                base: themeColors.notBeige,
+                base: {
+                    main: "#22323F",
+                    dark: "#0f161c",
+                },
                 background: { default: "#22323F" },
                 action: {
-                    hover: "#E8CCA6",
+                    hover: "#0f161c",
                 },
             },
         },
