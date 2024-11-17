@@ -12,7 +12,7 @@ registerPlugin(FilePondPluginFileValidateType);
 export default function FileLoader() {
     const [errorMessage, setErrorMessage] = useState(null);
     const setFileData = useStore((state) => state.setFileData);
-    const [hasFile, setHasFile] = useState(false);
+    const [files, setFiles] = useState([]);
 
     function validateFileType(file, type) {
         return new Promise((resolve) => {
@@ -37,9 +37,9 @@ export default function FileLoader() {
     }
 
     function handleFileChange(files) {
-        const file = files[0]?.file;
+        setFiles(files);
 
-        setHasFile(!!file);
+        const file = files[0]?.file;
 
         if (!file) {
             setFileData(null);
@@ -66,7 +66,8 @@ export default function FileLoader() {
     return (
         <div>
             <MuiFilepond
-                className={hasFile && "hasFile"}
+                files={files}
+                className={files.length > 0 && "hasFile"}
                 labelIdle={renderToString(<CustomLabelIdle />)}
                 acceptedFileTypes={[".sav"]}
                 maxFiles={1}
