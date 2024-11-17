@@ -8,7 +8,7 @@ import { theme } from "./Theme.js";
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme} defaultMode="light">
                 <CssBaseline />
                 {/* <GlobalStyles
                     styles={(theme) => ({

@@ -1,7 +1,10 @@
 import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
-    cssVariables: { cssVarPrefix: "", colorSchemeSelector: "class" },
+    cssVariables: {
+        cssVarPrefix: "",
+        colorSchemeSelector: "class",
+    },
     typography: {
         fontFamily: ["Inter", "sans-serif"].join(","),
         button: {
