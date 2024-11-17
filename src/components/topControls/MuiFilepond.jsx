@@ -1,6 +1,5 @@
 import { styled, useColorScheme } from "@mui/material/styles";
 import { FilePond } from "react-filepond";
-import "filepond/dist/filepond.min.css";
 import iconRemove from "../../assets/remove.svg?raw";
 import { useEffect } from "react";
 
@@ -25,8 +24,9 @@ const StyledFilePond = styled(FilePond, {
     ".filepond--panel-root": {
         borderRadius: "24px",
         backgroundColor: "transparent",
-        border: `8px dashed ${theme.palette.primary.main}`,
-        backgroundImage: `radial-gradient(${theme.palette.base.dark} 3px, transparent 3px), radial-gradient(${theme.palette.base.dark} 3px, transparent 3px)`,
+        border: "8px dashed var(--palette-primary-main)",
+        backgroundImage:
+            "radial-gradient(var(--palette-base-dark) 3px, transparent 3px), radial-gradient(var(--palette-base-dark) 3px, transparent 3px)",
         backgroundSize: "20px 20px",
         backgroundPosition: " 0 0, 10px 10px",
     },
@@ -35,7 +35,7 @@ const StyledFilePond = styled(FilePond, {
         borderWidth: "4px",
     },
     ".filepond--drop-label": {
-        color: theme.palette.primary.main,
+        color: "var(--palette-primary-main)",
         height: "100%",
     },
     ".filepond--drop-label label": {
@@ -50,7 +50,7 @@ const StyledFilePond = styled(FilePond, {
     ".filepond--item-panel": {
         borderRadius: "14px",
         overflow: "hidden",
-        backgroundColor: theme.palette.base.dark,
+        backgroundColor: "var(--palette-base-dark)",
     },
     ".filepond--item": {
         borderRadius: "14px",
@@ -58,41 +58,41 @@ const StyledFilePond = styled(FilePond, {
         height: "64px",
         top: "2px",
         justifySelf: "center",
-        backgroundColor: theme.palette.base.dark,
+        backgroundColor: "var(--palette-base-dark)",
     },
     ".filepond--file": {
         alignItems: "center",
-        color: theme.palette.primary.main,
+        color: "var(--palette-primary-main)",
     },
     ".filepond--drip-blob": {
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: "var(--palette-secondary-main)",
     },
     "[data-filepond-item-state*='error'] .filepond--item-panel": {
-        backgroundColor: theme.palette.warning.light,
+        backgroundColor: "var(--palette-warning-light)",
     },
     "[data-filepond-item-state*='invalid'] .filepond--item-panel": {
-        backgroundColor: theme.palette.warning.light,
+        backgroundColor: "var(--palette-warning-light)",
     },
     "[data-filepond-item-state='processing-complete'] .filepond--item-panel": {
-        backgroundColor: theme.palette.success.main,
+        backgroundColor: "var(--palette-success-main)",
     },
     ".filepond--file-action-button": {
         width: "30px",
         height: "30px",
         cursor: "pointer",
-        color: theme.palette.primary.main,
-        backgroundColor: theme.palette.base.main,
+        color: "var(--palette-primary-main)",
+        backgroundColor: "var(--palette-base-main)",
         borderRadius: "8px",
-        border: `2px solid ${theme.palette.secondary.main}`,
-        boxShadow: `2px 2px ${theme.palette.secondary.main}`,
+        border: "2px solid var(--palette-secondary-main)",
+        boxShadow: "2px 2px var(--palette-secondary-main)",
         transitionDuration: "100ms",
         transitionProperty: "background-color, box-shadow, border-color, color, transform",
         transform: "none !important",
         "&:hover": {
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: "var(--palette-action-hover)",
         },
         "&:active": {
-            boxShadow: `0 0 ${theme.palette.secondary.main}`,
+            boxShadow: "0 0 var(--palette-secondary-main)",
             transform: "translateY(2px) !important",
         },
     },
