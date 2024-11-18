@@ -74,14 +74,14 @@ export default function FileLoader() {
                 onupdatefiles={handleFileChange}
                 fileValidateTypeDetectType={validateFileType}
             />
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         </div>
     );
 }
 
 export function CustomLabelIdle() {
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>
+        <div className="flex flex-col items-center gap-1">
             <IconUpload />
             <span>
                 Drag & Drop your .sav file or <span className="filepond--label-action">Browse</span>
