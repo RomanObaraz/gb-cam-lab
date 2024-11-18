@@ -2,6 +2,7 @@ import FileLoader from "./FileLoader";
 import ColorPresetSelect from "./colorPresetSelect";
 import ColorPalette from "./colorPalette";
 import { Stack } from "@mui/material";
+import { twMerge } from "tailwind-merge";
 
 export default function TopControls({
     isFileLoaded,
@@ -9,18 +10,13 @@ export default function TopControls({
     onPaletteColorChange,
     onPalettePresetSelect,
 }) {
+    const stackCenteredStyle = "absolute top-0 left-0 bottom-0 right-0 items-center";
+
     return (
         <Stack
-            sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                bottom: 0,
-                right: 0,
-                justifyContent: "center",
-                alignItems: "center",
-            }}
+            className={twMerge(isFileLoaded ? "" : stackCenteredStyle, "justify-center mt-3")}
             direction="row"
+            spacing={6}
         >
             <FileLoader />
             {isFileLoaded && (

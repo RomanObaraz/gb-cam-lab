@@ -3,8 +3,7 @@ import ColorPicker from "./ColorPicker";
 
 export default function ColorPalette({ colors, onChange }) {
     return (
-        // <div id="colorPalette">
-        <Stack direction={"row"} justify="center">
+        <Stack direction="row" spacing={3}>
             {colors.map((color, i) => {
                 return (
                     <ColorPicker
