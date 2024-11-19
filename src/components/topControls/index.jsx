@@ -22,10 +22,10 @@ export default function TopControls({
             {isFileLoaded && (
                 <>
                     <ColorPalette colors={palette.colors} onChange={onPaletteColorChange} />
-                    {/* <ColorPresetSelect
-                            currentPalette={palette}
-                            onPresetSelect={onPalettePresetSelect}
-                        /> */}
+                    <ColorPresetSelect
+                        currentPalette={palette}
+                        onPresetSelect={onPalettePresetSelect}
+                    />
                 </>
             )}
         </Stack>

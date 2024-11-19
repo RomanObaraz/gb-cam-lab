@@ -1,6 +1,5 @@
 import "filepond/dist/filepond.min.css";
 import "./styles/App.css";
-// import "./styles/ColorPicker.css";
 // import "./styles/ColorBlock.css";
 // import "./styles/FileBlock.css";
 import "./styles/PhotoGallery.css";

@@ -2,7 +2,17 @@ import { useEffect, useState } from "react";
 import ColorPalettePreset from "./ColorPalettePreset";
 import { defaultPalettePresets } from "../../../utils/constants";
 import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../../utils/utils";
-import { Button } from "@mui/material";
+import {
+    Button,
+    Collapse,
+    Divider,
+    IconButton,
+    List,
+    ListSubheader,
+    MenuItem,
+    Select,
+} from "@mui/material";
+import IconRemove from "../../../assets/remove.svg?react";
 
 export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
@@ -38,26 +48,31 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
 
     return (
         <>
-            {Object.values(defaultPalettePresets).map((palette, i) => {
-                return (
-                    <ColorPalettePreset
-                        key={`defaultPalette-${i}`}
-                        palette={palette}
-                        onSelect={onPresetSelect}
-                    />
-                );
-            })}
+            <Button onClick={handleCreatePalettePreset}>Save</Button>
 
-            {!!Object.keys(customPalettePresets).length &&
-                Object.entries(customPalettePresets).map(([key, palette], i) => {
+            <Select className="w-48 h-11" MenuProps={{ disablePortal: true }}>
+                <ListSubheader className="flex items-center gap-1 h-4 text-[10px]">
+                    Default
+                    <Divider className="flex-1" />
+                </ListSubheader>
+
+                {Object.values(defaultPalettePresets).map((palette, i) => {
                     return (
-                        <div key={`palettePresetHolder-${i}`} className="customPalettePresetHolder">
+                        <MenuItem key={`defaultPalette-${i}`} value={i}>
                             <ColorPalettePreset palette={palette} onSelect={onPresetSelect} />
-                            <Button onClick={() => handleDeletePalettePreset(key)}>&#9003;</Button>
-                        </div>
+                        </MenuItem>
                     );
                 })}
-            <Button onClick={handleCreatePalettePreset}>+</Button>
+
+                {!!Object.keys(customPalettePresets).length &&
+                    Object.entries(customPalettePresets).map(([key, palette], i) => {
+                        return (
+                            <MenuItem key={`defaultPalette-${i}`} value={i}>
+                                <ColorPalettePreset palette={palette} onSelect={onPresetSelect} />
+                            </MenuItem>
+                        );
+                    })}
+            </Select>
         </>
     );
 }

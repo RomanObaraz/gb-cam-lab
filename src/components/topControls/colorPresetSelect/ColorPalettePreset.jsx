@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function ColorPalettePreset({ palette, onSelect }) {
@@ -24,22 +24,28 @@ export default function ColorPalettePreset({ palette, onSelect }) {
     }, [timers]);
 
     return (
-        <div className="palettePreset">
-            <Button onClick={() => onSelect(palette)}>{palette.name}</Button>
-            <div className="palettePreview">
+        <Stack
+            className="w-full"
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+        >
+            <Typography className="text-xs font-medium">{palette.name}</Typography>
+            <Stack
+                className="border-2 border-solid border-primary-main rounded-[4px]"
+                direction="row"
+            >
                 {palette.colors.map((color, index) => {
                     return (
-                        <div
+                        <Box
                             key={`colorPreview-${index}`}
-                            className="colorPreview"
-                            style={{ background: color }}
+                            className="size-4 min-w-4 min-h-4"
+                            style={{ backgroundColor: color }}
                             onClick={(e) => handleCopyToClipboard(e, color)}
-                        >
-                            <span className="colorPreviewTooltip">{color}</span>
-                        </div>
+                        />
                     );
                 })}
-            </div>
-        </div>
+            </Stack>
+        </Stack>
     );
 }
