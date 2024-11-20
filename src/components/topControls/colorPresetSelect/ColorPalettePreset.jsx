@@ -1,7 +1,8 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
-export default function ColorPalettePreset({ palette, onSelect }) {
+export default function ColorPalettePreset({ palette, isHeader = false }) {
     const [timers, setTimers] = useState([]);
 
     function handleCopyToClipboard(e, color) {
@@ -25,7 +26,12 @@ export default function ColorPalettePreset({ palette, onSelect }) {
 
     return (
         <Stack direction="row" alignItems="center">
-            <Typography className="w-20 text-left text-xs font-medium text-primary-main">
+            <Typography
+                className={twMerge(
+                    "w-20 text-left text-xs font-medium text-primary-main",
+                    isHeader && "w-fit pr-2 font-bold"
+                )}
+            >
                 {palette.name}
             </Typography>
             <Stack
