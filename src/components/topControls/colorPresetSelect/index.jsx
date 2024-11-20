@@ -17,11 +17,14 @@ import UnfoldMoreIcon from "../../../assets/unfold_more.svg?react";
 import UnfoldLessIcon from "../../../assets/unfold_less.svg?react";
 import PaletteIcon from "../../../assets/palette.svg?react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { twMerge } from "tailwind-merge";
 
 export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
     const [isListShown, setIsListShown] = useState(false);
+    const [isScrollDivVisible, setIsScrollDivVisible] = useState(false);
     const osRef = useRef();
+    const scrollDivRef = useRef();
 
     // read custom palettes from local storage
     useEffect(() => {
@@ -34,21 +37,30 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
 
     function handleSavePalettePreset() {
         setIsListShown(true);
+        setIsScrollDivVisible(true);
 
-        const presetCount = Object.values(customPalettePresets).length;
-        const lastPreset = Object.values(customPalettePresets)[presetCount - 1];
-        const newPresetId = lastPreset ? lastPreset.id + 1 : 0;
+        setTimeout(() => {
+            scrollDivRef.current.scrollIntoView({ behavior: "auto" });
 
-        const newPreset = {
-            id: newPresetId,
-            name: `Custom-${presetCount + 1}`,
-            colors: [...currentPalette.colors],
-        };
+            setTimeout(() => {
+                const presetCount = Object.values(customPalettePresets).length;
+                const lastPreset = Object.values(customPalettePresets)[presetCount - 1];
+                const newPresetId = lastPreset ? lastPreset.id + 1 : 0;
 
-        const updatedPresets = { ...customPalettePresets, [newPresetId]: newPreset };
-        setCustomPalettePresets(updatedPresets);
-        updatePalettePresetStorage(updatedPresets);
-        onPresetSelect(newPreset);
+                const newPreset = {
+                    id: newPresetId,
+                    name: `Custom-${presetCount + 1}`,
+                    colors: [...currentPalette.colors],
+                };
+
+                const updatedPresets = { ...customPalettePresets, [newPresetId]: newPreset };
+                setCustomPalettePresets(updatedPresets);
+                updatePalettePresetStorage(updatedPresets);
+                onPresetSelect(newPreset);
+
+                setTimeout(() => setIsScrollDivVisible(false), 500);
+            }, 100);
+        }, 100);
     }
 
     function handleDeletePalettePreset(paletteKey) {
@@ -67,14 +79,6 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     function handlePresetSelect(palette) {
         setIsListShown(false);
         onPresetSelect(palette);
-    }
-
-    function scrollToBottom() {
-        const osInstance = osRef.current?.osInstance();
-        if (osInstance) {
-            const viewport = osInstance.elements().viewport;
-            viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
-        }
     }
 
     function isCurrentPaletteInPresets() {
@@ -116,72 +120,70 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 </Button>
 
                 {isListShown && (
-                    <ClickAwayListener onClickAway={() => setIsListShown(false)}>
-                        <OverlayScrollbarsComponent
-                            ref={osRef}
-                            className="max-h-40 mt-2 p-2 pl-0 rounded-md border-2 border-solid border-primary-main"
-                            options={{ overflow: { x: "hidden" } }}
-                            defer
-                        >
-                            <div className="flex items-center gap-1 ml-2 h-4 text-[10px] opacity-60">
-                                Default
-                                <Divider className="flex-1 mr-1" />
-                            </div>
+                    // <ClickAwayListener onClickAway={() => setIsListShown(false)}>
+                    <OverlayScrollbarsComponent
+                        ref={osRef}
+                        className="max-h-40 mt-2 p-2 pl-0 rounded-md border-2 border-solid border-primary-main"
+                        options={{ overflow: { x: "hidden" } }}
+                        defer
+                    >
+                        <div className="flex items-center gap-1 ml-2 h-4 text-[10px] opacity-60">
+                            Default
+                            <Divider className="flex-1 mr-1" />
+                        </div>
 
-                            {Object.values(defaultPalettePresets).map((palette, i) => {
-                                return (
-                                    <MenuItem
-                                        key={`defaultPalette-${i}`}
-                                        className="w-fit h-7 px-1.5 ml-0.5 rounded-lg"
-                                        disableGutters
-                                        onClick={() => handlePresetSelect(palette)}
-                                    >
-                                        <ColorPalettePreset palette={palette} />
-                                    </MenuItem>
-                                );
-                            })}
+                        {Object.values(defaultPalettePresets).map((palette, i) => {
+                            return (
+                                <MenuItem
+                                    key={`defaultPalette-${i}`}
+                                    className="w-fit h-7 px-1.5 ml-0.5 rounded-lg"
+                                    disableGutters
+                                    onClick={() => handlePresetSelect(palette)}
+                                >
+                                    <ColorPalettePreset palette={palette} />
+                                </MenuItem>
+                            );
+                        })}
 
-                            {!!Object.keys(customPalettePresets).length && (
-                                <>
-                                    <div className="flex items-center gap-1 ml-2 h-4 text-[10px] opacity-60">
-                                        Custom
-                                        <Divider className="flex-1 mr-1" />
-                                    </div>
-                                    <TransitionGroup>
-                                        {Object.entries(customPalettePresets).map(
-                                            ([key, palette]) => {
-                                                return (
-                                                    <Collapse key={key}>
-                                                        <Stack direction="row">
-                                                            <MenuItem
-                                                                className="w-fit h-7 px-1.5 ml-0.5 rounded-lg"
-                                                                disableGutters
-                                                                onClick={() =>
-                                                                    handlePresetSelect(palette)
-                                                                }
-                                                            >
-                                                                <ColorPalettePreset
-                                                                    palette={palette}
-                                                                />
-                                                            </MenuItem>
-                                                            <IconButton
-                                                                className="p-0 size-fit self-center"
-                                                                onClick={() =>
-                                                                    handleDeletePalettePreset(key)
-                                                                }
-                                                            >
-                                                                <RemoveIcon className="size-4" />
-                                                            </IconButton>
-                                                        </Stack>
-                                                    </Collapse>
-                                                );
-                                            }
-                                        )}
-                                    </TransitionGroup>
-                                </>
-                            )}
-                        </OverlayScrollbarsComponent>
-                    </ClickAwayListener>
+                        {!!Object.keys(customPalettePresets).length && (
+                            <>
+                                <div className="flex items-center gap-1 ml-2 h-4 text-[10px] opacity-60">
+                                    Custom
+                                    <Divider className="flex-1 mr-1" />
+                                </div>
+                                <TransitionGroup>
+                                    {Object.entries(customPalettePresets).map(([key, palette]) => {
+                                        return (
+                                            <Collapse key={key}>
+                                                <Stack direction="row">
+                                                    <MenuItem
+                                                        className="w-fit h-7 px-1.5 ml-0.5 rounded-lg"
+                                                        disableGutters
+                                                        onClick={() => handlePresetSelect(palette)}
+                                                    >
+                                                        <ColorPalettePreset palette={palette} />
+                                                    </MenuItem>
+                                                    <IconButton
+                                                        className="p-0 size-fit self-center"
+                                                        onClick={() =>
+                                                            handleDeletePalettePreset(key)
+                                                        }
+                                                    >
+                                                        <RemoveIcon className="size-4" />
+                                                    </IconButton>
+                                                </Stack>
+                                            </Collapse>
+                                        );
+                                    })}
+                                </TransitionGroup>
+                            </>
+                        )}
+                        <div
+                            ref={scrollDivRef}
+                            className={twMerge("h-7", isScrollDivVisible ? "block" : "hidden")}
+                        />
+                    </OverlayScrollbarsComponent>
+                    // </ClickAwayListener>
                 )}
             </Stack>
         </>
