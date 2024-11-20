@@ -1,29 +1,7 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export default function ColorPalettePreset({ palette, isHeader = false }) {
-    const [timers, setTimers] = useState([]);
-
-    function handleCopyToClipboard(e, color) {
-        navigator.clipboard.writeText(color);
-
-        const tooltipElement = e.currentTarget.children[0];
-        const tooltipText = tooltipElement.innerText;
-
-        if (tooltipElement.innerText !== "Copied") {
-            tooltipElement.innerText = "Copied";
-            const timer = setTimeout(() => (tooltipElement.innerText = tooltipText), 1500);
-            setTimers((prev) => [...prev, timer]);
-        }
-    }
-
-    useEffect(() => {
-        return () => {
-            timers.forEach((timer) => clearTimeout(timer));
-        };
-    }, [timers]);
-
     return (
         <Stack direction="row" alignItems="center">
             <Typography
@@ -44,7 +22,6 @@ export default function ColorPalettePreset({ palette, isHeader = false }) {
                             key={`colorPreview-${index}`}
                             className="size-4 min-w-4 min-h-4"
                             style={{ backgroundColor: color }}
-                            onClick={(e) => handleCopyToClipboard(e, color)}
                         />
                     );
                 })}
