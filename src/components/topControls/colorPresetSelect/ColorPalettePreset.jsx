@@ -24,13 +24,10 @@ export default function ColorPalettePreset({ palette, onSelect }) {
     }, [timers]);
 
     return (
-        <Stack
-            className="w-full"
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-        >
-            <Typography className="text-xs font-medium">{palette.name}</Typography>
+        <Stack direction="row" alignItems="center">
+            <Typography className="w-20 text-left text-xs font-medium text-primary-main">
+                {palette.name}
+            </Typography>
             <Stack
                 className="border-2 border-solid border-primary-main rounded-[4px]"
                 direction="row"

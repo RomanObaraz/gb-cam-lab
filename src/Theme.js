@@ -30,6 +30,7 @@ export const theme = createTheme({
                 action: {
                     hover: "#E8CCA6",
                 },
+                divider: "#232858",
             },
         },
         dark: {
@@ -48,6 +49,7 @@ export const theme = createTheme({
                 action: {
                     hover: "#0f161c",
                 },
+                divider: "#ED2A3A",
             },
         },
     },
@@ -80,6 +82,13 @@ export const theme = createTheme({
                         transform: "translateY(2px)",
                     },
                 }),
+            },
+        },
+        MuiDivider: {
+            styleOverrides: {
+                root: {
+                    opacity: 0.6,
+                },
             },
         },
     },

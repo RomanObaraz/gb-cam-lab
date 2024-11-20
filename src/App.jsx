@@ -3,6 +3,7 @@ import "./styles/App.css";
 // import "./styles/ColorBlock.css";
 // import "./styles/FileBlock.css";
 import "./styles/PhotoGallery.css";
+import "overlayscrollbars/overlayscrollbars.css";
 
 import { useMemo, useState } from "react";
 import { hexToRgb } from "./utils/utils";
