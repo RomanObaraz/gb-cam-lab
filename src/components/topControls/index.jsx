@@ -22,10 +22,12 @@ export default function TopControls({
             {isFileLoaded && (
                 <>
                     <ColorPalette colors={palette.colors} onChange={onPaletteColorChange} />
-                    <ColorPresetSelect
-                        currentPalette={palette}
-                        onPresetSelect={onPalettePresetSelect}
-                    />
+                    <Stack className="ml-6" direction="row" spacing={6}>
+                        <ColorPresetSelect
+                            currentPalette={palette}
+                            onPresetSelect={onPalettePresetSelect}
+                        />
+                    </Stack>
                 </>
             )}
         </Stack>

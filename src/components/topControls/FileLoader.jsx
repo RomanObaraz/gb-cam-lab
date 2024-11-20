@@ -4,7 +4,7 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import { useStore } from "../../stores/useStore";
 import { SAVE_FILE_SIZE } from "../../utils/constants";
 import MuiFilepond from "./MuiFilepond";
-import IconUpload from "../../assets/iconComponents/IconUpload";
+import UploadIcon from "../../assets/upload.svg?react";
 import { renderToString } from "react-dom/server";
 
 registerPlugin(FilePondPluginFileValidateType);
@@ -82,7 +82,7 @@ export default function FileLoader() {
 export function CustomLabelIdle() {
     return (
         <div className="flex flex-col items-center gap-1">
-            <IconUpload />
+            <UploadIcon />
             <span>
                 Drag & Drop your .sav file or <span className="filepond--label-action">Browse</span>
             </span>

@@ -15,6 +15,7 @@ import { TransitionGroup } from "react-transition-group";
 import RemoveIcon from "../../../assets/remove.svg?react";
 import UnfoldMoreIcon from "../../../assets/unfold_more.svg?react";
 import UnfoldLessIcon from "../../../assets/unfold_less.svg?react";
+import PaletteIcon from "../../../assets/palette.svg?react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
@@ -31,7 +32,9 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         }
     }, []);
 
-    function handleCreatePalettePreset() {
+    function handleSavePalettePreset() {
+        setIsListShown(true);
+
         const presetCount = Object.values(customPalettePresets).length;
         const lastPreset = Object.values(customPalettePresets)[presetCount - 1];
         const newPresetId = lastPreset ? lastPreset.id + 1 : 0;
@@ -45,16 +48,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         const updatedPresets = { ...customPalettePresets, [newPresetId]: newPreset };
         setCustomPalettePresets(updatedPresets);
         updatePalettePresetStorage(updatedPresets);
-
-        // scroll to the bottom of the list
-        const osInstance = osRef.current?.osInstance();
-        if (osInstance) {
-            const viewport = osInstance.elements().viewport;
-            setTimeout(
-                () => viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" }),
-                250
-            );
-        }
+        onPresetSelect(newPreset);
     }
 
     function handleDeletePalettePreset(paletteKey) {
@@ -75,22 +69,43 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         onPresetSelect(palette);
     }
 
+    function scrollToBottom() {
+        const osInstance = osRef.current?.osInstance();
+        if (osInstance) {
+            const viewport = osInstance.elements().viewport;
+            viewport.scrollTo({ top: viewport.scrollHeight, behavior: "smooth" });
+        }
+    }
+
+    function isCurrentPaletteInPresets() {
+        return (
+            Object.values(defaultPalettePresets).some(
+                (preset) => preset.name === currentPalette.name
+            ) ||
+            Object.values(customPalettePresets).some(
+                (preset) => preset.name === currentPalette.name
+            )
+        );
+    }
+
     return (
         <>
-            <Button onClick={handleCreatePalettePreset}>Save</Button>
+            <Button className="px-2" endIcon={<PaletteIcon />} onClick={handleSavePalettePreset}>
+                Save
+            </Button>
 
             <Stack direction="column">
-                <Button className="w-48 h-11 px-0" onClick={() => setIsListShown(!isListShown)}>
+                <Button className="w-48 px-0" onClick={() => setIsListShown(!isListShown)}>
                     <div className="flex flex-row w-full">
                         <div className="items-start pl-3">
-                            {currentPalette.name === "Custom" ? (
-                                "Select preset"
-                            ) : (
+                            {isCurrentPaletteInPresets() ? (
                                 <ColorPalettePreset palette={currentPalette} isHeader />
+                            ) : (
+                                "Select palette preset"
                             )}
                         </div>
 
-                        <div className="absolute right-1 top-[11px]">
+                        <div className="absolute right-1 top-2">
                             {isListShown ? (
                                 <UnfoldLessIcon className="size-4" />
                             ) : (
