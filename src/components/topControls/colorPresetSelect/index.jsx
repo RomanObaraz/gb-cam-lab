@@ -2,32 +2,20 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import ColorPalettePreset from "./ColorPalettePreset";
 import { defaultPalettePresets } from "../../../utils/constants";
 import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../../utils/utils";
-import {
-    Button,
-    ClickAwayListener,
-    Collapse,
-    Divider,
-    IconButton,
-    MenuItem,
-    Stack,
-} from "@mui/material";
+import { Button, Collapse, IconButton, MenuItem, Stack } from "@mui/material";
 import { TransitionGroup } from "react-transition-group";
 import RemoveIcon from "../../../assets/remove.svg?react";
 import UnfoldMoreIcon from "../../../assets/unfold_more.svg?react";
 import UnfoldLessIcon from "../../../assets/unfold_less.svg?react";
 import PaletteIcon from "../../../assets/palette.svg?react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import { twMerge } from "tailwind-merge";
 import SelectDivider from "./SelectDivider";
 
-// TODO: list max height 100%
-// TODO: handle edge case on exceeding height with scroll div shenanigans
 // TODO: animate open/close list
 
 export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
     const [isListShown, setIsListShown] = useState(false);
-    const [isScrollDivVisible, setIsScrollDivVisible] = useState(false);
     const osRef = useRef();
     const scrollDivRef = useRef();
 
@@ -41,30 +29,37 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     }, [customPalettePresets, currentPalette]);
 
     function handleSavePalettePreset() {
+        const saveCurrentPalettePreset = () => {
+            const presetCount = Object.values(customPalettePresets).length;
+            const lastPreset = Object.values(customPalettePresets)[presetCount - 1];
+            const newPresetId = lastPreset ? lastPreset.id + 1 : 0;
+
+            const newPreset = {
+                id: newPresetId,
+                name: `Custom-${presetCount + 1}`,
+                colors: [...currentPalette.colors],
+            };
+
+            const updatedPresets = { ...customPalettePresets, [newPresetId]: newPreset };
+            setCustomPalettePresets(updatedPresets);
+            updatePalettePresetStorage(updatedPresets);
+            onPresetSelect(newPreset);
+        };
+
         setIsListShown(true);
-        // setIsScrollDivVisible(true);
 
         setTimeout(() => {
-            // scrollDivRef.current.scrollIntoView({ behavior: "auto" });
+            saveCurrentPalettePreset();
 
             setTimeout(() => {
-                const presetCount = Object.values(customPalettePresets).length;
-                const lastPreset = Object.values(customPalettePresets)[presetCount - 1];
-                const newPresetId = lastPreset ? lastPreset.id + 1 : 0;
+                const hasOverflow = osRef.current.osInstance()?.state().hasOverflow.y;
 
-                const newPreset = {
-                    id: newPresetId,
-                    name: `Custom-${presetCount + 1}`,
-                    colors: [...currentPalette.colors],
-                };
-
-                const updatedPresets = { ...customPalettePresets, [newPresetId]: newPreset };
-                setCustomPalettePresets(updatedPresets);
-                updatePalettePresetStorage(updatedPresets);
-                onPresetSelect(newPreset);
-
-                // setTimeout(() => setIsScrollDivVisible(false), 500);
-            }, 100);
+                if (hasOverflow && scrollDivRef.current) {
+                    scrollDivRef.current.style.display = "block";
+                    scrollDivRef.current.scrollIntoView({ behavior: "auto" });
+                    scrollDivRef.current.style.display = "none";
+                }
+            }, 300);
         }, 100);
     }
 
@@ -175,7 +170,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 {isListShown && (
                     <OverlayScrollbarsComponent
                         ref={osRef}
-                        className="mt-2 p-2 pl-0 rounded-md border-2 border-solid border-primary-main"
+                        className="max-h-[calc(100vh-16rem)] overflow-auto mt-2 p-2 pl-0 rounded-md border-2 border-solid border-primary-main"
                         options={{ overflow: { x: "hidden" } }}
                         defer
                     >
@@ -189,10 +184,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                             </>
                         )}
 
-                        <div
-                            ref={scrollDivRef}
-                            className={twMerge("h-7", isScrollDivVisible ? "block" : "hidden")}
-                        />
+                        <div ref={scrollDivRef} className="hidden h-7" />
                     </OverlayScrollbarsComponent>
                 )}
             </Stack>
