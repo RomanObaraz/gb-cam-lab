@@ -10,14 +10,14 @@ import UnfoldLessIcon from "../../../assets/unfold_less.svg?react";
 import PaletteIcon from "../../../assets/palette.svg?react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import SelectDivider from "./SelectDivider";
-
-// TODO: animate open/close list
+import { twMerge } from "tailwind-merge";
 
 export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
     const [isListShown, setIsListShown] = useState(false);
     const osRef = useRef();
     const scrollDivRef = useRef();
+    const animationContainerRef = useRef();
 
     const isCurrentPaletteInPresets = useMemo(() => {
         return (
@@ -164,29 +164,30 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 Save
             </Button>
 
-            <Stack direction="column">
+            <Stack ref={animationContainerRef} direction="column">
                 {selectButton}
 
-                {isListShown && (
-                    <OverlayScrollbarsComponent
-                        ref={osRef}
-                        className="max-h-[calc(100vh-16rem)] overflow-auto mt-2 p-2 pl-0 rounded-md border-2 border-solid border-primary-main"
-                        options={{ overflow: { x: "hidden" } }}
-                        defer
-                    >
-                        <SelectDivider label="Default" />
-                        {defaultPalettes}
+                <OverlayScrollbarsComponent
+                    ref={osRef}
+                    className={twMerge(
+                        "max-h-[calc(100vh-16rem)] overflow-auto p-2 pl-0 rounded-md border-2 border-solid border-primary-main opacity-0 transition-all duration-300",
+                        isListShown && "opacity-100 translate-y-2"
+                    )}
+                    options={{ overflow: { x: "hidden" } }}
+                    defer
+                >
+                    <SelectDivider label="Default" />
+                    {defaultPalettes}
 
-                        {!!Object.keys(customPalettePresets).length && (
-                            <>
-                                <SelectDivider label="Custom" />
-                                {customPalettes}
-                            </>
-                        )}
+                    {!!Object.keys(customPalettePresets).length && (
+                        <>
+                            <SelectDivider label="Custom" />
+                            {customPalettes}
+                        </>
+                    )}
 
-                        <div ref={scrollDivRef} className="hidden h-7" />
-                    </OverlayScrollbarsComponent>
-                )}
+                    <div ref={scrollDivRef} className="hidden h-7" />
+                </OverlayScrollbarsComponent>
             </Stack>
         </>
     );
