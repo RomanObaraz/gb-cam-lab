@@ -27,8 +27,9 @@ export default function App() {
 
     const handlePaletteColorChange = useThrottledCallback((index, colorValue) => {
         const newPalette = { ...palette };
-        newPalette.colors[index] = colorValue;
+        newPalette.id = "custom";
         newPalette.name = "Custom";
+        newPalette.colors[index] = colorValue;
         setPalette(newPalette);
     }, 50);
 

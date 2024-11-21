@@ -20,8 +20,6 @@ import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { twMerge } from "tailwind-merge";
 import SelectDivider from "./SelectDivider";
 
-// TODO: organize code
-// TODO: reset head text ONLY when active preset is deleted
 // TODO: list max height 100%
 // TODO: handle edge case on exceeding height with scroll div shenanigans
 // TODO: animate open/close list
@@ -36,11 +34,9 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const isCurrentPaletteInPresets = useMemo(() => {
         return (
             Object.values(defaultPalettePresets).some(
-                (preset) => preset.name === currentPalette.name
+                (preset) => preset.id === currentPalette.id
             ) ||
-            Object.values(customPalettePresets).some(
-                (preset) => preset.name === currentPalette.name
-            )
+            Object.values(customPalettePresets).some((preset) => preset.id === currentPalette.id)
         );
     }, [customPalettePresets, currentPalette]);
 
@@ -83,6 +79,11 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
 
         setCustomPalettePresets(updatedPresets);
         updatePalettePresetStorage(updatedPresets);
+
+        // this updates current palette on select button
+        if (updatedPresets[currentPalette.id]) {
+            onPresetSelect(updatedPresets[currentPalette.id]);
+        }
     }
 
     function handlePresetSelect(palette) {
