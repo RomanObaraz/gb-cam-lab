@@ -17,7 +17,6 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const [isListShown, setIsListShown] = useState(false);
     const osRef = useRef();
     const scrollDivRef = useRef();
-    const animationContainerRef = useRef();
 
     const isCurrentPaletteInPresets = useMemo(() => {
         return (
@@ -164,13 +163,13 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 Save
             </Button>
 
-            <Stack ref={animationContainerRef} direction="column">
+            <div className="relative">
                 {selectButton}
 
                 <OverlayScrollbarsComponent
                     ref={osRef}
                     className={twMerge(
-                        "max-h-[calc(100vh-16rem)] overflow-auto p-2 pl-0 rounded-md border-2 border-solid border-primary-main opacity-0 transition-all duration-300",
+                        "absolute top-10 max-h-[calc(100vh-16rem)] overflow-auto p-2 pl-0 rounded-md border-2 border-solid border-primary-main opacity-0 transition-all duration-300",
                         isListShown && "opacity-100 translate-y-2"
                     )}
                     options={{ overflow: { x: "hidden" } }}
@@ -188,7 +187,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
 
                     <div ref={scrollDivRef} className="hidden h-7" />
                 </OverlayScrollbarsComponent>
-            </Stack>
+            </div>
         </>
     );
 }
