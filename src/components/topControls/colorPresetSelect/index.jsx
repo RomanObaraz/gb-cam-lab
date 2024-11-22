@@ -167,6 +167,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 {selectButton}
 
                 <OverlayScrollbarsComponent
+                    id="smallOsScrollbar"
                     ref={osRef}
                     className={twMerge(
                         "absolute top-10 max-h-[calc(100vh-16rem)] overflow-auto p-2 pl-0 rounded-md border-2 border-solid border-primary-main opacity-0 transition-all duration-300",

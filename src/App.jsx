@@ -2,7 +2,7 @@ import "filepond/dist/filepond.min.css";
 import "./styles/App.css";
 // import "./styles/ColorBlock.css";
 // import "./styles/FileBlock.css";
-import "./styles/PhotoGallery.css";
+// import "./styles/PhotoGallery.css";
 import "overlayscrollbars/overlayscrollbars.css";
 
 import { useMemo, useState } from "react";
@@ -53,7 +53,7 @@ export default function App() {
 
             {fileData && (
                 <>
-                    {/* <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} /> */}
+                    <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
                     {/* <DownloadControls /> */}
                 </>
             )}

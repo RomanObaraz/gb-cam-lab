@@ -7,5 +7,13 @@
     --os-handle-bg-hover: var(--palette-primary-main);
     --os-handle-bg-active: var(--palette-primary-main);
     --os-handle-border: 2px solid var(--palette-primary-main);
+}
+
+#smallOsScrollbar .os-scrollbar {
+    --os-handle-border-radius: 2px;
+}
+
+#bigOsScrollbar .os-scrollbar {
+    --os-size: 16px;
     --os-handle-border-radius: 4px;
 }
