@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { areArraysEqual, getImageDataFromPhoto, replaceImageDataColor } from "../utils/utils";
 import { IMAGE_CANVAS_CLASSNAME, PHOTO_HEIGHT, PHOTO_WIDTH } from "../utils/constants";
 
@@ -7,9 +7,9 @@ const photoStartOffset = 0x2000;
 const photoByteLength = 0x1000;
 
 export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, paletteRGB }) {
+    const [imageData, setImageData] = useState(null);
     const canvasRef = useRef();
     const prevPaletteRef = useRef(paletteRGB);
-    const imageDataRef = useRef(null);
 
     useEffect(() => {
         // Extract one photo data
@@ -19,7 +19,7 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
 
         // Create imageData for canvas from photoData
         const newImageData = getImageDataFromPhoto(photoData, paletteRGB);
-        imageDataRef.current = newImageData;
+        setImageData(newImageData);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [byteArray, photoIndex]);
@@ -31,16 +31,16 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
 
             paletteRGB.forEach((color, index) => {
                 if (!areArraysEqual(prevPaletteRef.current[index], color)) {
-                    replaceImageDataColor(imageDataRef.current, index, color);
+                    replaceImageDataColor(imageData, index, color);
                 }
             });
 
-            ctx.putImageData(imageDataRef.current, 0, 0);
+            ctx.putImageData(imageData, 0, 0);
             prevPaletteRef.current = paletteRGB;
         };
 
-        updateCanvas();
-    }, [imageDataRef, paletteRGB]);
+        if (imageData) updateCanvas();
+    }, [imageData, paletteRGB]);
 
     return (
         <canvas
