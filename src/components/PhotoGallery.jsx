@@ -6,8 +6,6 @@ import { Grid2 } from "@mui/material";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { twMerge } from "tailwind-merge";
 
-// TODO: organize code
-
 export default function PhotoGallery({ fileData, paletteRGB }) {
     const imageScale = useStore((state) => state.imageScale);
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
