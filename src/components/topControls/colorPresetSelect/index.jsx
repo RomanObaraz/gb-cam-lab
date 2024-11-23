@@ -10,7 +10,7 @@ import UnfoldLessIcon from "../../../assets/unfold_less.svg?react";
 import PaletteIcon from "../../../assets/palette.svg?react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import SelectDivider from "./SelectDivider";
-import { twMerge } from "tailwind-merge";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
@@ -163,31 +163,39 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 Save
             </Button>
 
-            <div className="relative">
+            <div>
                 {selectButton}
 
-                <OverlayScrollbarsComponent
-                    id="smallOsScrollbar"
-                    ref={osRef}
-                    className={twMerge(
-                        "absolute top-10 max-h-[calc(100vh-16rem)] overflow-auto p-2 pl-0 rounded-md border-2 border-solid border-primary-main opacity-0 transition-all duration-300",
-                        isListShown && "opacity-100 translate-y-2"
-                    )}
-                    options={{ overflow: { x: "hidden" } }}
-                    defer
-                >
-                    <SelectDivider label="Default" />
-                    {defaultPalettes}
+                <AnimatePresence>
+                    {isListShown && (
+                        <motion.div
+                            key="modal"
+                            initial={{ opacity: 0, translateY: 0 }}
+                            animate={{ opacity: 1, translateY: 8 }}
+                            exit={{ opacity: 0, translateY: 0 }}
+                        >
+                            <OverlayScrollbarsComponent
+                                id="smallOsScrollbar"
+                                ref={osRef}
+                                className="absolute max-h-[calc(100vh-16rem)] overflow-auto p-2 pl-0 rounded-md border-2 border-solid border-primary-main"
+                                options={{ overflow: { x: "hidden" } }}
+                                defer
+                            >
+                                <SelectDivider label="Default" />
+                                {defaultPalettes}
 
-                    {!!Object.keys(customPalettePresets).length && (
-                        <>
-                            <SelectDivider label="Custom" />
-                            {customPalettes}
-                        </>
-                    )}
+                                {!!Object.keys(customPalettePresets).length && (
+                                    <>
+                                        <SelectDivider label="Custom" />
+                                        {customPalettes}
+                                    </>
+                                )}
 
-                    <div ref={scrollDivRef} className="hidden h-7" />
-                </OverlayScrollbarsComponent>
+                                <div ref={scrollDivRef} className="hidden h-7" />
+                            </OverlayScrollbarsComponent>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </>
     );
