@@ -31,6 +31,10 @@ export const theme = createTheme({
                     hover: "#E8CCA6",
                 },
                 divider: "#232858",
+                text: {
+                    primary: "#232858",
+                    secondary: "#ED2A3A",
+                },
             },
         },
         dark: {
@@ -50,6 +54,10 @@ export const theme = createTheme({
                     hover: "#0f161c",
                 },
                 divider: "#ED2A3A",
+                text: {
+                    primary: "#ED2A3A",
+                    secondary: "#232858",
+                },
             },
         },
     },
@@ -89,6 +97,43 @@ export const theme = createTheme({
                 root: {
                     opacity: 0.6,
                 },
+            },
+        },
+        MuiOutlinedInput: {
+            defaultProps: {
+                notched: false,
+            },
+            styleOverrides: {
+                notchedOutline: ({ theme }) => ({
+                    border: `2px solid ${theme.palette.secondary.main}`,
+                    borderRadius: 8,
+                }),
+                root: ({ theme }) => ({
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                        borderColor: `${theme.palette.secondary.main}`,
+                    },
+                }),
+                input: ({ theme }) => ({
+                    paddingLeft: 8,
+                    paddingRight: 0,
+                    paddingTop: 8,
+                    paddingBottom: 8,
+                    color: `${theme.palette.primary.main}`,
+                    fontSize: 14,
+                    fontWeight: `${theme.typography.fontWeightBold}`,
+                }),
+            },
+        },
+        MuiInputLabel: {
+            styleOverrides: {
+                outlined: ({ theme }) => ({
+                    top: -20,
+                    color: `${theme.palette.primary.main}`,
+                    fontSize: 14,
+                    fontWeight: `${theme.typography.fontWeightBold}`,
+                    transform: "none",
+                    transition: "none",
+                }),
             },
         },
     },

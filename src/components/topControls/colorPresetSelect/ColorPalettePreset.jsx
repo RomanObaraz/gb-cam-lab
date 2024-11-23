@@ -6,7 +6,7 @@ export default function ColorPalettePreset({ palette, isHeader = false }) {
         <Stack direction="row" alignItems="center">
             <Typography
                 className={twMerge(
-                    "w-20 text-left text-xs font-medium text-primary-main",
+                    "w-20 text-left text-xs font-medium",
                     isHeader && "w-fit pr-2 font-bold"
                 )}
             >
