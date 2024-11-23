@@ -1,13 +1,11 @@
 import { useState } from "react";
 import ImageFromByteArray from "./ImageFromByteArray";
-import { useStore } from "../stores/useStore";
 import { PHOTO_COUNT } from "../utils/constants";
 import { Grid2 } from "@mui/material";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { twMerge } from "tailwind-merge";
 
 export default function PhotoGallery({ fileData, paletteRGB }) {
-    const imageScale = useStore((state) => state.imageScale);
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
     const photoPreview = (
@@ -22,7 +20,7 @@ export default function PhotoGallery({ fileData, paletteRGB }) {
             <ImageFromByteArray
                 byteArray={fileData}
                 photoIndex={currentPhotoIndex}
-                imageScale={imageScale}
+                imageScale={3}
                 paletteRGB={paletteRGB}
             />
         </div>
