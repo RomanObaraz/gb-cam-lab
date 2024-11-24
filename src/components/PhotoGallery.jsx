@@ -29,7 +29,7 @@ export default function PhotoGallery({ fileData, paletteRGB }) {
     const photoGrid = (
         <OverlayScrollbarsComponent
             id="bigOsScrollbar"
-            className="w-[304px] h-[624px]
+            className="w-[304px] h-[622px]
                 [&>div[data-overlayscrollbars-viewport]]:snap-mandatory [&>div[data-overlayscrollbars-viewport]]:snap-y"
             options={{ overflow: { x: "hidden" } }}
             defer
