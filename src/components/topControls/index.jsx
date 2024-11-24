@@ -14,7 +14,7 @@ export default function TopControls({
 
     return (
         <Stack
-            className={twMerge(isFileLoaded ? "" : stackCenteredStyle, "justify-center mt-3")}
+            className={twMerge(isFileLoaded ? "" : stackCenteredStyle, "justify-center mt-8")}
             direction="row"
             spacing={6}
         >
