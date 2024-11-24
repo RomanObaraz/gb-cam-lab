@@ -29,7 +29,7 @@ export default function ImageScaler() {
     }
 
     return (
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row mt-0.6 items-center">
             <TextField
                 className="w-[60px]"
                 slotProps={{
@@ -67,7 +67,7 @@ export default function ImageScaler() {
                     if (e.target.value === "") setImageScale(1);
                 }}
             />
-            <Typography className="ml-2 font-medium">
+            <Typography className="w-36 text-left ml-2 font-medium">
                 {` (${PHOTO_WIDTH * imageScale}x${PHOTO_HEIGHT * imageScale} px)`}
             </Typography>
         </div>

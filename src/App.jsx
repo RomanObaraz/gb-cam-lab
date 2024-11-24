@@ -49,10 +49,10 @@ export default function App() {
             />
 
             {fileData && (
-                <>
+                <div className="-mt-8">
                     <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
                     <DownloadControls />
-                </>
+                </div>
             )}
         </>
     );

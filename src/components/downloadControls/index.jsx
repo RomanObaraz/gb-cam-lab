@@ -3,7 +3,7 @@ import ImageScaler from "./ImageScaler";
 
 export default function DownloadControls() {
     return (
-        <div className="flex flex-row items-center gap-8">
+        <div className="flex flex-row mt-8 items-center justify-center gap-2">
             <ImageScaler />
             <ImageDownloader />
         </div>
