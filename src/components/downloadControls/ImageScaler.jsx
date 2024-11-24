@@ -15,8 +15,6 @@ export default function ImageScaler() {
             // Remove leading zeros to prevent input like "01"
             inputValue = inputValue.replace(/^0+/, "");
             setImageScale(inputValue);
-        } else {
-            setImageScale(1);
         }
     }
 
@@ -24,13 +22,14 @@ export default function ImageScaler() {
         <div className="flex flex-row items-center">
             <TextField
                 className="w-[60px]"
-                type="number"
+                slotProps={{ htmlInput: { maxLength: 2 } }}
                 label="Scale"
-                min={1}
-                max={10}
                 value={imageScale}
                 onChange={handleScaleInputChange}
                 onKeyDown={(e) => ["e", "E", "+", "-", "."].includes(e.key) && e.preventDefault()}
+                onBlur={(e) => {
+                    if (e.target.value === "") setImageScale(1);
+                }}
             />
             <Typography className="ml-2 font-medium">{` (${PHOTO_WIDTH * imageScale}x${
                 PHOTO_HEIGHT * imageScale
