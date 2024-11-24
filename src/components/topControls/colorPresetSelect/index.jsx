@@ -135,7 +135,8 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                                     <ColorPalettePreset palette={palette} />
                                 </MenuItem>
                                 <IconButton
-                                    className="p-0 size-fit self-center"
+                                    className="p-0.5 self-center"
+                                    aria-label="remove"
                                     onClick={() => handleDeletePalettePreset(key)}
                                 >
                                     <RemoveIcon className="size-4" />

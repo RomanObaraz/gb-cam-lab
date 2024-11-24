@@ -92,6 +92,17 @@ export const theme = createTheme({
                 }),
             },
         },
+        MuiIconButton: {
+            styleOverrides: {
+                root: ({ theme }) => ({
+                    borderRadius: 4,
+                    color: theme.palette.primary.main,
+                    "&:hover": {
+                        backgroundColor: theme.palette.action.hover,
+                    },
+                }),
+            },
+        },
         MuiDivider: {
             styleOverrides: {
                 root: {

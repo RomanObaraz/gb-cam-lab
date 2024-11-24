@@ -7,6 +7,6 @@
 <path d="M17.5 13C18.3284 13 19 12.3284 19 11.5C19 10.6716 18.3284 10 17.5 10C16.6716 10 16 10.6716 16 11.5C16 12.3284 16.6716 13 17.5 13Z" fill="black"/>
 </mask>
 <g mask="url(#mask0_51_2889)">
-<rect width="24" height="24" fill="#232858"/>
+<rect width="24" height="24" fill="currentColor"/>
 </g>
 </svg>

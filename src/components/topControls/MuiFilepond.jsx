@@ -1,6 +1,6 @@
 import { styled, useColorScheme } from "@mui/material/styles";
 import { FilePond } from "react-filepond";
-import iconRemove from "../../assets/remove.svg?raw";
+import RemoveIcon from "../../assets/remove.svg?raw";
 import { useEffect } from "react";
 
 const StyledFilePond = styled(FilePond, {
@@ -43,6 +43,7 @@ const StyledFilePond = styled(FilePond, {
         fontWeight: theme.typography.fontWeightMedium,
     },
     ".filepond--label-action": {
+        color: "var(--palette-secondary-main)",
         fontWeight: theme.typography.fontWeightBold,
         textDecoration: "underline",
         cursor: "pointer",
@@ -114,5 +115,5 @@ export default function MuiFilepond(props) {
         }
     }, [props.className]);
 
-    return <StyledFilePond key={mode} iconRemove={iconRemove} {...props} />;
+    return <StyledFilePond key={mode} iconRemove={RemoveIcon} {...props} />;
 }

@@ -1,6 +1,8 @@
-import { TextField, Typography } from "@mui/material";
+import { IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import { useStore } from "../../stores/useStore";
 import { PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
+import ArrowUpIcon from "../../assets/arrow_up.svg?react";
+import ArrowDownIcon from "../../assets/arrow_down.svg?react";
 
 export default function ImageScaler() {
     const { imageScale, setImageScale } = useStore();
@@ -18,11 +20,45 @@ export default function ImageScaler() {
         }
     }
 
+    function handleIncrement() {
+        setImageScale(Math.min(imageScale + 1, 99));
+    }
+
+    function handleDecrement() {
+        setImageScale(Math.max(imageScale - 1, 1));
+    }
+
     return (
         <div className="flex flex-row items-center">
             <TextField
                 className="w-[60px]"
-                slotProps={{ htmlInput: { maxLength: 2 } }}
+                slotProps={{
+                    htmlInput: { maxLength: 2 },
+                    input: {
+                        endAdornment: (
+                            <InputAdornment className="absolute top-0.5 right-1.5" position="end">
+                                <div className="flex flex-col">
+                                    <IconButton
+                                        className="p-0"
+                                        size="small"
+                                        onClick={handleIncrement}
+                                        aria-label="increment"
+                                    >
+                                        <ArrowUpIcon className="size-4" />
+                                    </IconButton>
+                                    <IconButton
+                                        className="p-0"
+                                        size="small"
+                                        onClick={handleDecrement}
+                                        aria-label="decrement"
+                                    >
+                                        <ArrowDownIcon className="size-4" />
+                                    </IconButton>
+                                </div>
+                            </InputAdornment>
+                        ),
+                    },
+                }}
                 label="Scale"
                 value={imageScale}
                 onChange={handleScaleInputChange}
@@ -31,9 +67,9 @@ export default function ImageScaler() {
                     if (e.target.value === "") setImageScale(1);
                 }}
             />
-            <Typography className="ml-2 font-medium">{` (${PHOTO_WIDTH * imageScale}x${
-                PHOTO_HEIGHT * imageScale
-            } px)`}</Typography>
+            <Typography className="ml-2 font-medium">
+                {` (${PHOTO_WIDTH * imageScale}x${PHOTO_HEIGHT * imageScale} px)`}
+            </Typography>
         </div>
     );
 }
