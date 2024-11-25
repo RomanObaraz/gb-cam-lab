@@ -40,23 +40,23 @@ export const theme = createTheme({
         dark: {
             palette: {
                 primary: {
-                    main: "#ED2A3A",
+                    main: "#E7CAA0",
                 },
                 secondary: {
-                    main: "#232858",
+                    main: "#DBA54F",
                 },
                 base: {
                     main: "#22323F",
-                    dark: "#0f161c",
+                    dark: "#324A5D",
                 },
                 background: { default: "#22323F" },
                 action: {
-                    hover: "#0f161c",
+                    hover: "#324A5D",
                 },
-                divider: "#ED2A3A",
+                divider: "#E7CAA0",
                 text: {
-                    primary: "#ED2A3A",
-                    secondary: "#232858",
+                    primary: "#E7CAA0",
+                    secondary: "#DBA54F",
                 },
             },
         },
