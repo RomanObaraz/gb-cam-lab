@@ -5,12 +5,14 @@ import { downloadAll, downloadCurrent } from "../../utils/utils";
 export default function ImageDownloader() {
     const imageScale = useStore((state) => state.imageScale);
 
+    const buttonClassName = "w-32 p-0";
+
     return (
         <Stack direction={"row"} spacing={2.5}>
-            <Button sx={{ width: "130px", padding: 0 }} onClick={() => downloadCurrent(imageScale)}>
+            <Button className={buttonClassName} onClick={() => downloadCurrent(imageScale)}>
                 Download one
             </Button>
-            <Button sx={{ width: "130px", padding: 0 }} onClick={() => downloadAll(imageScale)}>
+            <Button className={buttonClassName} onClick={() => downloadAll(imageScale)}>
                 Download all
             </Button>
         </Stack>

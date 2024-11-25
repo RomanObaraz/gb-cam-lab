@@ -7,8 +7,8 @@ const StyledFilePond = styled(FilePond, {
     name: "MuiFilepond",
     slot: "root",
 })(({ theme }) => ({
-    width: "600px",
-    height: "240px",
+    width: 600,
+    height: 240,
     fontFamily: theme.typography.fontFamily,
 
     // TODO: what do we do with transition animation?
@@ -18,11 +18,11 @@ const StyledFilePond = styled(FilePond, {
     //     delay: "300ms",
     // })}`,
     "&.hasFile": {
-        width: "278px",
-        height: "100px",
+        width: 278,
+        height: 100,
     },
     ".filepond--panel-root": {
-        borderRadius: "24px",
+        borderRadius: 24,
         backgroundColor: "transparent",
         border: "8px dashed var(--palette-primary-main)",
         backgroundImage:
@@ -32,14 +32,14 @@ const StyledFilePond = styled(FilePond, {
     },
     // TODO: transition here as well?
     "&.hasFile .filepond--panel-root": {
-        borderWidth: "4px",
+        borderWidth: 4,
     },
     ".filepond--drop-label": {
         color: "var(--palette-primary-main)",
         height: "100%",
     },
     ".filepond--drop-label label": {
-        fontSize: "20px",
+        fontSize: 20,
         fontWeight: theme.typography.fontWeightMedium,
     },
     ".filepond--label-action": {
@@ -49,15 +49,15 @@ const StyledFilePond = styled(FilePond, {
         cursor: "pointer",
     },
     ".filepond--item-panel": {
-        borderRadius: "14px",
+        borderRadius: 14,
         overflow: "hidden",
         backgroundColor: "var(--palette-base-dark)",
     },
     ".filepond--item": {
-        borderRadius: "14px",
-        width: "240px",
-        height: "64px",
-        top: "2px",
+        borderRadius: 14,
+        width: 240,
+        height: 64,
+        top: 2,
         justifySelf: "center",
         backgroundColor: "var(--palette-base-dark)",
     },
@@ -78,12 +78,12 @@ const StyledFilePond = styled(FilePond, {
         backgroundColor: "var(--palette-success-main)",
     },
     ".filepond--file-action-button": {
-        width: "30px",
-        height: "30px",
+        width: 30,
+        height: 30,
         cursor: "pointer",
         color: "var(--palette-primary-main)",
         backgroundColor: "var(--palette-base-main)",
-        borderRadius: "8px",
+        borderRadius: 8,
         border: "2px solid var(--palette-secondary-main)",
         boxShadow: "2px 2px var(--palette-secondary-main)",
         transitionDuration: "100ms",

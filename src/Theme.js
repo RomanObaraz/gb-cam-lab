@@ -69,10 +69,10 @@ export const theme = createTheme({
             },
             styleOverrides: {
                 outlined: ({ theme }) => ({
-                    height: "40px",
+                    height: 40,
                     color: `${theme.palette.primary.main}`,
-                    borderWidth: "2px",
-                    borderRadius: "8px",
+                    borderWidth: 2,
+                    borderRadius: 8,
                     borderColor: `${theme.palette.secondary.main}`,
                     boxShadow: `2px 2px ${theme.palette.secondary.main}`,
                     transition: `${theme.transitions.create(

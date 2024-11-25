@@ -4,8 +4,8 @@ const StyledSwitch = styled((props) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
     position: "absolute",
-    top: "10px",
-    right: "10px",
+    top: 10,
+    right: 10,
     width: 62,
     height: 34,
     padding: 0,
