@@ -29,7 +29,7 @@ export default function ImageScaler() {
     }
 
     return (
-        <div className="flex flex-row mt-0.6 items-center">
+        <div className="flex flex-row mt-0.5 items-center">
             <TextField
                 className="w-[60px]"
                 slotProps={{

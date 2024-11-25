@@ -1,9 +1,8 @@
-import { Stack } from "@mui/material";
 import ColorPicker from "./ColorPicker";
 
 export default function ColorPalette({ colors, onChange }) {
     return (
-        <Stack direction="row" spacing={3}>
+        <div className="flex gap-6">
             {colors.map((color, i) => {
                 return (
                     <ColorPicker
@@ -13,6 +12,6 @@ export default function ColorPalette({ colors, onChange }) {
                     />
                 );
             })}
-        </Stack>
+        </div>
     );
 }

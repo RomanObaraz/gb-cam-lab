@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import ColorPalettePreset from "./ColorPalettePreset";
 import { defaultPalettePresets } from "../../../utils/constants";
 import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../../utils/utils";
-import { Button, Collapse, IconButton, MenuItem, Stack } from "@mui/material";
+import { Button, Collapse, IconButton, MenuItem } from "@mui/material";
 import { TransitionGroup } from "react-transition-group";
 import RemoveIcon from "../../../assets/remove.svg?react";
 import UnfoldMoreIcon from "../../../assets/unfold_more.svg?react";
@@ -126,7 +126,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 {Object.entries(customPalettePresets).map(([key, palette]) => {
                     return (
                         <Collapse key={key}>
-                            <Stack direction="row">
+                            <div className="flex">
                                 <MenuItem
                                     className={menuItemClassName}
                                     disableGutters
@@ -141,7 +141,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                                 >
                                     <RemoveIcon className="size-4" />
                                 </IconButton>
-                            </Stack>
+                            </div>
                         </Collapse>
                     );
                 })}

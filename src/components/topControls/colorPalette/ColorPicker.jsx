@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import classes from "../../../styles/ColorPicker.module.css";
-import { Box, ClickAwayListener } from "@mui/material";
+import { ClickAwayListener } from "@mui/material";
 
 export default function ColorPicker({ color, onChange }) {
     const [isOpen, toggle] = useState(false);
 
     return (
         <>
-            <Box
+            <div
                 className="
                     relative w-24 h-10
                     rounded-lg border-solid border-2 border-base-main
@@ -16,12 +16,12 @@ export default function ColorPicker({ color, onChange }) {
                     shadow-[4px_4px_0_2px] shadow-primary-main
                     cursor-pointer
                 "
-                sx={{ backgroundColor: color }}
+                style={{ backgroundColor: color }}
                 onClick={() => toggle(true)}
             >
                 {isOpen && (
                     <ClickAwayListener onClickAway={() => toggle(false)}>
-                        <Box className={classes.popover}>
+                        <div className={classes.popover}>
                             <HexColorPicker color={color} onChange={onChange} />
                             <HexColorInput
                                 className={classes.colorInput}
@@ -29,10 +29,10 @@ export default function ColorPicker({ color, onChange }) {
                                 onChange={onChange}
                                 onFocus={(e) => e.target.select()}
                             />
-                        </Box>
+                        </div>
                     </ClickAwayListener>
                 )}
-            </Box>
+            </div>
         </>
     );
 }
