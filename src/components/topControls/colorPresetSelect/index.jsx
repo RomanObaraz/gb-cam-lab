@@ -170,7 +170,6 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 <AnimatePresence>
                     {isListShown && (
                         <motion.div
-                            key="modal"
                             initial={{ opacity: 0, translateY: 0 }}
                             animate={{ opacity: 1, translateY: 8 }}
                             exit={{ opacity: 0, translateY: 0 }}
