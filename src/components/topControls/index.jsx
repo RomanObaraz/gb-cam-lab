@@ -2,6 +2,7 @@ import FileLoader from "./FileLoader";
 import ColorPresetSelect from "./colorPresetSelect";
 import ColorPalette from "./colorPalette";
 import { twMerge } from "tailwind-merge";
+import { IndexedAnimatePresence } from "../IndexedAnimatePresence";
 
 export default function TopControls({
     isFileLoaded,
@@ -21,13 +22,17 @@ export default function TopControls({
             <FileLoader />
             {isFileLoaded && (
                 <>
-                    <ColorPalette colors={palette.colors} onChange={onPaletteColorChange} />
-                    <div className="flex -ml-6 gap-12">
-                        <ColorPresetSelect
-                            currentPalette={palette}
-                            onPresetSelect={onPalettePresetSelect}
-                        />
-                    </div>
+                    <IndexedAnimatePresence index={0}>
+                        <ColorPalette colors={palette.colors} onChange={onPaletteColorChange} />
+                    </IndexedAnimatePresence>
+                    <IndexedAnimatePresence index={1}>
+                        <div className="flex -ml-6 gap-12">
+                            <ColorPresetSelect
+                                currentPalette={palette}
+                                onPresetSelect={onPalettePresetSelect}
+                            />
+                        </div>
+                    </IndexedAnimatePresence>
                 </>
             )}
         </div>

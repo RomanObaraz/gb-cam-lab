@@ -13,6 +13,7 @@ import { useThrottledCallback } from "use-debounce";
 import ColorSchemeSwitch from "./components/ColorSchemeSwitch";
 import Title from "./components/Title";
 import { useColorScheme } from "@mui/material";
+import { IndexedAnimatePresence } from "./components/IndexedAnimatePresence";
 
 export default function App() {
     const { mode, setMode } = useColorScheme();
@@ -50,8 +51,12 @@ export default function App() {
 
             {fileData && (
                 <div className="-mt-8">
-                    <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
-                    <DownloadControls />
+                    <IndexedAnimatePresence index={2}>
+                        <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
+                    </IndexedAnimatePresence>
+                    <IndexedAnimatePresence index={3}>
+                        <DownloadControls />
+                    </IndexedAnimatePresence>
                 </div>
             )}
         </>
