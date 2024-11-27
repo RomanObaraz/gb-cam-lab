@@ -1,4 +1,4 @@
-import { styled, useColorScheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { FilePond } from "react-filepond";
 import RemoveIcon from "../../assets/remove.svg?raw";
 import { useEffect } from "react";
@@ -11,12 +11,10 @@ const StyledFilePond = styled(FilePond, {
     height: 240,
     fontFamily: theme.typography.fontFamily,
 
-    // TODO: what do we do with transition animation?
-    // transition: `${theme.transitions.create(["width", "height"], {
-    //     duration: theme.transitions.duration.standard,
-    //     easing: theme.transitions.easing.easeInOut,
-    //     delay: "300ms",
-    // })}`,
+    transition: `${theme.transitions.create(["width", "height"], {
+        duration: theme.transitions.duration.standard,
+        easing: theme.transitions.easing.easeInOut,
+    })}`,
     "&.hasFile": {
         width: 278,
         height: 100,
@@ -30,9 +28,9 @@ const StyledFilePond = styled(FilePond, {
         backgroundSize: "20px 20px",
         backgroundPosition: " 0 0, 10px 10px",
     },
-    // TODO: transition here as well?
     "&.hasFile .filepond--panel-root": {
         borderWidth: 4,
+        borderRadius: 20,
     },
     ".filepond--drop-label": {
         color: "var(--palette-primary-main)",
@@ -100,10 +98,6 @@ const StyledFilePond = styled(FilePond, {
 }));
 
 export default function MuiFilepond(props) {
-    const { mode } = useColorScheme(); // this forces Filepond re-render to change colors
-
-    //TODO: what to do with animations??
-
     useEffect(() => {
         const filepondRoot = document.getElementsByClassName("filepond--root")[0];
         if (filepondRoot) {
@@ -115,5 +109,5 @@ export default function MuiFilepond(props) {
         }
     }, [props.className]);
 
-    return <StyledFilePond key={mode} iconRemove={RemoveIcon} {...props} />;
+    return <StyledFilePond iconRemove={RemoveIcon} {...props} />;
 }
