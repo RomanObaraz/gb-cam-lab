@@ -56,7 +56,7 @@ const StyledSwitch = styled((props) => (
         opacity: 1,
     },
     [theme.breakpoints.down("sm")]: {
-        scale: 0.75,
+        scale: 0.6,
         top: 5,
         right: 0,
     },
