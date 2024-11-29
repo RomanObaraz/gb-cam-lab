@@ -16,7 +16,7 @@ export default function ImageScaler() {
         } else if (inputValue > 0) {
             // Remove leading zeros to prevent input like "01"
             inputValue = inputValue.replace(/^0+/, "");
-            setImageScale(inputValue);
+            setImageScale(Number(inputValue));
         }
     }
 
