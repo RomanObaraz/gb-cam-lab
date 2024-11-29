@@ -15,9 +15,17 @@ const StyledFilePond = styled(FilePond, {
         duration: theme.transitions.duration.standard,
         easing: theme.transitions.easing.easeInOut,
     })}`,
+    [theme.breakpoints.down("sm")]: {
+        width: 340,
+        height: 140,
+    },
     "&.hasFile": {
         width: 278,
         height: 100,
+        [theme.breakpoints.down("sm")]: {
+            width: 250,
+            height: 90,
+        },
     },
     ".filepond--panel-root": {
         borderRadius: 24,
@@ -39,6 +47,9 @@ const StyledFilePond = styled(FilePond, {
     ".filepond--drop-label label": {
         fontSize: 20,
         fontWeight: theme.typography.fontWeightMedium,
+        [theme.breakpoints.down("sm")]: {
+            fontSize: 16,
+        },
     },
     ".filepond--label-action": {
         color: "var(--palette-secondary-main)",
@@ -58,6 +69,12 @@ const StyledFilePond = styled(FilePond, {
         top: 2,
         justifySelf: "center",
         backgroundColor: "var(--palette-base-dark)",
+        [theme.breakpoints.down("sm")]: {
+            width: 220,
+            height: 60,
+            top: -2,
+            left: -2,
+        },
     },
     ".filepond--file": {
         alignItems: "center",

@@ -67,7 +67,7 @@ export default function ImageScaler() {
                     if (e.target.value === "") setImageScale(1);
                 }}
             />
-            <Typography className="w-36 text-left ml-2 font-medium">
+            <Typography className="w-36 text-left ml-2 font-medium max-sm:w-auto">
                 {` (${PHOTO_WIDTH * imageScale}x${PHOTO_HEIGHT * imageScale} px)`}
             </Typography>
         </div>

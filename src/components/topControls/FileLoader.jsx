@@ -64,7 +64,7 @@ export default function FileLoader() {
     }
 
     return (
-        <div>
+        <div className="max-sm:-mb-3">
             <MuiFilepond
                 files={files}
                 className={files.length > 0 && "hasFile"}

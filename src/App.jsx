@@ -50,7 +50,7 @@ export default function App() {
             />
 
             {fileData && (
-                <div className="-mt-8">
+                <div className="-mt-8 max-sm:mt-6">
                     <IndexedAnimatePresence index={2}>
                         <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
                     </IndexedAnimatePresence>

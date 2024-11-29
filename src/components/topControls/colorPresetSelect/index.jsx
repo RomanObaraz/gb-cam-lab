@@ -149,6 +149,38 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         </>
     );
 
+    const presetList = (
+        <motion.div
+            className="absolute z-50"
+            initial={{ opacity: 0, translateY: 0 }}
+            animate={{ opacity: 1, translateY: 8 }}
+            exit={{ opacity: 0, translateY: 0 }}
+        >
+            <OverlayScrollbarsComponent
+                id="smallOsScrollbar"
+                ref={osRef}
+                className="
+                                    absolute w-48 max-h-[calc(100vh-16rem)] max-sm:max-h-[calc(100vh-28rem)] overflow-auto
+                                    p-2 pl-0 bg-base-main rounded-md border-2 border-solid border-primary-main
+                                "
+                options={{ overflow: { x: "hidden" } }}
+                defer
+            >
+                <SelectDivider label="Default" />
+                {defaultPalettes}
+
+                {!!Object.keys(customPalettePresets).length && (
+                    <>
+                        <SelectDivider label="Custom" />
+                        {customPalettes}
+                    </>
+                )}
+
+                <div ref={scrollDivRef} className="hidden h-7" />
+            </OverlayScrollbarsComponent>
+        </motion.div>
+    );
+
     // read custom palettes from local storage
     useEffect(() => {
         const storedPalettePresets = getPalettePresetsFromStorage();
@@ -167,35 +199,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
             <div>
                 {selectButton}
 
-                <AnimatePresence>
-                    {isListShown && (
-                        <motion.div
-                            initial={{ opacity: 0, translateY: 0 }}
-                            animate={{ opacity: 1, translateY: 8 }}
-                            exit={{ opacity: 0, translateY: 0 }}
-                        >
-                            <OverlayScrollbarsComponent
-                                id="smallOsScrollbar"
-                                ref={osRef}
-                                className="absolute max-h-[calc(100vh-16rem)] overflow-auto p-2 pl-0 rounded-md border-2 border-solid border-primary-main"
-                                options={{ overflow: { x: "hidden" } }}
-                                defer
-                            >
-                                <SelectDivider label="Default" />
-                                {defaultPalettes}
-
-                                {!!Object.keys(customPalettePresets).length && (
-                                    <>
-                                        <SelectDivider label="Custom" />
-                                        {customPalettes}
-                                    </>
-                                )}
-
-                                <div ref={scrollDivRef} className="hidden h-7" />
-                            </OverlayScrollbarsComponent>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                <AnimatePresence>{isListShown && presetList}</AnimatePresence>
             </div>
         </>
     );

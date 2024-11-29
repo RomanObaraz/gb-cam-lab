@@ -15,7 +15,7 @@ export default function TopControls({
     return (
         <div
             className={twMerge(
-                "flex gap-12 mt-8 justify-center",
+                "flex gap-12 mt-8 justify-center max-sm:flex-col max-sm:items-center max-sm:gap-6",
                 isFileLoaded ? "" : stackCenteredStyle
             )}
         >
@@ -26,7 +26,7 @@ export default function TopControls({
                         <ColorPalette colors={palette.colors} onChange={onPaletteColorChange} />
                     </IndexedAnimatePresence>
                     <IndexedAnimatePresence index={1}>
-                        <div className="flex -ml-6 gap-12">
+                        <div className="flex -ml-6 gap-12 max-sm:ml-0">
                             <ColorPresetSelect
                                 currentPalette={palette}
                                 onPresetSelect={onPalettePresetSelect}

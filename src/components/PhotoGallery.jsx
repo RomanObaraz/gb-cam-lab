@@ -15,6 +15,7 @@ export default function PhotoGallery({ fileData, paletteRGB }) {
                     [&>canvas]:rounded-lg rounded-lg border-solid border-4 border-base-main
                     outline outline-4 outline-primary-main
                     shadow-[8px_8px_0_2px] shadow-primary-main
+                    max-sm:hidden
                 "
         >
             <ImageFromByteArray
@@ -29,7 +30,7 @@ export default function PhotoGallery({ fileData, paletteRGB }) {
     const photoGrid = (
         <OverlayScrollbarsComponent
             id="bigOsScrollbar"
-            className="w-[304px] h-[622px]
+            className="w-[304px] h-[622px] max-sm:h-[374px] !z-0
                 [&>div[data-overlayscrollbars-viewport]]:snap-mandatory [&>div[data-overlayscrollbars-viewport]]:snap-y"
             options={{ overflow: { x: "hidden" } }}
             defer

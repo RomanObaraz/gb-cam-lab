@@ -55,6 +55,11 @@ const StyledSwitch = styled((props) => (
         backgroundColor: theme.palette.base.dark,
         opacity: 1,
     },
+    [theme.breakpoints.down("sm")]: {
+        scale: 0.75,
+        top: 5,
+        right: 0,
+    },
 }));
 
 export default function ColorSchemeSwitch({ colorScheme, onSwitch }) {
