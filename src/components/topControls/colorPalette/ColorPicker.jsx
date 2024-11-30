@@ -1,10 +1,22 @@
 import { useState } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import classes from "../../../styles/ColorPicker.module.css";
-import { ClickAwayListener } from "@mui/material";
 
 export default function ColorPicker({ color, onChange }) {
-    const [isOpen, toggle] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
+    function handleSwatchClick() {
+        setIsOpen((prev) => !prev);
+    }
+
+    function handlePopoverClick(e) {
+        e.stopPropagation();
+    }
+
+    function handleBackdropClick(e) {
+        setIsOpen(false);
+        e.stopPropagation();
+    }
 
     return (
         <>
@@ -17,11 +29,15 @@ export default function ColorPicker({ color, onChange }) {
                     cursor-pointer
                 "
                 style={{ backgroundColor: color }}
-                onClick={() => toggle(true)}
+                onClick={handleSwatchClick}
             >
                 {isOpen && (
-                    <ClickAwayListener onClickAway={() => toggle(false)}>
-                        <div className={classes.popover}>
+                    <>
+                        <div
+                            className="fixed inset-0 z-10 cursor-auto"
+                            onClick={(e) => handleBackdropClick(e)}
+                        />
+                        <div className={classes.popover} onClick={(e) => handlePopoverClick(e)}>
                             <HexColorPicker color={color} onChange={onChange} />
                             <HexColorInput
                                 className={classes.colorInput}
@@ -30,7 +46,7 @@ export default function ColorPicker({ color, onChange }) {
                                 onFocus={(e) => e.target.select()}
                             />
                         </div>
-                    </ClickAwayListener>
+                    </>
                 )}
             </div>
         </>
