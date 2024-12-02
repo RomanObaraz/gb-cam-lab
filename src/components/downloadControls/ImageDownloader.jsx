@@ -9,7 +9,6 @@ export default function ImageDownloader() {
 
     return (
         <div className="flex gap-5 max-sm:pb-20">
-            {/* <div className="sticky bottom-0 w-full p-4 flex justify-around"> */}
             <Button className={buttonClassName} onClick={() => downloadCurrent(imageScale)}>
                 Download one
             </Button>
