@@ -8,7 +8,7 @@ import { twMerge } from "tailwind-merge";
 export default function PhotoGallery({ fileData, paletteRGB }) {
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
     const theme = useTheme();
-    const isMediaUnderLg = useMediaQuery(theme.breakpoints.down("lg"));
+    const isSmallerPreview = useMediaQuery(theme.breakpoints.down("md"));
 
     const photoPreview = (
         <div
@@ -23,7 +23,7 @@ export default function PhotoGallery({ fileData, paletteRGB }) {
             <ImageFromByteArray
                 byteArray={fileData}
                 photoIndex={currentPhotoIndex}
-                imageScale={isMediaUnderLg ? 2 : 3}
+                imageScale={isSmallerPreview ? 2 : 3}
                 paletteRGB={paletteRGB}
             />
         </div>
