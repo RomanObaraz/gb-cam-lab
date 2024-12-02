@@ -1,26 +1,17 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import classes from "../../../styles/ColorPicker.module.css";
+import { Popover } from "@mui/material";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function ColorPicker({ color, onChange }) {
     const [isOpen, setIsOpen] = useState(false);
-
-    function handleSwatchClick() {
-        setIsOpen((prev) => !prev);
-    }
-
-    function handlePopoverClick(e) {
-        e.stopPropagation();
-    }
-
-    function handleBackdropClick(e) {
-        setIsOpen(false);
-        e.stopPropagation();
-    }
+    const swatchRef = useRef();
 
     return (
         <>
             <div
+                ref={swatchRef}
                 className="
                     relative w-24 h-10 max-sm:w-16 max-sm:h-8
                     rounded-lg border-solid border-2 border-base-main
@@ -29,26 +20,34 @@ export default function ColorPicker({ color, onChange }) {
                     cursor-pointer
                 "
                 style={{ backgroundColor: color }}
-                onClick={handleSwatchClick}
-            >
+                onClick={() => setIsOpen((prev) => !prev)}
+            />
+            <AnimatePresence>
                 {isOpen && (
-                    <>
-                        <div
-                            className="fixed inset-0 z-10 cursor-auto"
-                            onClick={(e) => handleBackdropClick(e)}
+                    <Popover
+                        className={classes.popover}
+                        open={isOpen}
+                        onClose={() => setIsOpen(false)}
+                        anchorEl={swatchRef.current}
+                        anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "left",
+                        }}
+                        component={motion.div}
+                        initial={{ opacity: 0, translateY: 0 }}
+                        animate={{ opacity: 1, translateY: 12 }}
+                        exit={{ opacity: 0, translateY: 0 }}
+                    >
+                        <HexColorPicker color={color} onChange={onChange} />
+                        <HexColorInput
+                            className={classes.colorInput}
+                            color={color}
+                            onChange={onChange}
+                            onFocus={(e) => e.target.select()}
                         />
-                        <div className={classes.popover} onClick={(e) => handlePopoverClick(e)}>
-                            <HexColorPicker color={color} onChange={onChange} />
-                            <HexColorInput
-                                className={classes.colorInput}
-                                color={color}
-                                onChange={onChange}
-                                onFocus={(e) => e.target.select()}
-                            />
-                        </div>
-                    </>
+                    </Popover>
                 )}
-            </div>
+            </AnimatePresence>
         </>
     );
 }
