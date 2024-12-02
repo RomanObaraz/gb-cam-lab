@@ -8,7 +8,7 @@ export default function ImageDownloader() {
     const buttonClassName = "w-32 p-0";
 
     return (
-        <div className="flex gap-5 max-sm:pb-20">
+        <div className="flex gap-5">
             <Button className={buttonClassName} onClick={() => downloadCurrent(imageScale)}>
                 Download one
             </Button>

@@ -15,25 +15,25 @@ export default function TopControls({
     return (
         <div
             className={twMerge(
-                "flex gap-12 mt-8 justify-center max-sm:flex-col max-sm:items-center max-sm:gap-6",
+                "flex gap-12 mt-8 justify-center max-lg:flex-col max-lg:items-center max-lg:gap-6",
                 isFileLoaded ? "" : stackCenteredStyle
             )}
         >
             <FileLoader />
             {isFileLoaded && (
-                <>
+                <div className="flex max-md:flex-col max-md:items-center max-md:gap-6">
                     <IndexedAnimatePresence index={0}>
                         <ColorPalette colors={palette.colors} onChange={onPaletteColorChange} />
                     </IndexedAnimatePresence>
                     <IndexedAnimatePresence index={1}>
-                        <div className="flex -ml-6 gap-12 max-sm:ml-0">
+                        <div className="flex ml-4 gap-12 max-sm:ml-0">
                             <ColorPresetSelect
                                 currentPalette={palette}
                                 onPresetSelect={onPalettePresetSelect}
                             />
                         </div>
                     </IndexedAnimatePresence>
-                </>
+                </div>
             )}
         </div>
     );

@@ -17,6 +17,11 @@ export default {
                 },
             },
         },
+        screens: {
+            sm: "640px",
+            md: "840px",
+            lg: "1180px",
+        },
     },
     plugins: [],
     corePlugins: {

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import ImageFromByteArray from "./ImageFromByteArray";
 import { PHOTO_COUNT } from "../utils/constants";
-import { Grid2 } from "@mui/material";
+import { Grid2, useMediaQuery, useTheme } from "@mui/material";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { twMerge } from "tailwind-merge";
 
 export default function PhotoGallery({ fileData, paletteRGB }) {
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+    const theme = useTheme();
+    const isMediaUnderLg = useMediaQuery(theme.breakpoints.down("lg"));
 
     const photoPreview = (
         <div
@@ -21,7 +23,7 @@ export default function PhotoGallery({ fileData, paletteRGB }) {
             <ImageFromByteArray
                 byteArray={fileData}
                 photoIndex={currentPhotoIndex}
-                imageScale={3}
+                imageScale={isMediaUnderLg ? 2 : 3}
                 paletteRGB={paletteRGB}
             />
         </div>
@@ -30,7 +32,7 @@ export default function PhotoGallery({ fileData, paletteRGB }) {
     const photoGrid = (
         <OverlayScrollbarsComponent
             id="bigOsScrollbar"
-            className="w-[304px] h-[622px] max-sm:h-[374px] !z-0
+            className="w-[304px] h-[622px] max-md:h-[374px] !z-0
                 [&>div[data-overlayscrollbars-viewport]]:snap-mandatory [&>div[data-overlayscrollbars-viewport]]:snap-y"
             options={{ overflow: { x: "hidden" } }}
             defer

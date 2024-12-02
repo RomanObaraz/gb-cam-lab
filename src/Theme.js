@@ -5,6 +5,13 @@ export const theme = createTheme({
         cssVarPrefix: "",
         colorSchemeSelector: "class",
     },
+    breakpoints: {
+        values: {
+            sm: 640,
+            md: 840,
+            lg: 1180,
+        },
+    },
     typography: {
         fontFamily: ["Inter", "sans-serif"].join(","),
         button: {

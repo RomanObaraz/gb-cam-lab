@@ -149,6 +149,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         </>
     );
 
+    // TODO: max-h-[400px] is kinda small for desktop. Make it truly responsive for any screen height
     const presetList = (
         <motion.div
             className="absolute z-50"
@@ -160,7 +161,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 id="smallOsScrollbar"
                 ref={osRef}
                 className="
-                                    absolute w-48 max-h-[calc(100vh-16rem)] max-sm:max-h-[calc(100vh-28rem)] overflow-auto
+                                    absolute w-48 max-h-[400px] overflow-auto
                                     p-2 pl-0 bg-base-main rounded-md border-2 border-solid border-primary-main
                                 "
                 options={{ overflow: { x: "hidden" } }}

@@ -64,7 +64,7 @@ export default function FileLoader() {
     }
 
     return (
-        <div className="max-sm:-mb-3">
+        <div className="max-lg:-mb-3">
             <MuiFilepond
                 className={hasFile && "hasFile"}
                 labelIdle={renderToString(<CustomLabelIdle />)}
