@@ -18,6 +18,11 @@
     --os-handle-border-radius: 4px;
 }
 
+body .os-scrollbar {
+    --os-size: 16px;
+    --os-handle-border-radius: 4px;
+}
+
 canvas {
     pointer-events: none;
     image-rendering: pixelated;

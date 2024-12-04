@@ -2,7 +2,7 @@ import "filepond/dist/filepond.min.css";
 import "./styles/App.css";
 import "overlayscrollbars/overlayscrollbars.css";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { hexToRgb } from "./utils/utils";
 import PhotoGallery from "./components/PhotoGallery";
 import { useStore } from "./stores/useStore";
@@ -14,6 +14,8 @@ import ColorSchemeSwitch from "./components/ColorSchemeSwitch";
 import Title from "./components/Title";
 import { useColorScheme } from "@mui/material";
 import { IndexedAnimatePresence } from "./components/IndexedAnimatePresence";
+import { OverlayScrollbars } from "overlayscrollbars";
+import { isMobile } from "react-device-detect";
 
 export default function App() {
     const { mode, setMode } = useColorScheme();
@@ -35,6 +37,16 @@ export default function App() {
         // clone preset data so that we don't change the preset itself
         setPalette(structuredClone(newPalette));
     }
+
+    useEffect(() => {
+        if (!isMobile) {
+            OverlayScrollbars(document.body, { scrollbars: { autoHide: "leave" } });
+
+            return () => {
+                OverlayScrollbars(document.body)?.destroy();
+            };
+        }
+    }, []);
 
     if (!mode) return null;
 
