@@ -40,7 +40,9 @@ export default function App() {
 
     useEffect(() => {
         if (!isMobile) {
-            OverlayScrollbars(document.body, { scrollbars: { autoHide: "leave" } });
+            OverlayScrollbars(document.body, {
+                scrollbars: { autoHide: "never" },
+            });
 
             return () => {
                 OverlayScrollbars(document.body)?.destroy();

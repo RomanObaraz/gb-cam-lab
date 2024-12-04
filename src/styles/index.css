@@ -16,14 +16,42 @@
 #bigOsScrollbar .os-scrollbar {
     --os-size: 16px;
     --os-handle-border-radius: 4px;
+    --os-padding-axis: 10px;
 }
 
-body .os-scrollbar {
+body > .os-scrollbar {
     --os-size: 16px;
     --os-handle-border-radius: 4px;
+    --os-padding-axis: 20px;
 }
 
 canvas {
     pointer-events: none;
     image-rendering: pixelated;
+}
+
+.os-scrollbar-track::before,
+.os-scrollbar-track::after {
+    content: "";
+    position: absolute;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 0;
+    height: 0;
+}
+
+/* Top arrow */
+.os-scrollbar-track::before {
+    top: -10px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid black;
+}
+
+/* Bottom arrow */
+.os-scrollbar-track::after {
+    bottom: -10px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid black;
 }

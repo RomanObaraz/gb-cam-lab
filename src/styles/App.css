@@ -1,3 +1,5 @@
+/* TODO: do we need this as a separate .css? */
+
 #root {
     display: flex;
     flex-direction: column;
