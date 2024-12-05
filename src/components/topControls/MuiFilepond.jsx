@@ -30,7 +30,7 @@ const StyledFilePond = styled(FilePond, {
     ".filepond--panel-root": {
         borderRadius: 24,
         backgroundColor: "transparent",
-        border: "8px dashed var(--palette-primary-main)",
+        border: "8px dashed var(--palette-text-primary)",
         backgroundImage:
             "radial-gradient(var(--palette-base-dark) 3px, transparent 3px), radial-gradient(var(--palette-base-dark) 3px, transparent 3px)",
         backgroundSize: "20px 20px",
@@ -39,6 +39,7 @@ const StyledFilePond = styled(FilePond, {
     "&.hasFile .filepond--panel-root": {
         borderWidth: 4,
         borderRadius: 20,
+        borderColor: "var(--palette-primary-main)",
     },
     ".filepond--drop-label": {
         color: "var(--palette-text-primary)",
