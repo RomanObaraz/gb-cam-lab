@@ -47,20 +47,20 @@ export const theme = createTheme({
         dark: {
             palette: {
                 primary: {
-                    main: "#E7CAA0",
+                    main: "#29A197",
                 },
                 secondary: {
                     main: "#DBA54F",
                 },
                 base: {
                     main: "#22323F",
-                    dark: "#324A5D",
+                    dark: "#354450",
                 },
                 background: { default: "#22323F" },
                 action: {
-                    hover: "#324A5D",
+                    hover: "#354450",
                 },
-                divider: "#E7CAA0",
+                divider: "#29A197",
                 text: {
                     primary: "#E7CAA0",
                     secondary: "#DBA54F",
