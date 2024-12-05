@@ -77,7 +77,7 @@ export const theme = createTheme({
             styleOverrides: {
                 outlined: ({ theme }) => ({
                     height: 40,
-                    color: `${theme.palette.primary.main}`,
+                    color: `${theme.palette.text.primary}`,
                     borderWidth: 2,
                     borderRadius: 8,
                     borderColor: `${theme.palette.secondary.main}`,
@@ -103,7 +103,7 @@ export const theme = createTheme({
             styleOverrides: {
                 root: ({ theme }) => ({
                     borderRadius: 4,
-                    color: theme.palette.primary.main,
+                    color: theme.palette.text.primary,
                     "&:hover": {
                         backgroundColor: theme.palette.action.hover,
                     },
@@ -136,7 +136,7 @@ export const theme = createTheme({
                     paddingRight: 0,
                     paddingTop: 8,
                     paddingBottom: 8,
-                    color: `${theme.palette.primary.main}`,
+                    color: `${theme.palette.text.primary}`,
                     fontSize: 14,
                     fontWeight: `${theme.typography.fontWeightBold}`,
                 }),
@@ -146,7 +146,7 @@ export const theme = createTheme({
             styleOverrides: {
                 outlined: ({ theme }) => ({
                     top: -20,
-                    color: `${theme.palette.primary.main}`,
+                    color: `${theme.palette.text.primary}`,
                     fontSize: 14,
                     fontWeight: `${theme.typography.fontWeightBold}`,
                     transform: "none",

@@ -41,7 +41,7 @@ const StyledFilePond = styled(FilePond, {
         borderRadius: 20,
     },
     ".filepond--drop-label": {
-        color: "var(--palette-primary-main)",
+        color: "var(--palette-text-primary)",
         height: "100%",
     },
     ".filepond--drop-label label": {
@@ -78,7 +78,7 @@ const StyledFilePond = styled(FilePond, {
     },
     ".filepond--file": {
         alignItems: "center",
-        color: "var(--palette-primary-main)",
+        color: "var(--palette-text-primary)",
     },
     ".filepond--drip-blob": {
         backgroundColor: "var(--palette-secondary-main)",
@@ -96,7 +96,7 @@ const StyledFilePond = styled(FilePond, {
         width: 30,
         height: 30,
         cursor: "pointer",
-        color: "var(--palette-primary-main)",
+        color: "var(--palette-text-primary)",
         backgroundColor: "var(--palette-base-main)",
         borderRadius: 8,
         border: "2px solid var(--palette-secondary-main)",

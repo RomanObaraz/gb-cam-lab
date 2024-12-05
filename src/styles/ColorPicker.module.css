@@ -42,7 +42,7 @@
     padding: 6px;
     border: 2px solid var(--palette-primary-main);
     border-radius: 4px;
-    color: var(--palette-primary-main);
+    color: var(--palette-text-primary);
     background: var(--palette-base-dark);
     text-transform: uppercase;
     text-align: center;
