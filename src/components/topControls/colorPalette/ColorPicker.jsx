@@ -3,6 +3,7 @@ import { HexColorInput, HexColorPicker } from "react-colorful";
 import classes from "../../../styles/ColorPicker.module.css";
 import { Popover } from "@mui/material";
 import { motion, AnimatePresence } from "motion/react";
+import { twMerge } from "tailwind-merge";
 
 export default function ColorPicker({ color, onChange }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,13 +13,19 @@ export default function ColorPicker({ color, onChange }) {
         <>
             <div
                 ref={swatchRef}
-                className="
+                className={twMerge(
+                    `
                     relative w-24 h-10 max-sm:w-16 max-sm:h-8
                     rounded-lg border-solid border-2 border-base-main
-                    outline outline-2 outline-primary-main
+                    outline outline-2 outline-primary-main 
                     shadow-[4px_4px_0_2px] shadow-primary-main
+                    transition-all
+                    hover:-translate-y-0.5 hover:outline-secondary-main hover:shadow-secondary-main
+                    active:shadow-none active:translate-y-0.5
                     cursor-pointer
-                "
+                `,
+                    isOpen && "-translate-y-0.5 outline-secondary-main shadow-secondary-main"
+                )}
                 style={{ backgroundColor: color }}
                 onClick={() => setIsOpen((prev) => !prev)}
             />
