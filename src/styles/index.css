@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    will-change: background-color, shadow-color, border-color, outline-color;
+    transition: background-color 0.5s ease, shadow-color 0.5s ease, border-color 0.5s ease,
+        outline-color 0.5s ease;
+}
+
 .os-scrollbar {
     --os-handle-bg: none;
     --os-handle-bg-hover: var(--palette-primary-main);
