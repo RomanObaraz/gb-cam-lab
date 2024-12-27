@@ -15,8 +15,10 @@ import { motion, AnimatePresence } from "motion/react";
 export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
     const [isListShown, setIsListShown] = useState(false);
+    const [listHeightOffset, setListHeightOffset] = useState(0);
     const osRef = useRef();
     const scrollDivRef = useRef();
+    const selectButtonRef = useRef();
 
     const isCurrentPaletteInPresets = useMemo(() => {
         return (
@@ -85,12 +87,23 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         onPresetSelect(palette);
     }
 
+    const updateListHeightOffset = () => {
+        if (selectButtonRef.current) {
+            const rect = selectButtonRef.current.getBoundingClientRect();
+            setListHeightOffset(rect.top + 80);
+        }
+    };
+
     const menuItemClassName = "w-fit h-7 px-1.5 ml-0.5 rounded-lg";
 
     const UnfoldIcon = isListShown ? UnfoldLessIcon : UnfoldMoreIcon;
 
     const selectButton = (
-        <Button className="w-48 px-0" onClick={() => setIsListShown(!isListShown)}>
+        <Button
+            ref={selectButtonRef}
+            className="w-48 px-0"
+            onClick={() => setIsListShown(!isListShown)}
+        >
             <div className="flex flex-row w-full">
                 <div className="items-start pl-3">
                     {isCurrentPaletteInPresets ? (
@@ -149,7 +162,6 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         </>
     );
 
-    // TODO: max-h-[400px] is kinda small for desktop. Make it truly responsive for any screen height
     const presetList = (
         <motion.div
             className="absolute z-50"
@@ -161,9 +173,10 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 id="smallOsScrollbar"
                 ref={osRef}
                 className="
-                                    absolute w-48 max-h-[400px] overflow-auto
+                                    absolute w-48overflow-auto min-h-28
                                     p-2 pl-0 bg-base-main rounded-md border-2 border-solid border-primary-main
                                 "
+                style={{ maxHeight: `calc(100vh - ${listHeightOffset}px)` }}
                 options={{ overflow: { x: "hidden" } }}
                 defer
             >
@@ -189,6 +202,13 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         if (storedPalettePresets) {
             setCustomPalettePresets(storedPalettePresets);
         }
+
+        updateListHeightOffset();
+        window.addEventListener("resize", updateListHeightOffset);
+
+        return () => {
+            window.removeEventListener("resize", updateListHeightOffset);
+        };
     }, []);
 
     return (
