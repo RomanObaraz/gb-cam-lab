@@ -63,19 +63,21 @@ export default function App() {
                 onPaletteColorChange={handlePaletteColorChange}
                 onPalettePresetSelect={handlePalettePresetSelect}
             />
-
             {fileData && (
-                <div className="-mt-8 max-lg:mt-6 pb-24">
-                    <IndexedAnimatePresence index={2}>
-                        <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
-                    </IndexedAnimatePresence>
-                    <IndexedAnimatePresence index={3}>
-                        <DownloadControls />
-                    </IndexedAnimatePresence>
-                </div>
+                <>
+                    <div className="-mt-8 max-lg:mt-6">
+                        <IndexedAnimatePresence index={2}>
+                            <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
+                        </IndexedAnimatePresence>
+                        <IndexedAnimatePresence index={3}>
+                            <DownloadControls />
+                        </IndexedAnimatePresence>
+                        <IndexedAnimatePresence index={4}>
+                            <Footer />
+                        </IndexedAnimatePresence>
+                    </div>
+                </>
             )}
-
-            <Footer />
         </>
     );
 }

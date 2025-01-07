@@ -2,55 +2,59 @@ import { BugReport, Coffee, GitHub } from "@mui/icons-material";
 import { Link } from "@mui/material";
 
 export default function Footer() {
-    const footerLineClassName = "flex justify-center gap-2";
-    const linkClassName = "flex items-center gap-1";
+    const footerLineClassName = "flex flex-wrap max-sm:flex-col justify-center gap-2";
+    const linkGroupClassName = "flex flex-wrap gap-2 justify-center";
+    const linkClassName = "flex items-center gap-1 whitespace-nowrap";
 
     return (
-        <div className="flex flex-col gap-2 absolute bottom-8 left-0 right-0 mx-auto w-fit font-medium">
+        <div className="flex flex-col gap-4 mt-16 px-4 max-lg:pb-20 font-medium">
             <div className={footerLineClassName}>
-                Enjoying the tool?
-                <Link
-                    className={linkClassName}
-                    href="https://github.com/RomanObaraz/gb-cam-lab"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View the project's source code on GitHub"
-                >
-                    View on GitHub <GitHub color="secondary" />
-                </Link>
-                |
-                <Link
-                    className={linkClassName}
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Support this project by buying me a coffee"
-                >
-                    Buy me a coffee <Coffee color="secondary" />
-                </Link>
+                <span>Enjoying the tool?</span>
+                <div className={linkGroupClassName}>
+                    <Link
+                        className={linkClassName}
+                        href="https://github.com/RomanObaraz/gb-cam-lab"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View the project's source code on GitHub"
+                    >
+                        View on GitHub <GitHub color="secondary" />
+                    </Link>
+                    <span>|</span>
+                    <Link
+                        className={linkClassName}
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Support this project by buying me a coffee"
+                    >
+                        Buy me a coffee <Coffee color="secondary" />
+                    </Link>
+                </div>
             </div>
             <div className={footerLineClassName}>
-                Found an issue?
-                <Link
-                    className={linkClassName}
-                    href="https://github.com/RomanObaraz/gb-cam-lab/issues/new"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="View the project's source code on GitHub"
-                >
-                    Report it on GitHub <BugReport color="secondary" />
-                </Link>
-                |
-                <Link
-                    className={linkClassName}
-                    href="mailto: gbcl-support@gmail.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Support this project by buying me a coffee"
-                >
-                    Email us at <b>gbcl-support@gmail.com</b>
-                    <BugReport color="secondary" />
-                </Link>
+                <span className="whitespace-nowrap">Found an issue?</span>
+                <div className={linkGroupClassName}>
+                    <Link
+                        className={linkClassName}
+                        href="https://github.com/RomanObaraz/gb-cam-lab/issues/new"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Report an issue on GitHub"
+                    >
+                        Report it on GitHub <BugReport color="secondary" />
+                    </Link>
+                    <span>|</span>
+                    <Link
+                        className={linkClassName}
+                        href="mailto: gbcl-support@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Email support for the project"
+                    >
+                        Email at <b>gbcl-support@gmail.com</b> <BugReport color="secondary" />
+                    </Link>
+                </div>
             </div>
         </div>
     );
