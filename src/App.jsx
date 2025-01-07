@@ -16,6 +16,7 @@ import { useColorScheme } from "@mui/material";
 import { IndexedAnimatePresence } from "./components/IndexedAnimatePresence";
 import { OverlayScrollbars } from "overlayscrollbars";
 import { isMobile } from "react-device-detect";
+import Footer from "./components/Footer";
 
 export default function App() {
     const { mode, setMode } = useColorScheme();
@@ -64,7 +65,7 @@ export default function App() {
             />
 
             {fileData && (
-                <div className="-mt-8 max-lg:mt-6">
+                <div className="-mt-8 max-lg:mt-6 pb-24">
                     <IndexedAnimatePresence index={2}>
                         <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
                     </IndexedAnimatePresence>
@@ -73,6 +74,8 @@ export default function App() {
                     </IndexedAnimatePresence>
                 </div>
             )}
+
+            <Footer />
         </>
     );
 }
