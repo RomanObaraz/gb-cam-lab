@@ -47,12 +47,12 @@ export default function Footer() {
                     <span>|</span>
                     <Link
                         className={linkClassName}
-                        href="mailto: gbcl-support@gmail.com"
+                        href="mailto: gbcamlab@gmail.com"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Email support for the project"
                     >
-                        Email at <b>gbcl-support@gmail.com</b> <BugReport color="secondary" />
+                        Email at <b>gbcamlab@gmail.com</b> <BugReport color="secondary" />
                     </Link>
                 </div>
             </div>
