@@ -1,8 +1,25 @@
-# React + Vite
+# GB Cam Lab
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The tool: [GB Cam Lab](https://gbcamlab.vercel.app/)
 
-Currently, two official plugins are available:
+A simple tool for exporting and editing photos from Gameboy Camera save files.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Peview](./preview.png)
+
+## Features
+
+-   **Photo Extraction**  
+    Upload a GameBoy Camera save file and extract photos directly from it.
+
+-   **Recoloring**  
+    Recolor your extracted photos using custom palettes created directly within the tool.
+
+-   **Palette Presets**  
+    Save your user-created palettes as presets for quick and easy reuse.
+
+-   **Image Scaling**  
+    Scale your extracted photos to different sizes while maintaining their pixel-perfect quality.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
