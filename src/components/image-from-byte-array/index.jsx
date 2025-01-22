@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { areArraysEqual, getImageDataFromPhoto, replaceImageDataColor } from "../utils/utils";
-import { IMAGE_CANVAS_CLASSNAME, PHOTO_HEIGHT, PHOTO_WIDTH } from "../utils/constants";
+import { areArraysEqual, getImageDataFromPhoto, replaceImageDataColor } from "../../utils/utils";
+import { IMAGE_CANVAS_CLASSNAME, PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
 
 // Photos start at 0x2000 with an interval of 0x1000 per photo
 const photoStartOffset = 0x2000;
 const photoByteLength = 0x1000;
 
-export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, paletteRGB }) {
+export const ImageFromByteArray = ({ byteArray, photoIndex, imageScale, paletteRGB }) => {
     const [imageData, setImageData] = useState(null);
     const canvasRef = useRef();
     const prevPaletteRef = useRef(paletteRGB);
@@ -51,4 +51,4 @@ export default function ImageFromByteArray({ byteArray, photoIndex, imageScale, 
             style={{ width: PHOTO_WIDTH * imageScale, height: PHOTO_HEIGHT * imageScale }}
         />
     );
-}
+};

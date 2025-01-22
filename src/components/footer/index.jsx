@@ -1,7 +1,7 @@
 import { BugReport, Coffee, GitHub } from "@mui/icons-material";
 import { Link } from "@mui/material";
 
-export default function Footer() {
+export const Footer = () => {
     const footerLineClassName = "flex flex-wrap max-sm:flex-col justify-center gap-2";
     const linkGroupClassName = "flex flex-wrap gap-2 justify-center";
     const linkClassName = "flex items-center gap-1 whitespace-nowrap";
@@ -58,4 +58,4 @@ export default function Footer() {
             </div>
         </div>
     );
-}
+};

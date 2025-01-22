@@ -1,6 +1,6 @@
 // If anything remains unclear check this video: https://youtu.be/txkHN6izK2Y?si=Mg0vllVL-3uzrHqh
 
-import JSZip from "jszip";
+import { JSZip } from "jszip";
 import { saveAs } from "file-saver";
 import {
     DOWNLOAD_FILE_NAME,
@@ -10,7 +10,7 @@ import {
     PHOTO_WIDTH,
 } from "./constants";
 
-export function getImageDataFromPhoto(photoData, palette) {
+export const getImageDataFromPhoto = (photoData, palette) => {
     // Photos consist of 8x8 pixel tiles
     // >> 3 gives the amount of 8x8 tiles for the size
     const wTiles = PHOTO_WIDTH >> 3; // 16 tiles
@@ -94,9 +94,9 @@ export function getImageDataFromPhoto(photoData, palette) {
     }
 
     return imageData;
-}
+};
 
-export function replaceImageDataColor(imageData, shadeIndex, newColor) {
+export const replaceImageDataColor = (imageData, shadeIndex, newColor) => {
     const data = imageData.data;
     const [r, g, b] = newColor;
 
@@ -105,9 +105,9 @@ export function replaceImageDataColor(imageData, shadeIndex, newColor) {
         data[pixelIndex[1]] = g;
         data[pixelIndex[2]] = b;
     });
-}
+};
 
-export function hexToRgb(hex) {
+export const hexToRgb = (hex) => {
     // Remove the hash at the start if it's there
     hex = hex.replace(/^#/, "");
 
@@ -117,9 +117,9 @@ export function hexToRgb(hex) {
     let b = bigint & 255;
 
     return [r, g, b];
-}
+};
 
-export function getScaledCanvas(originalCanvas, scale) {
+export const getScaledCanvas = (originalCanvas, scale) => {
     // Create an off-screen canvas for scaling
     const scaledCanvas = document.createElement("canvas");
     const ctx = scaledCanvas.getContext("2d");
@@ -144,30 +144,30 @@ export function getScaledCanvas(originalCanvas, scale) {
     );
 
     return scaledCanvas;
-}
+};
 
-export function updatePalettePresetStorage(updatedPresets) {
+export const updatePalettePresetStorage = (updatedPresets) => {
     if (Object.keys(updatedPresets).length) {
         localStorage.setItem("palettePresets", JSON.stringify(updatedPresets));
     } else {
         localStorage.removeItem("palettePresets");
     }
-}
+};
 
-export function getPalettePresetsFromStorage() {
+export const getPalettePresetsFromStorage = () => {
     return JSON.parse(localStorage.getItem("palettePresets"));
-}
+};
 
-export function downloadCurrent(imageScale) {
+export const downloadCurrent = (imageScale) => {
     const canvas = document.getElementsByClassName(IMAGE_CANVAS_CLASSNAME)?.[0];
 
     if (!canvas) return;
 
     const scaledCanvas = getScaledCanvas(canvas, imageScale);
     scaledCanvas.toBlob((blob) => saveAs(blob, `${DOWNLOAD_FILE_NAME}.png`), "image/png");
-}
+};
 
-export async function downloadAll(imageScale) {
+export const downloadAll = async (imageScale) => {
     const canvases = document.getElementsByClassName(IMAGE_CANVAS_CLASSNAME);
 
     if (!canvases) return;
@@ -190,8 +190,8 @@ export async function downloadAll(imageScale) {
     await Promise.all(zipPromises);
     const zipBlob = await zip.generateAsync({ type: "blob" });
     saveAs(zipBlob, `${DOWNLOAD_FILE_NAME}s.zip`);
-}
+};
 
-export function areArraysEqual(arr1, arr2) {
+export const areArraysEqual = (arr1, arr2) => {
     return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
-}
+};

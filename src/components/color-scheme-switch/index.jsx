@@ -62,10 +62,10 @@ const StyledSwitch = styled((props) => (
     },
 }));
 
-export default function ColorSchemeSwitch({ colorScheme, onSwitch }) {
-    function handleSwitch(event) {
+export const ColorSchemeSwitch = ({ colorScheme, onSwitch }) => {
+    const handleSwitch = (event) => {
         onSwitch(event.target.checked ? "dark" : "light");
-    }
+    };
 
     return <StyledSwitch checked={colorScheme === "dark" ? true : false} onChange={handleSwitch} />;
-}
+};

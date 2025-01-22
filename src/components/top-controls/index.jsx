@@ -1,15 +1,15 @@
-import FileLoader from "./FileLoader";
-import ColorPresetSelect from "./colorPresetSelect";
-import ColorPalette from "./colorPalette";
+import { FileLoader } from "./file-loader";
+import { ColorPresetSelect } from "./color-preset-select";
+import { ColorPalette } from "./color-palette";
 import { twMerge } from "tailwind-merge";
-import IndexedAnimatePresence from "../IndexedAnimatePresence";
+import { IndexedAnimatePresence } from "../indexed-animated-presence";
 
-export default function TopControls({
+export const TopControls = ({
     isFileLoaded,
     palette,
     onPaletteColorChange,
     onPalettePresetSelect,
-}) {
+}) => {
     const stackCenteredStyle = "absolute top-0 left-0 bottom-0 right-0 items-center";
 
     return (
@@ -37,4 +37,4 @@ export default function TopControls({
             )}
         </div>
     );
-}
+};

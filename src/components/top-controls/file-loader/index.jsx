@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { registerPlugin } from "react-filepond";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-import { useStore } from "../../stores/useStore";
-import { SAVE_FILE_SIZE } from "../../utils/constants";
-import MuiFilepond from "./MuiFilepond";
-import UploadIcon from "../../assets/upload.svg?react";
+import { useStore } from "../../../stores/useStore";
+import { SAVE_FILE_SIZE } from "../../../utils/constants";
+import { MuiFilepond } from "./MuiFilepond";
+import UploadIcon from "../../../assets/upload.svg?react";
 import { renderToString } from "react-dom/server";
 
 registerPlugin(FilePondPluginFileValidateType);
 
-function CustomLabelIdle() {
+const CustomLabelIdle = () => {
     return (
         <div className="flex flex-col items-center gap-1">
             <UploadIcon />
@@ -18,9 +18,9 @@ function CustomLabelIdle() {
             </span>
         </div>
     );
-}
+};
 
-function validateFileType(file, type) {
+const validateFileType = (file, type) => {
     return new Promise((resolve) => {
         if (!type) {
             type = "." + file.name.split(".").pop();
@@ -28,14 +28,14 @@ function validateFileType(file, type) {
 
         resolve(type);
     });
-}
+};
 
-export default function FileLoader() {
+export const FileLoader = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [hasFile, setHasFile] = useState(false);
     const setFileData = useStore((state) => state.setFileData);
 
-    function validateFile(file) {
+    const validateFile = (file) => {
         // TODO: might need more thorough validation for file content
         // I can't test other game's .sav files now, so I assume this validation is enough to differ GB Camera saves
         if (file.size !== SAVE_FILE_SIZE) {
@@ -45,9 +45,9 @@ export default function FileLoader() {
 
         setErrorMessage(null);
         return true;
-    }
+    };
 
-    function handleFileChange(files) {
+    const handleFileChange = (files) => {
         setHasFile(files?.length > 0);
 
         const file = files[0]?.file;
@@ -84,7 +84,7 @@ export default function FileLoader() {
         };
 
         reader.readAsArrayBuffer(file);
-    }
+    };
 
     return (
         <div className="max-lg:-mb-3">
@@ -99,4 +99,4 @@ export default function FileLoader() {
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         </div>
     );
-}
+};

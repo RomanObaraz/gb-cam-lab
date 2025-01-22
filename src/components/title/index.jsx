@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-export default function Title() {
+export const Title = () => {
     return (
         <Typography
             className="text-8xl max-sm:text-[44px] sm:max-lg:text-6xl mt-0 font-[Orbitron] font-black text-secondary-main"
@@ -21,4 +21,4 @@ export default function Title() {
             GB Cam Lab
         </Typography>
     );
-}
+};

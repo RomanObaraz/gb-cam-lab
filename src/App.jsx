@@ -1,24 +1,23 @@
 import "filepond/dist/filepond.min.css";
-import "./styles/App.css";
 import "overlayscrollbars/overlayscrollbars.css";
 
 import { useEffect, useMemo, useState } from "react";
 import { hexToRgb } from "./utils/utils";
-import PhotoGallery from "./components/PhotoGallery";
+import { PhotoGallery } from "./components/photo-gallery";
 import { useStore } from "./stores/useStore";
 import { defaultPalettePresets } from "./utils/constants";
-import TopControls from "./components/topControls";
-import DownloadControls from "./components/downloadControls";
+import { TopControls } from "./components/top-controls";
+import { DownloadControls } from "./components/download-controls";
 import { useThrottledCallback } from "use-debounce";
-import ColorSchemeSwitch from "./components/ColorSchemeSwitch";
-import Title from "./components/Title";
+import { ColorSchemeSwitch } from "./components/color-scheme-switch";
+import { Title } from "./components/title";
 import { useColorScheme } from "@mui/material";
-import { IndexedAnimatePresence } from "./components/IndexedAnimatePresence";
+import { IndexedAnimatePresence } from "./components/indexed-animated-presence";
 import { OverlayScrollbars } from "overlayscrollbars";
 import { isMobile } from "react-device-detect";
-import Footer from "./components/Footer";
+import { Footer } from "./components/footer";
 
-export default function App() {
+export const App = () => {
     const { mode, setMode } = useColorScheme();
 
     const fileData = useStore((state) => state.fileData);
@@ -34,10 +33,10 @@ export default function App() {
         setPalette(newPalette);
     }, 50);
 
-    function handlePalettePresetSelect(newPalette) {
+    const handlePalettePresetSelect = (newPalette) => {
         // clone preset data so that we don't change the preset itself
         setPalette(structuredClone(newPalette));
-    }
+    };
 
     useEffect(() => {
         if (!isMobile) {
@@ -80,4 +79,4 @@ export default function App() {
             )}
         </>
     );
-}
+};

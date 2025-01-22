@@ -4,10 +4,10 @@ import { PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
 import ArrowUpIcon from "../../assets/arrow_up.svg?react";
 import ArrowDownIcon from "../../assets/arrow_down.svg?react";
 
-export default function ImageScaler() {
+export const ImageScaler = () => {
     const { imageScale, setImageScale } = useStore();
 
-    function handleScaleInputChange(e) {
+    const handleScaleInputChange = (e) => {
         let inputValue = e.target.value;
 
         // Allow empty string so user can clear input
@@ -18,15 +18,15 @@ export default function ImageScaler() {
             inputValue = inputValue.replace(/^0+/, "");
             setImageScale(Number(inputValue));
         }
-    }
+    };
 
-    function handleIncrement() {
+    const handleIncrement = () => {
         setImageScale(Math.min(imageScale + 1, 99));
-    }
+    };
 
-    function handleDecrement() {
+    const handleDecrement = () => {
         setImageScale(Math.max(imageScale - 1, 1));
-    }
+    };
 
     return (
         <div className="flex flex-row mt-0.5 items-center max-sm:ml-10">
@@ -72,4 +72,4 @@ export default function ImageScaler() {
             </Typography>
         </div>
     );
-}
+};

@@ -5,7 +5,7 @@ import { Popover } from "@mui/material";
 import { motion, AnimatePresence } from "motion/react";
 import { twMerge } from "tailwind-merge";
 
-export default function ColorPicker({ color, onChange }) {
+export const ColorPicker = ({ color, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const swatchRef = useRef();
 
@@ -57,4 +57,4 @@ export default function ColorPicker({ color, onChange }) {
             </AnimatePresence>
         </>
     );
-}
+};

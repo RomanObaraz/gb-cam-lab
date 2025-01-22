@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import ColorPalettePreset from "./ColorPalettePreset";
+import { ColorPalettePreset } from "./ColorPalettePreset";
 import { defaultPalettePresets } from "../../../utils/constants";
 import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../../utils/utils";
 import { Button, Collapse, IconButton, MenuItem } from "@mui/material";
@@ -9,10 +9,10 @@ import UnfoldMoreIcon from "../../../assets/unfold_more.svg?react";
 import UnfoldLessIcon from "../../../assets/unfold_less.svg?react";
 import PaletteIcon from "../../../assets/palette.svg?react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import SelectDivider from "./SelectDivider";
+import { SelectDivider } from "./SelectDivider";
 import { motion, AnimatePresence } from "motion/react";
 
-export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
+export const ColorPresetSelect = ({ currentPalette, onPresetSelect }) => {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
     const [isListShown, setIsListShown] = useState(false);
     const [listHeightOffset, setListHeightOffset] = useState(0);
@@ -27,7 +27,7 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         ].some((preset) => preset.id === currentPalette.id);
     }, [customPalettePresets, currentPalette]);
 
-    function handleSavePalettePreset() {
+    const handleSavePalettePreset = () => {
         const saveCurrentPalettePreset = () => {
             const presetCount = Object.values(customPalettePresets).length;
             const lastPreset = Object.values(customPalettePresets)[presetCount - 1];
@@ -60,9 +60,9 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
                 }
             }, 300);
         }, 100);
-    }
+    };
 
-    function handleDeletePalettePreset(paletteKey) {
+    const handleDeletePalettePreset = (paletteKey) => {
         const updatedPresets = { ...customPalettePresets };
         delete updatedPresets[paletteKey];
 
@@ -78,12 +78,12 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
         if (updatedPresets[currentPalette.id]) {
             onPresetSelect(updatedPresets[currentPalette.id]);
         }
-    }
+    };
 
-    function handlePresetSelect(palette) {
+    const handlePresetSelect = (palette) => {
         setIsListShown(false);
         onPresetSelect(palette);
-    }
+    };
 
     const updateListHeightOffset = () => {
         if (selectButtonRef.current) {
@@ -220,4 +220,4 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
             </div>
         </>
     );
-}
+};

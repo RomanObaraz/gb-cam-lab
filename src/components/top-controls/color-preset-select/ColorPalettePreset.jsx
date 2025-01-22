@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { twMerge } from "tailwind-merge";
 
-export default function ColorPalettePreset({ palette, isHeader = false }) {
+export const ColorPalettePreset = ({ palette, isHeader = false }) => {
     return (
         <div className="flex items-center">
             <Typography
@@ -25,4 +25,4 @@ export default function ColorPalettePreset({ palette, isHeader = false }) {
             </div>
         </div>
     );
-}
+};

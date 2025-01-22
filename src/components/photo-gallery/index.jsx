@@ -1,11 +1,11 @@
 import { useState } from "react";
-import ImageFromByteArray from "./ImageFromByteArray";
-import { PHOTO_COUNT } from "../utils/constants";
+import { PHOTO_COUNT } from "../../utils/constants";
 import { Grid2, useMediaQuery, useTheme } from "@mui/material";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { twMerge } from "tailwind-merge";
+import { ImageFromByteArray } from "../image-from-byte-array";
 
-export default function PhotoGallery({ fileData, paletteRGB }) {
+export const PhotoGallery = ({ fileData, paletteRGB }) => {
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
     const theme = useTheme();
     const isSmallerPreview = useMediaQuery(theme.breakpoints.down("md"));
@@ -69,4 +69,4 @@ export default function PhotoGallery({ fileData, paletteRGB }) {
             {photoGrid}
         </div>
     );
-}
+};

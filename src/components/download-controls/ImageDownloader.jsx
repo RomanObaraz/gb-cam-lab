@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { useStore } from "../../stores/useStore";
 import { downloadAll, downloadCurrent } from "../../utils/utils";
 
-export default function ImageDownloader() {
+export const ImageDownloader = () => {
     const imageScale = useStore((state) => state.imageScale);
 
     const buttonClassName = "w-32 p-0";
@@ -17,4 +17,4 @@ export default function ImageDownloader() {
             </Button>
         </div>
     );
-}
+};

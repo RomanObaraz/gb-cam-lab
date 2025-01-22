@@ -1,6 +1,6 @@
-import ColorPicker from "./ColorPicker";
+import { ColorPicker } from "./ColorPicker";
 
-export default function ColorPalette({ colors, onChange }) {
+export const ColorPalette = ({ colors, onChange }) => {
     return (
         <div className="flex gap-6">
             {colors.map((color, i) => {
@@ -14,4 +14,4 @@ export default function ColorPalette({ colors, onChange }) {
             })}
         </div>
     );
-}
+};

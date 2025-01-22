@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import { FilePond } from "react-filepond";
-import RemoveIcon from "../../assets/remove.svg?raw";
+import RemoveIcon from "../../../assets/remove.svg?raw";
 import { useEffect } from "react";
 
 const StyledFilePond = styled(FilePond, {
@@ -114,7 +114,7 @@ const StyledFilePond = styled(FilePond, {
     },
 }));
 
-export default function MuiFilepond(props) {
+export const MuiFilepond = (props) => {
     useEffect(() => {
         const filepondRoot = document.getElementsByClassName("filepond--root")[0];
         if (filepondRoot) {
@@ -127,4 +127,4 @@ export default function MuiFilepond(props) {
     }, [props.className]);
 
     return <StyledFilePond iconRemove={RemoveIcon} {...props} />;
-}
+};
