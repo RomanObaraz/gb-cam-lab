@@ -23,7 +23,7 @@ export default function Footer() {
                     <span>|</span>
                     <Link
                         className={linkClassName}
-                        href="#"
+                        href="https://ko-fi.com/romanobaraz"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Support this project by buying me a coffee"

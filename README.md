@@ -6,6 +6,8 @@ A simple tool for exporting and editing photos from Gameboy Camera save files.
 
 ![Peview](./preview.png)
 
+If you like GB Cam Lab and want to support my work, consider [Buying me a coffee ☕](https://ko-fi.com/romanobaraz)
+
 ## Features
 
 -   **Photo Extraction**  
