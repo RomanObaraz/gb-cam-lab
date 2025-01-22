@@ -2,7 +2,7 @@ import FileLoader from "./FileLoader";
 import ColorPresetSelect from "./colorPresetSelect";
 import ColorPalette from "./colorPalette";
 import { twMerge } from "tailwind-merge";
-import { IndexedAnimatePresence } from "../IndexedAnimatePresence";
+import IndexedAnimatePresence from "../IndexedAnimatePresence";
 
 export default function TopControls({
     isFileLoaded,

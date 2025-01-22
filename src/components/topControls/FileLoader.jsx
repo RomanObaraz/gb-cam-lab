@@ -9,20 +9,31 @@ import { renderToString } from "react-dom/server";
 
 registerPlugin(FilePondPluginFileValidateType);
 
+function CustomLabelIdle() {
+    return (
+        <div className="flex flex-col items-center gap-1">
+            <UploadIcon />
+            <span>
+                Drag & Drop your .sav file or <span className="filepond--label-action">Browse</span>
+            </span>
+        </div>
+    );
+}
+
+function validateFileType(file, type) {
+    return new Promise((resolve) => {
+        if (!type) {
+            type = "." + file.name.split(".").pop();
+        }
+
+        resolve(type);
+    });
+}
+
 export default function FileLoader() {
     const [errorMessage, setErrorMessage] = useState(null);
-    const setFileData = useStore((state) => state.setFileData);
     const [hasFile, setHasFile] = useState(false);
-
-    function validateFileType(file, type) {
-        return new Promise((resolve) => {
-            if (!type) {
-                type = "." + file.name.split(".").pop();
-            }
-
-            resolve(type);
-        });
-    }
+    const setFileData = useStore((state) => state.setFileData);
 
     function validateFile(file) {
         // TODO: might need more thorough validation for file content
@@ -86,17 +97,6 @@ export default function FileLoader() {
                 fileValidateTypeDetectType={validateFileType}
             />
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-        </div>
-    );
-}
-
-export function CustomLabelIdle() {
-    return (
-        <div className="flex flex-col items-center gap-1">
-            <UploadIcon />
-            <span>
-                Drag & Drop your .sav file or <span className="filepond--label-action">Browse</span>
-            </span>
         </div>
     );
 }

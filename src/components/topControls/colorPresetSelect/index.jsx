@@ -21,12 +21,10 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
     const selectButtonRef = useRef();
 
     const isCurrentPaletteInPresets = useMemo(() => {
-        return (
-            Object.values(defaultPalettePresets).some(
-                (preset) => preset.id === currentPalette.id
-            ) ||
-            Object.values(customPalettePresets).some((preset) => preset.id === currentPalette.id)
-        );
+        return [
+            ...Object.values(defaultPalettePresets),
+            ...Object.values(customPalettePresets),
+        ].some((preset) => preset.id === currentPalette.id);
     }, [customPalettePresets, currentPalette]);
 
     function handleSavePalettePreset() {
@@ -172,10 +170,8 @@ export default function ColorPresetSelect({ currentPalette, onPresetSelect }) {
             <OverlayScrollbarsComponent
                 id="smallOsScrollbar"
                 ref={osRef}
-                className="
-                                    absolute w-48overflow-auto min-h-28
-                                    p-2 pl-0 bg-base-main rounded-md border-2 border-solid border-primary-main
-                                "
+                className="absolute w-48overflow-auto min-h-28
+                           p-2 pl-0 bg-base-main rounded-md border-2 border-solid border-primary-main"
                 style={{ maxHeight: `calc(100vh - ${listHeightOffset}px)` }}
                 options={{ overflow: { x: "hidden" } }}
                 defer

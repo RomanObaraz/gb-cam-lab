@@ -10,7 +10,6 @@ const StyledFilePond = styled(FilePond, {
     width: 600,
     height: 240,
     fontFamily: theme.typography.fontFamily,
-
     transition: `${theme.transitions.create(["width", "height"], {
         duration: theme.transitions.duration.standard,
         easing: theme.transitions.easing.easeInOut,

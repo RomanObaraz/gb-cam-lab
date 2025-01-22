@@ -12,12 +12,12 @@ export default function ColorPalettePreset({ palette, isHeader = false }) {
             >
                 {palette.name}
             </Typography>
-            <div className="flex border-2 border-solid border-primary-main rounded-[4px]">
+            <div className="flex border-2 border-solid border-primary-main rounded">
                 {palette.colors.map((color, index) => {
                     return (
                         <div
                             key={`colorPreview-${index}`}
-                            className="size-4 w-4 h-4"
+                            className="size-4"
                             style={{ backgroundColor: color }}
                         />
                     );

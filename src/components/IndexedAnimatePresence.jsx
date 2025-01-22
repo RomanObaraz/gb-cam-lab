@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 
-export const IndexedAnimatePresence = ({ children, index }) => {
+export default function IndexedAnimatePresence({ children, index }) {
     const delay = 0.3 + index * 0.2;
 
     const variants = {
@@ -30,4 +30,4 @@ export const IndexedAnimatePresence = ({ children, index }) => {
             </motion.div>
         </AnimatePresence>
     );
-};
+}
