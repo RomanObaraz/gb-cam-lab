@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 import { areArraysEqual, getImageDataFromPhoto, replaceImageDataColor } from "../../utils/utils";
 import { IMAGE_CANVAS_CLASSNAME, PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
 

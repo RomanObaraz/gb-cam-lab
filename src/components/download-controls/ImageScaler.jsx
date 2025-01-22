@@ -1,4 +1,5 @@
 import { IconButton, InputAdornment, TextField, Typography } from "@mui/material";
+
 import { useStore } from "../../stores/useStore";
 import { PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
 import ArrowUpIcon from "../../assets/arrow_up.svg?react";

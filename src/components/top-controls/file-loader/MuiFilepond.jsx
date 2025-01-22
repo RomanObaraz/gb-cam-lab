@@ -1,7 +1,8 @@
 import { styled } from "@mui/material/styles";
 import { FilePond } from "react-filepond";
-import RemoveIcon from "../../../assets/remove.svg?raw";
 import { useEffect } from "react";
+
+import RemoveIcon from "../../../assets/remove.svg?raw";
 
 const StyledFilePond = styled(FilePond, {
     name: "MuiFilepond",

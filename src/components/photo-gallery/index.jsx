@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { PHOTO_COUNT } from "../../utils/constants";
 import { Grid2, useMediaQuery, useTheme } from "@mui/material";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { twMerge } from "tailwind-merge";
+
+import { PHOTO_COUNT } from "../../utils/constants";
 import { ImageFromByteArray } from "../image-from-byte-array";
 
 export const PhotoGallery = ({ fileData, paletteRGB }) => {

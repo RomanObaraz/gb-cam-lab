@@ -1,16 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Button, Collapse, IconButton, MenuItem } from "@mui/material";
+import { TransitionGroup } from "react-transition-group";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { motion, AnimatePresence } from "motion/react";
+
 import { ColorPalettePreset } from "./ColorPalettePreset";
 import { defaultPalettePresets } from "../../../utils/constants";
 import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../../utils/utils";
-import { Button, Collapse, IconButton, MenuItem } from "@mui/material";
-import { TransitionGroup } from "react-transition-group";
+import { SelectDivider } from "./SelectDivider";
 import RemoveIcon from "../../../assets/remove.svg?react";
 import UnfoldMoreIcon from "../../../assets/unfold_more.svg?react";
 import UnfoldLessIcon from "../../../assets/unfold_less.svg?react";
 import PaletteIcon from "../../../assets/palette.svg?react";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import { SelectDivider } from "./SelectDivider";
-import { motion, AnimatePresence } from "motion/react";
 
 export const ColorPresetSelect = ({ currentPalette, onPresetSelect }) => {
     const [customPalettePresets, setCustomPalettePresets] = useState({});

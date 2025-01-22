@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { registerPlugin } from "react-filepond";
+import { renderToString } from "react-dom/server";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+
 import { useStore } from "../../../stores/useStore";
 import { SAVE_FILE_SIZE } from "../../../utils/constants";
 import { MuiFilepond } from "./MuiFilepond";
 import UploadIcon from "../../../assets/upload.svg?react";
-import { renderToString } from "react-dom/server";
 
 registerPlugin(FilePondPluginFileValidateType);
 

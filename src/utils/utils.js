@@ -2,6 +2,7 @@
 
 import { JSZip } from "jszip";
 import { saveAs } from "file-saver";
+
 import {
     DOWNLOAD_FILE_NAME,
     IMAGE_CANVAS_CLASSNAME,

@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
-import classes from "../../../styles/ColorPicker.module.css";
 import { Popover } from "@mui/material";
 import { motion, AnimatePresence } from "motion/react";
 import { twMerge } from "tailwind-merge";
+
+import classes from "../../../styles/ColorPicker.module.css";
 
 export const ColorPicker = ({ color, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);

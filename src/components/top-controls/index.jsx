@@ -1,7 +1,8 @@
+import { twMerge } from "tailwind-merge";
+
 import { FileLoader } from "./file-loader";
 import { ColorPresetSelect } from "./color-preset-select";
 import { ColorPalette } from "./color-palette";
-import { twMerge } from "tailwind-merge";
 import { IndexedAnimatePresence } from "../indexed-animated-presence";
 
 export const TopControls = ({
