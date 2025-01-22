@@ -8,6 +8,22 @@
         outline-color 0.5s ease;
 }
 
+#root {
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    min-height: 100vh;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+canvas {
+    pointer-events: none;
+    image-rendering: pixelated;
+}
+
 .os-scrollbar {
     --os-handle-bg: none;
     --os-handle-bg-hover: var(--palette-primary-main);
@@ -29,11 +45,6 @@ body > .os-scrollbar {
     --os-size: 16px;
     --os-handle-border-radius: 4px;
     --os-padding-axis: 20px;
-}
-
-canvas {
-    pointer-events: none;
-    image-rendering: pixelated;
 }
 
 .os-scrollbar-track::before,
