@@ -1,6 +1,6 @@
 // If anything remains unclear check this video: https://youtu.be/txkHN6izK2Y?si=Mg0vllVL-3uzrHqh
 
-import { JSZip } from "jszip";
+import JSZip from "jszip";
 import { saveAs } from "file-saver";
 
 import {
