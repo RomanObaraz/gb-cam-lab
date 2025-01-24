@@ -1,5 +1,5 @@
 {
-    "name": "gbcamera",
+    "name": "gb-cam-lab",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -15,6 +15,7 @@
         "@mui/icons-material": "^6.3.0",
         "@mui/material": "^6.1.6",
         "@types/react-transition-group": "^4.4.11",
+        "@vercel/analytics": "^1.4.1",
         "file-saver": "^2.0.5",
         "filepond": "^4.31.4",
         "filepond-plugin-file-validate-type": "^1.2.9",
