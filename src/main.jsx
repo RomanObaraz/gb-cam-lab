@@ -9,10 +9,10 @@ import "./styles/index.css";
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
+        <Analytics />
         <ThemeProvider theme={theme} defaultMode="light">
             <CssBaseline />
             <App />
         </ThemeProvider>
-        <Analytics />
     </StrictMode>
 );
