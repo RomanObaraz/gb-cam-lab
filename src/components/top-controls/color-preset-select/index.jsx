@@ -171,7 +171,7 @@ export const ColorPresetSelect = ({ currentPalette, onPresetSelect }) => {
             <OverlayScrollbarsComponent
                 id="smallOsScrollbar"
                 ref={osRef}
-                className="absolute w-48overflow-auto min-h-28
+                className="absolute w-48 overflow-auto min-h-20
                            p-2 pl-0 bg-base-main rounded-md border-2 border-solid border-primary-main"
                 style={{ maxHeight: `calc(100vh - ${listHeightOffset}px)` }}
                 options={{ overflow: { x: "hidden" } }}
