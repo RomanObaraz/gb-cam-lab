@@ -15,6 +15,8 @@ export const IMAGE_CANVAS_CLASSNAME = "photoImage";
 
 export const DOWNLOAD_FILE_NAME = "gb-cam-image";
 
+export const CUSTOM_PALETTE_PRESET_NAME = "Palette";
+
 // Gameboy Camera's photos are 128x112 resolution
 export const PHOTO_WIDTH = 128;
 export const PHOTO_HEIGHT = 112;

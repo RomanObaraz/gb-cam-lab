@@ -5,7 +5,7 @@ import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { motion, AnimatePresence } from "motion/react";
 
 import { ColorPalettePreset } from "./ColorPalettePreset";
-import { defaultPalettePresets } from "../../../utils/constants";
+import { CUSTOM_PALETTE_PRESET_NAME, defaultPalettePresets } from "../../../utils/constants";
 import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../../utils/utils";
 import { SelectDivider } from "./SelectDivider";
 import RemoveIcon from "../../../assets/remove.svg?react";
@@ -36,7 +36,7 @@ export const ColorPresetSelect = ({ currentPalette, onPresetSelect }) => {
 
             const newPreset = {
                 id: newPresetId,
-                name: `Custom-${presetCount + 1}`,
+                name: `${CUSTOM_PALETTE_PRESET_NAME}-${presetCount + 1}`,
                 colors: [...currentPalette.colors],
             };
 
@@ -69,7 +69,7 @@ export const ColorPresetSelect = ({ currentPalette, onPresetSelect }) => {
 
         // rename all remaining presets to retain naming order
         Object.values(updatedPresets).forEach((preset, i) => {
-            preset.name = `Custom-${i + 1}`;
+            preset.name = `${CUSTOM_PALETTE_PRESET_NAME}-${i + 1}`;
         });
 
         setCustomPalettePresets(updatedPresets);

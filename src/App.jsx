@@ -7,7 +7,7 @@ import { isMobile } from "react-device-detect";
 import { hexToRgb } from "./utils/utils";
 import { PhotoGallery } from "./components/photo-gallery";
 import { useStore } from "./stores/useStore";
-import { defaultPalettePresets } from "./utils/constants";
+import { CUSTOM_PALETTE_PRESET_NAME, defaultPalettePresets } from "./utils/constants";
 import { TopControls } from "./components/top-controls";
 import { DownloadControls } from "./components/download-controls";
 import { ColorSchemeSwitch } from "./components/color-scheme-switch";
@@ -28,7 +28,7 @@ export const App = () => {
     const handlePaletteColorChange = useThrottledCallback((index, colorValue) => {
         const newPalette = { ...palette };
         newPalette.id = "custom";
-        newPalette.name = "Custom";
+        newPalette.name = CUSTOM_PALETTE_PRESET_NAME;
         newPalette.colors[index] = colorValue;
         setPalette(newPalette);
     }, 50);
