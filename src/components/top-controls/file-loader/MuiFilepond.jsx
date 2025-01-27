@@ -84,12 +84,6 @@ const StyledFilePond = styled(FilePond, {
     ".filepond--drip-blob": {
         backgroundColor: "var(--palette-secondary-main)",
     },
-    "[data-filepond-item-state*='error'] .filepond--item-panel": {
-        backgroundColor: "var(--palette-warning-light)",
-    },
-    "[data-filepond-item-state*='invalid'] .filepond--item-panel": {
-        backgroundColor: "var(--palette-warning-light)",
-    },
     "[data-filepond-item-state='processing-complete'] .filepond--item-panel": {
         backgroundColor: "var(--palette-success-main)",
     },
