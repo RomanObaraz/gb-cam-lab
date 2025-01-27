@@ -22,7 +22,7 @@ export const ImageScaler = () => {
     };
 
     const handleIncrement = () => {
-        setImageScale(Math.min(imageScale + 1, 99));
+        setImageScale(Math.min(imageScale + 1, 30));
     };
 
     const handleDecrement = () => {
