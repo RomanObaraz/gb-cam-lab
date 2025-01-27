@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { alpha, createTheme } from "@mui/material";
 
 export const theme = createTheme({
     cssVariables: {
@@ -95,6 +95,11 @@ export const theme = createTheme({
                     "&:active": {
                         boxShadow: `0 0 ${theme.palette.secondary.main}`,
                         transform: "translateY(2px)",
+                    },
+                    "&.Mui-disabled": {
+                        borderWidth: 2,
+                        borderColor: alpha(theme.palette.secondary.main, 0.3),
+                        boxShadow: `2px 2px ${alpha(theme.palette.secondary.main, 0.3)}`,
                     },
                 }),
             },
