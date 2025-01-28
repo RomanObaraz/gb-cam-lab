@@ -104,7 +104,7 @@ const StyledFilePond = styled(FilePond, {
         },
         "&:active": {
             boxShadow: "0 0 var(--palette-secondary-main)",
-            transform: "translateY(2px) !important",
+            transform: "translate(2px, 2px) !important",
         },
     },
 }));

@@ -22,7 +22,7 @@ export const ColorPicker = ({ color, onChange }) => {
                     shadow-[4px_4px_0_2px] shadow-primary-main
                     transition-all
                     hover:-translate-y-0.5 hover:outline-secondary-main hover:shadow-secondary-main
-                    active:shadow-none active:translate-y-0.5
+                    active:shadow-none active:translate-y-0.5 active:translate-x-0.5
                     cursor-pointer
                 `,
                     isOpen && "-translate-y-0.5 outline-secondary-main shadow-secondary-main"

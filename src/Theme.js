@@ -94,7 +94,7 @@ export const theme = createTheme({
                     },
                     "&:active": {
                         boxShadow: `0 0 ${theme.palette.secondary.main}`,
-                        transform: "translateY(2px)",
+                        transform: "translate(2px, 2px)",
                     },
                     "&.Mui-disabled": {
                         borderWidth: 2,
