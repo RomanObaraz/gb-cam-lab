@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --body-pattern-color {
+    syntax: "<color>";
+    initial-value: #e8cca6; /* --palette-base-dark in light scheme */
+    inherits: false;
+}
+
 * {
-    will-change: background-color, shadow-color, border-color, outline-color;
+    will-change: background-color, shadow-color, border-color, outline-color, --palette-base-dark;
     transition: background-color 0.5s ease, shadow-color 0.5s ease, border-color 0.5s ease,
-        outline-color 0.5s ease;
+        outline-color 0.5s ease, --body-pattern-color 0.5s ease;
 }
 
 #root {
@@ -17,6 +23,18 @@
     margin: 0 auto;
     padding: 1rem;
     text-align: center;
+}
+
+/* grid pattern BG */
+body {
+    background-color: transparent;
+    background-image: linear-gradient(var(--body-pattern-color) 2px, transparent 2px),
+        linear-gradient(to right, var(--body-pattern-color) 2px, transparent 2px);
+    background-size: 100px 100px;
+}
+
+.dark body {
+    --body-pattern-color: #354450; /* --palette-base-dark in dark scheme */
 }
 
 canvas {

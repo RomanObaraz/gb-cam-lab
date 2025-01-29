@@ -29,7 +29,7 @@ const StyledFilePond = styled(FilePond, {
     },
     ".filepond--panel-root": {
         borderRadius: 24,
-        backgroundColor: "transparent",
+        backgroundColor: "var(--palette-base-main)",
         border: "8px dashed var(--palette-text-primary)",
         backgroundImage:
             "radial-gradient(var(--palette-base-dark) 3px, transparent 3px), radial-gradient(var(--palette-base-dark) 3px, transparent 3px)",
