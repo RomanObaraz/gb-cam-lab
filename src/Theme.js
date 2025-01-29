@@ -81,6 +81,7 @@ export const theme = createTheme({
                     borderWidth: 2,
                     borderRadius: 8,
                     borderColor: `${theme.palette.secondary.main}`,
+                    backgroundColor: theme.palette.base.main,
                     boxShadow: `2px 2px ${theme.palette.secondary.main}`,
                     transition: `${theme.transitions.create(
                         ["background-color", "box-shadow", "border-color", "color", "transform"],
@@ -132,6 +133,7 @@ export const theme = createTheme({
                     borderRadius: 8,
                 }),
                 root: ({ theme }) => ({
+                    backgroundColor: theme.palette.base.main,
                     "&:hover .MuiOutlinedInput-notchedOutline": {
                         borderColor: `${theme.palette.secondary.main}`,
                     },
