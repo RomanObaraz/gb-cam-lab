@@ -30,7 +30,7 @@ body {
     background-color: transparent;
     background-image: linear-gradient(var(--body-pattern-color) 2px, transparent 2px),
         linear-gradient(to right, var(--body-pattern-color) 2px, transparent 2px);
-    background-size: 100px 100px;
+    background-size: 120px 120px;
 }
 
 .dark body {
