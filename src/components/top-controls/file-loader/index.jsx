@@ -2,6 +2,7 @@ import { useState } from "react";
 import { registerPlugin } from "react-filepond";
 import { renderToString } from "react-dom/server";
 import { Typography } from "@mui/material";
+import { useDebouncedCallback } from "use-debounce";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
@@ -43,6 +44,11 @@ export const FileLoader = () => {
     const [hasFile, setHasFile] = useState(false);
     const setFileData = useStore((state) => state.setFileData);
 
+    const debouncedSetFileData = useDebouncedCallback(
+        (arrayBuffer) => setFileData(arrayBuffer),
+        100
+    );
+
     const handleFileChange = (files) => {
         setHasFile(files?.length > 0);
 
@@ -77,9 +83,9 @@ export const FileLoader = () => {
                 fixedByteArray.set(byteArray.subarray(1));
                 fixedByteArray[fixedByteArray.length - 1] = newByte;
 
-                setFileData(fixedByteArray);
+                debouncedSetFileData(fixedByteArray);
             } else {
-                setFileData(arrayBuffer);
+                debouncedSetFileData(arrayBuffer);
             }
         };
 
