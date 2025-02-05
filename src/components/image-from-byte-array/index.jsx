@@ -1,47 +1,125 @@
 import { useEffect, useRef, useState } from "react";
 
-import { areArraysEqual, getImageDataFromPhoto, replaceImageDataColor } from "../../utils/utils";
-import { IMAGE_CANVAS_CLASSNAME, PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
+import {
+    areArraysEqual,
+    createImageDataShadeMap,
+    getImageDataFromPhoto,
+    replaceImageDataColor,
+} from "../../utils/utils";
+import {
+    FRAME_HEIGHT,
+    FRAME_WIDTH,
+    IMAGE_CANVAS_CLASSNAME,
+    PHOTO_HEIGHT,
+    PHOTO_WIDTH,
+} from "../../utils/constants";
+
+import myImage from "/src/assets/frames/frame.png";
 
 // Photos start at 0x2000 with an interval of 0x1000 per photo
 const photoStartOffset = 0x2000;
 const photoByteLength = 0x1000;
 
-export const ImageFromByteArray = ({ byteArray, photoIndex, imageScale, paletteRGB }) => {
+// TODO: ignore empty photos in all processes (recolor, frame, download)
+
+export const ImageFromByteArray = ({
+    byteArray,
+    photoIndex,
+    imageScale,
+    isFrameEnabled,
+    paletteRGB,
+}) => {
     const [imageData, setImageData] = useState(null);
+    const [frameData, setFrameData] = useState(null);
     const canvasRef = useRef();
     const prevPaletteRef = useRef(paletteRGB);
 
+    const updateCanvas = () => {
+        if (!imageData) return;
+
+        const ctx = canvasRef.current.getContext("2d");
+        ctx.imageSmoothingEnabled = false;
+
+        paletteRGB.forEach((color, index) => {
+            if (!areArraysEqual(prevPaletteRef.current[index], color)) {
+                replaceImageDataColor(imageData, index, color);
+                if (frameData) {
+                    replaceImageDataColor(frameData, index, color);
+                }
+            }
+        });
+
+        ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+
+        // draw frame first if enabled
+        if (isFrameEnabled && frameData) {
+            ctx.putImageData(frameData, 0, 0);
+        }
+
+        // draw photo image
+        ctx.putImageData(imageData, isFrameEnabled ? 16 : 0, isFrameEnabled ? 16 : 0);
+
+        prevPaletteRef.current = paletteRGB;
+    };
+
+    const createFrameData = () => {
+        const img = new Image();
+        img.src = myImage;
+        img.onload = () => {
+            const tempCanvas = document.createElement("canvas");
+            tempCanvas.width = img.width;
+            tempCanvas.height = img.height;
+            const tempCtx = tempCanvas.getContext("2d");
+            tempCtx.drawImage(img, 0, 0);
+
+            const frameImageData = tempCtx.getImageData(0, 0, img.width, img.height);
+            frameImageData.shadeMap = createImageDataShadeMap(frameImageData);
+
+            paletteRGB.forEach((color, index) => {
+                replaceImageDataColor(frameImageData, index, color);
+            });
+
+            setFrameData(frameImageData);
+
+            canvasRef.current.width = FRAME_WIDTH;
+            canvasRef.current.height = FRAME_HEIGHT;
+        };
+    };
+
     useEffect(() => {
-        // Extract one photo data
         const photoStart = photoStartOffset + photoByteLength * photoIndex;
         const photoEnd = photoStart + photoByteLength;
         const photoData = new Uint8Array(byteArray).slice(photoStart, photoEnd);
 
-        // Create imageData for canvas from photoData
         const newImageData = getImageDataFromPhoto(photoData, paletteRGB);
         setImageData(newImageData);
-
+        console.log("update");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [byteArray, photoIndex]);
 
     useEffect(() => {
-        const updateCanvas = () => {
-            const ctx = canvasRef.current.getContext("2d");
-            ctx.imageSmoothingEnabled = false;
+        if (!isFrameEnabled) {
+            canvasRef.current.width = PHOTO_WIDTH;
+            canvasRef.current.height = PHOTO_HEIGHT;
+            updateCanvas();
+            return;
+        }
 
-            paletteRGB.forEach((color, index) => {
-                if (!areArraysEqual(prevPaletteRef.current[index], color)) {
-                    replaceImageDataColor(imageData, index, color);
-                }
-            });
+        if (frameData) {
+            canvasRef.current.width = FRAME_WIDTH;
+            canvasRef.current.height = FRAME_HEIGHT;
+            updateCanvas();
+            return;
+        }
 
-            ctx.putImageData(imageData, 0, 0);
-            prevPaletteRef.current = paletteRGB;
-        };
+        createFrameData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isFrameEnabled]);
 
-        if (imageData) updateCanvas();
-    }, [imageData, paletteRGB]);
+    useEffect(() => {
+        updateCanvas();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [imageData, frameData, paletteRGB]);
 
     return (
         <canvas

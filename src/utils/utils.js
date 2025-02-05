@@ -97,6 +97,43 @@ export const getImageDataFromPhoto = (photoData, palette) => {
     return imageData;
 };
 
+export const createImageDataShadeMap = (imageData) => {
+    const data = imageData.data;
+    const width = imageData.width;
+    const height = imageData.height;
+
+    const shadeMap = {
+        shade0: [],
+        shade1: [],
+        shade2: [],
+        shade3: [],
+    };
+
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            const index = (y * width + x) * 4; // RGBA index in data array
+            const r = data[index];
+            const g = data[index + 1];
+            const b = data[index + 2];
+
+            const grayscale = Math.round((r + g + b) / 3);
+
+            // determine closest Gameboy shade (0 = lightest, 3 = darkest)
+            let shadeIndex;
+
+            // 223, 144, 48 are halfways between the b&w palette (255, 192, 96, 0)
+            if (grayscale > 223) shadeIndex = 0;
+            else if (grayscale > 144) shadeIndex = 1;
+            else if (grayscale > 48) shadeIndex = 2;
+            else shadeIndex = 3;
+
+            shadeMap[`shade${shadeIndex}`].push([index, index + 1, index + 2]);
+        }
+    }
+
+    return shadeMap;
+};
+
 export const replaceImageDataColor = (imageData, shadeIndex, newColor) => {
     const data = imageData.data;
     const [r, g, b] = newColor;

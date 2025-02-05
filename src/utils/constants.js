@@ -21,6 +21,10 @@ export const CUSTOM_PALETTE_PRESET_NAME = "Palette";
 export const PHOTO_WIDTH = 128;
 export const PHOTO_HEIGHT = 112;
 
+// Gameboy Camera's photo frames are 160x144 resolution
+export const FRAME_WIDTH = 160;
+export const FRAME_HEIGHT = 144;
+
 // There're a total of 30 photos in Gameboy Camera's memory
 export const PHOTO_COUNT = 30;
 

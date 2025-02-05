@@ -6,13 +6,18 @@ export const useStore = create(
         (set) => ({
             fileData: null,
             imageScale: 3,
+            isFrameEnabled: false,
 
             setFileData: (data) => set({ fileData: data }),
             setImageScale: (scale) => set({ imageScale: scale }),
+            setIsFrameEnabled: (enabled) => set({ isFrameEnabled: enabled }),
         }),
         {
             name: "scale-storage",
-            partialize: (state) => ({ imageScale: state.imageScale }),
+            partialize: (state) => ({
+                imageScale: state.imageScale,
+                isFrameEnabled: state.isFrameEnabled,
+            }),
         }
     )
 );

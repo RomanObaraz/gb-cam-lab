@@ -5,8 +5,10 @@ import { twMerge } from "tailwind-merge";
 
 import { PHOTO_COUNT } from "../../utils/constants";
 import { ImageFromByteArray } from "../image-from-byte-array";
+import { useStore } from "../../stores/useStore";
 
 export const PhotoGallery = ({ fileData, paletteRGB }) => {
+    const isFrameEnabled = useStore((state) => state.isFrameEnabled);
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
     const theme = useTheme();
     const isSmallerPreview = useMediaQuery(theme.breakpoints.down("md"));
@@ -25,6 +27,7 @@ export const PhotoGallery = ({ fileData, paletteRGB }) => {
                 byteArray={fileData}
                 photoIndex={currentPhotoIndex}
                 imageScale={isSmallerPreview ? 2 : 3}
+                isFrameEnabled={isFrameEnabled}
                 paletteRGB={paletteRGB}
             />
         </div>
@@ -56,6 +59,7 @@ export const PhotoGallery = ({ fileData, paletteRGB }) => {
                             byteArray={fileData}
                             photoIndex={index}
                             imageScale={1}
+                            isFrameEnabled={isFrameEnabled}
                             paletteRGB={paletteRGB}
                         />
                     </div>
