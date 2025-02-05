@@ -56,7 +56,6 @@ export const FileLoader = () => {
         setErrorMessage(null);
 
         const file = files[0]?.file;
-        console.log();
 
         if (!file) {
             setFileData(null);

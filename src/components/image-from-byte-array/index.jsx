@@ -93,7 +93,7 @@ export const ImageFromByteArray = ({
 
         const newImageData = getImageDataFromPhoto(photoData, paletteRGB);
         setImageData(newImageData);
-        console.log("update");
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [byteArray, photoIndex]);
 
