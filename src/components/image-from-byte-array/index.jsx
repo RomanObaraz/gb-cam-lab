@@ -14,7 +14,7 @@ import {
     PHOTO_WIDTH,
 } from "../../utils/constants";
 
-import myImage from "/src/assets/frames/frame.png";
+import testFrame from "/src/assets/frames/int-frame-0.png";
 
 // Photos start at 0x2000 with an interval of 0x1000 per photo
 const photoStartOffset = 0x2000;
@@ -64,7 +64,7 @@ export const ImageFromByteArray = ({
 
     const createFrameData = () => {
         const img = new Image();
-        img.src = myImage;
+        img.src = testFrame;
         img.onload = () => {
             const tempCanvas = document.createElement("canvas");
             tempCanvas.width = img.width;

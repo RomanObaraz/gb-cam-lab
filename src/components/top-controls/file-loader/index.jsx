@@ -8,7 +8,7 @@ import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import { useStore } from "../../../stores/useStore";
 import { SAVE_FILE_SIZE } from "../../../utils/constants";
 import { MuiFilepond } from "./MuiFilepond";
-import UploadIcon from "../../../assets/upload.svg?react";
+import UploadIcon from "../../../assets/icons/upload.svg?react";
 
 registerPlugin(FilePondPluginFileValidateType);
 registerPlugin(FilePondPluginFileValidateSize);

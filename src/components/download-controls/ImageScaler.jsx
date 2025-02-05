@@ -2,8 +2,8 @@ import { IconButton, InputAdornment, TextField, Typography } from "@mui/material
 
 import { useStore } from "../../stores/useStore";
 import { PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
-import ArrowUpIcon from "../../assets/arrow_up.svg?react";
-import ArrowDownIcon from "../../assets/arrow_down.svg?react";
+import ArrowUpIcon from "../../assets/icons/arrow_up.svg?react";
+import ArrowDownIcon from "../../assets/icons/arrow_down.svg?react";
 
 export const ImageScaler = () => {
     const { imageScale, setImageScale } = useStore();

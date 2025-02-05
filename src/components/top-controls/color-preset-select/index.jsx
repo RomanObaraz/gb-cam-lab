@@ -8,10 +8,10 @@ import { ColorPalettePreset } from "./ColorPalettePreset";
 import { CUSTOM_PALETTE_PRESET_NAME, defaultPalettePresets } from "../../../utils/constants";
 import { getPalettePresetsFromStorage, updatePalettePresetStorage } from "../../../utils/utils";
 import { SelectDivider } from "./SelectDivider";
-import RemoveIcon from "../../../assets/remove.svg?react";
-import UnfoldMoreIcon from "../../../assets/unfold_more.svg?react";
-import UnfoldLessIcon from "../../../assets/unfold_less.svg?react";
-import PaletteIcon from "../../../assets/palette.svg?react";
+import RemoveIcon from "../../../assets/icons/remove.svg?react";
+import UnfoldMoreIcon from "../../../assets/icons/unfold_more.svg?react";
+import UnfoldLessIcon from "../../../assets/icons/unfold_less.svg?react";
+import PaletteIcon from "../../../assets/icons/palette.svg?react";
 
 export const ColorPresetSelect = ({ currentPalette, onPresetSelect }) => {
     const [customPalettePresets, setCustomPalettePresets] = useState({});
