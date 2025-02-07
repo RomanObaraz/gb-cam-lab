@@ -14,6 +14,7 @@ import { ColorSchemeSwitch } from "./components/color-scheme-switch";
 import { Title } from "./components/title";
 import { IndexedAnimatePresence } from "./components/indexed-animated-presence";
 import { Footer } from "./components/footer";
+import { loadFrames } from "./utils/frameLoader";
 import "filepond/dist/filepond.min.css";
 import "overlayscrollbars/overlayscrollbars.css";
 
@@ -22,6 +23,7 @@ export const App = () => {
 
     const fileData = useStore((state) => state.fileData);
     const [palette, setPalette] = useState(structuredClone(defaultPalettePresets.blackAndWhite));
+    const [isAssetsLoaded, setIsAssetsLoaded] = useState(false);
 
     const paletteRGB = useMemo(() => palette.colors.map((color) => hexToRgb(color)), [palette]);
 
@@ -39,6 +41,12 @@ export const App = () => {
     };
 
     useEffect(() => {
+        const loadAssets = async () => {
+            await loadFrames();
+            setIsAssetsLoaded(true);
+        };
+        loadAssets();
+
         if (!isMobile) {
             OverlayScrollbars(document.body, {
                 scrollbars: { autoHide: "never" },
@@ -56,25 +64,29 @@ export const App = () => {
         <>
             <ColorSchemeSwitch colorScheme={mode} onSwitch={setMode} />
             <Title />
-            <TopControls
-                isFileLoaded={!!fileData}
-                palette={palette}
-                onPaletteColorChange={handlePaletteColorChange}
-                onPalettePresetSelect={handlePalettePresetSelect}
-            />
-            {fileData && (
+            {isAssetsLoaded && (
                 <>
-                    <div className="-mt-8 max-lg:mt-6">
-                        <IndexedAnimatePresence index={2}>
-                            <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
-                        </IndexedAnimatePresence>
-                        <IndexedAnimatePresence index={3}>
-                            <DownloadControls />
-                        </IndexedAnimatePresence>
-                        <IndexedAnimatePresence index={4}>
-                            <Footer />
-                        </IndexedAnimatePresence>
-                    </div>
+                    <TopControls
+                        isFileLoaded={!!fileData}
+                        palette={palette}
+                        onPaletteColorChange={handlePaletteColorChange}
+                        onPalettePresetSelect={handlePalettePresetSelect}
+                    />
+                    {fileData && (
+                        <>
+                            <div className="-mt-8 max-lg:mt-6">
+                                <IndexedAnimatePresence index={2}>
+                                    <PhotoGallery fileData={fileData} paletteRGB={paletteRGB} />
+                                </IndexedAnimatePresence>
+                                <IndexedAnimatePresence index={3}>
+                                    <DownloadControls />
+                                </IndexedAnimatePresence>
+                                <IndexedAnimatePresence index={4}>
+                                    <Footer />
+                                </IndexedAnimatePresence>
+                            </div>
+                        </>
+                    )}
                 </>
             )}
         </>

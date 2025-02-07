@@ -230,6 +230,17 @@ export const downloadAll = async (imageScale) => {
     saveAs(zipBlob, `${DOWNLOAD_FILE_NAME}s.zip`);
 };
 
+export const getFrameIndex = (photoData) => {
+    const frameIndexAddress = 0xf54;
+    let index = 0;
+
+    if (frameIndexAddress < photoData.length) {
+        index = photoData[frameIndexAddress];
+    }
+
+    return index;
+};
+
 export const areArraysEqual = (arr1, arr2) => {
     return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
 };

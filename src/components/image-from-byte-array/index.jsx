@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import {
     areArraysEqual,
     createImageDataShadeMap,
+    getFrameIndex,
     getImageDataFromPhoto,
     replaceImageDataColor,
 } from "../../utils/utils";
@@ -13,8 +14,7 @@ import {
     PHOTO_HEIGHT,
     PHOTO_WIDTH,
 } from "../../utils/constants";
-
-import testFrame from "/src/assets/frames/int-frame-0.png";
+import { getFrame } from "../../utils/frameLoader";
 
 // Photos start at 0x2000 with an interval of 0x1000 per photo
 const photoStartOffset = 0x2000;
@@ -31,6 +31,7 @@ export const ImageFromByteArray = ({
 }) => {
     const [imageData, setImageData] = useState(null);
     const [frameData, setFrameData] = useState(null);
+    const [frameIndex, setFrameIndex] = useState(0);
     const canvasRef = useRef();
     const prevPaletteRef = useRef(paletteRGB);
 
@@ -63,33 +64,39 @@ export const ImageFromByteArray = ({
     };
 
     const createFrameData = () => {
-        const img = new Image();
-        img.src = testFrame;
-        img.onload = () => {
-            const tempCanvas = document.createElement("canvas");
-            tempCanvas.width = img.width;
-            tempCanvas.height = img.height;
-            const tempCtx = tempCanvas.getContext("2d");
-            tempCtx.drawImage(img, 0, 0);
+        const img = getFrame(frameIndex);
+        if (!img) {
+            console.error(`Frame at index ${frameIndex} not found or not loaded.`);
+            return;
+        }
 
-            const frameImageData = tempCtx.getImageData(0, 0, img.width, img.height);
-            frameImageData.shadeMap = createImageDataShadeMap(frameImageData);
+        const tempCanvas = document.createElement("canvas");
+        tempCanvas.width = img.width;
+        tempCanvas.height = img.height;
+        const tempCtx = tempCanvas.getContext("2d");
+        tempCtx.drawImage(img, 0, 0);
 
-            paletteRGB.forEach((color, index) => {
-                replaceImageDataColor(frameImageData, index, color);
-            });
+        const frameImageData = tempCtx.getImageData(0, 0, img.width, img.height);
+        frameImageData.shadeMap = createImageDataShadeMap(frameImageData);
 
-            setFrameData(frameImageData);
+        paletteRGB.forEach((color, index) => {
+            replaceImageDataColor(frameImageData, index, color);
+        });
 
+        setFrameData(frameImageData);
+
+        if (isFrameEnabled) {
             canvasRef.current.width = FRAME_WIDTH;
             canvasRef.current.height = FRAME_HEIGHT;
-        };
+        }
     };
 
     useEffect(() => {
         const photoStart = photoStartOffset + photoByteLength * photoIndex;
         const photoEnd = photoStart + photoByteLength;
         const photoData = new Uint8Array(byteArray).slice(photoStart, photoEnd);
+
+        setFrameIndex(getFrameIndex(photoData));
 
         const newImageData = getImageDataFromPhoto(photoData, paletteRGB);
         setImageData(newImageData);
@@ -112,9 +119,13 @@ export const ImageFromByteArray = ({
             return;
         }
 
-        createFrameData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isFrameEnabled]);
+
+    useEffect(() => {
+        createFrameData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [frameIndex]);
 
     useEffect(() => {
         updateCanvas();
