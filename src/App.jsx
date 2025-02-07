@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useThrottledCallback } from "use-debounce";
-import { useColorScheme } from "@mui/material";
+import { CircularProgress, useColorScheme } from "@mui/material";
 import { OverlayScrollbars } from "overlayscrollbars";
 import { isMobile } from "react-device-detect";
 
@@ -64,7 +64,7 @@ export const App = () => {
         <>
             <ColorSchemeSwitch colorScheme={mode} onSwitch={setMode} />
             <Title />
-            {isAssetsLoaded && (
+            {isAssetsLoaded ? (
                 <>
                     <TopControls
                         isFileLoaded={!!fileData}
@@ -88,6 +88,12 @@ export const App = () => {
                         </>
                     )}
                 </>
+            ) : (
+                <CircularProgress
+                    className="flex absolute top-0 bottom-0 self-center"
+                    size="96px"
+                    color="main"
+                />
             )}
         </>
     );
