@@ -17,8 +17,6 @@ export const loadFrames = async () => {
         return parseInt(aPath.split("-")[2], 10) - parseInt(bPath.split("-")[2], 10);
     });
 
-    console.log(entries);
-
     loadingPromise = Promise.all(
         entries.map(async ([path, importer], index) => {
             const module = await importer();
@@ -39,7 +37,6 @@ export const loadFrames = async () => {
     isLoading = false;
     loadingPromise = null;
     console.log("Frames loaded!");
-    console.log(frames.map((f) => f.currentSrc));
 };
 
 export const getFrame = (index) => frames[index] || null;
