@@ -1,12 +1,12 @@
 import { IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 
 import { useStore } from "../../stores/useStore";
-import { PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
+import { FRAME_HEIGHT, FRAME_WIDTH, PHOTO_HEIGHT, PHOTO_WIDTH } from "../../utils/constants";
 import ArrowUpIcon from "../../assets/icons/arrow_up.svg?react";
 import ArrowDownIcon from "../../assets/icons/arrow_down.svg?react";
 
 export const ImageScaler = () => {
-    const { imageScale, setImageScale } = useStore();
+    const { isFrameEnabled, imageScale, setImageScale } = useStore();
 
     const handleScaleInputChange = (e) => {
         let inputValue = e.target.value;
@@ -69,7 +69,9 @@ export const ImageScaler = () => {
                 }}
             />
             <Typography className="w-36 text-left ml-2 font-medium">
-                {` (${PHOTO_WIDTH * imageScale}x${PHOTO_HEIGHT * imageScale} px)`}
+                {isFrameEnabled
+                    ? ` (${FRAME_WIDTH * imageScale}x${FRAME_HEIGHT * imageScale} px)`
+                    : ` (${PHOTO_WIDTH * imageScale}x${PHOTO_HEIGHT * imageScale} px)`}
             </Typography>
         </div>
     );
