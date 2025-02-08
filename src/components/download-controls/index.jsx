@@ -4,10 +4,12 @@ import { ImageScaler } from "./ImageScaler";
 
 export const DownloadControls = () => {
     return (
-        <div className="flex flex-row mt-8 items-center justify-center gap-2 max-sm:flex-col max-sm:gap-4">
-            <ImageScaler />
+        <div className="flex flex-col items-center mt-4 gap-4">
             <FrameToggle />
-            <ImageDownloader />
+            <div className="flex flex-row items-center justify-center gap-2 max-sm:flex-col max-sm:gap-4">
+                <ImageScaler />
+                <ImageDownloader />
+            </div>
         </div>
     );
 };
