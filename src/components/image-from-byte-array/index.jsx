@@ -14,7 +14,7 @@ import {
     PHOTO_HEIGHT,
     PHOTO_WIDTH,
 } from "../../utils/constants";
-import { getFrame } from "../../utils/frameLoader";
+import { getFrame, hasVariant } from "../../utils/frameLoader";
 
 // Photos start at 0x2000 with an interval of 0x1000 per photo
 const photoStartOffset = 0x2000;
@@ -27,6 +27,7 @@ export const ImageFromByteArray = ({
     photoIndex,
     imageScale,
     isFrameEnabled,
+    frameVariant,
     paletteRGB,
 }) => {
     const [imageData, setImageData] = useState(null);
@@ -64,7 +65,7 @@ export const ImageFromByteArray = ({
     };
 
     const createFrameData = () => {
-        const img = getFrame(frameIndex);
+        const img = getFrame(frameIndex, frameVariant);
         if (!img) {
             console.error(`Frame at index ${frameIndex} not found or not loaded.`);
             return;
@@ -84,6 +85,12 @@ export const ImageFromByteArray = ({
         });
 
         setFrameData(frameImageData);
+
+        // clear temp canvas and remove from memory
+        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+        tempCanvas.width = 0;
+        tempCanvas.height = 0;
+        tempCanvas.remove();
 
         if (isFrameEnabled) {
             canvasRef.current.width = FRAME_WIDTH;
@@ -126,6 +133,11 @@ export const ImageFromByteArray = ({
         createFrameData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [frameIndex]);
+
+    useEffect(() => {
+        if (hasVariant(frameIndex)) createFrameData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [frameVariant]);
 
     useEffect(() => {
         updateCanvas();

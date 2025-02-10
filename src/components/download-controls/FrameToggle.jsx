@@ -4,7 +4,7 @@ import { useStore } from "../../stores/useStore";
 
 export const FrameToggle = () => {
     const { isFrameEnabled, setIsFrameEnabled } = useStore();
-    const { framesVariant, setFramesVariant } = useStore();
+    const { frameVariant, setFrameVariant } = useStore();
 
     return (
         <div className="flex flex-row">
@@ -19,8 +19,8 @@ export const FrameToggle = () => {
             />
             <RadioGroup
                 className="flex flex-col"
-                value={framesVariant}
-                onChange={(event) => setFramesVariant(event.target.value)}
+                value={frameVariant}
+                onChange={(event) => setFrameVariant(event.target.value)}
             >
                 <FormControlLabel
                     value="international"

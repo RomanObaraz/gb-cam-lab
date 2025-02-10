@@ -1,9 +1,9 @@
-const frames = [];
+const frames = { int: {}, jp: {} };
 let isLoading = false;
 let loadingPromise = null;
 
 export const loadFrames = async () => {
-    if (frames.length || isLoading) {
+    if (Object.keys(frames.int).length || isLoading) {
         return loadingPromise ?? Promise.resolve();
     }
 
@@ -13,18 +13,23 @@ export const loadFrames = async () => {
     const images = import.meta.glob("/src/assets/frames/*.png");
     const entries = Object.entries(images);
 
-    entries.sort(([aPath], [bPath]) => {
-        return parseInt(aPath.split("-")[2], 10) - parseInt(bPath.split("-")[2], 10);
-    });
-
     loadingPromise = Promise.all(
-        entries.map(async ([path, importer], index) => {
+        entries.map(async ([path, importer]) => {
             const module = await importer();
             return new Promise((resolve, reject) => {
                 const img = new Image();
                 img.src = module.default;
                 img.onload = () => {
-                    frames[index] = img;
+                    const match = path.match(/\/(\w+)-frame-(\d+)\.png$/);
+                    if (!match) return resolve();
+
+                    const [, type, index] = match;
+                    const frameIndex = parseInt(index, 10);
+
+                    if (frames[type]) {
+                        frames[type][frameIndex] = img;
+                    }
+
                     resolve();
                 };
                 img.onerror = reject;
@@ -39,4 +44,12 @@ export const loadFrames = async () => {
     console.log("Frames loaded!");
 };
 
-export const getFrame = (index) => frames[index] || null;
+export const getFrame = (index, variant) => {
+    return variant === "japanese" && frames.jp[index]
+        ? frames.jp[index]
+        : frames.int[index] || null;
+};
+
+export const hasVariant = (index) => {
+    return !!frames.jp[index];
+};
