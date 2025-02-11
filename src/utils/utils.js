@@ -214,15 +214,17 @@ export const downloadAll = async (imageScale) => {
     const zipPromises = [];
 
     for (let i = 1; i <= PHOTO_COUNT; i++) {
-        const promise = new Promise((resolve) => {
-            const scaledCanvas = getScaledCanvas(canvases[i], imageScale);
-            scaledCanvas.toBlob((blob) => {
-                zip.file(`${DOWNLOAD_FILE_NAME}-${i - 1}.png`, blob);
-                resolve();
-            }, "image/png");
-        });
+        if (canvases[i]) {
+            const promise = new Promise((resolve) => {
+                const scaledCanvas = getScaledCanvas(canvases[i], imageScale);
+                scaledCanvas.toBlob((blob) => {
+                    zip.file(`${DOWNLOAD_FILE_NAME}-${i - 1}.png`, blob);
+                    resolve();
+                }, "image/png");
+            });
 
-        zipPromises.push(promise);
+            zipPromises.push(promise);
+        }
     }
 
     await Promise.all(zipPromises);

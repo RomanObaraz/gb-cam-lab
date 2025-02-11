@@ -10,6 +10,7 @@ import { useStore } from "../../stores/useStore";
 export const PhotoGallery = ({ fileData, paletteRGB }) => {
     const isFrameEnabled = useStore((state) => state.isFrameEnabled);
     const frameVariant = useStore((state) => state.frameVariant);
+    const isPhotoBlank = useStore((state) => state.isPhotoBlank);
     const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
     const theme = useTheme();
     const isSmallerPreview = useMediaQuery(theme.breakpoints.down("md"));
@@ -44,29 +45,32 @@ export const PhotoGallery = ({ fileData, paletteRGB }) => {
             defer
         >
             <Grid2 className="p-1 pb-2" container columns={2} spacing={1}>
-                {[...Array(PHOTO_COUNT)].map((_, index) => (
-                    <div
-                        key={`photo_${index}`}
-                        className={twMerge(
-                            `flex snap-center
+                {[...Array(PHOTO_COUNT)].map((_, index) => {
+                    if (!isPhotoBlank[index])
+                        return (
+                            <div
+                                key={`photo_${index}`}
+                                className={twMerge(
+                                    `flex snap-center
                                 border-2 border-solid border-primary-main
                                 shadow-[2px_2px] shadow-primary-main
                                 transition-transform hover:scale-105`,
-                            index === currentPhotoIndex &&
-                                "border-secondary-main shadow-secondary-main"
-                        )}
-                        onClick={() => setCurrentPhotoIndex(index)}
-                    >
-                        <ImageFromByteArray
-                            byteArray={fileData}
-                            photoIndex={index}
-                            imageScale={1}
-                            isFrameEnabled={isFrameEnabled}
-                            frameVariant={frameVariant}
-                            paletteRGB={paletteRGB}
-                        />
-                    </div>
-                ))}
+                                    index === currentPhotoIndex &&
+                                        "border-secondary-main shadow-secondary-main"
+                                )}
+                                onClick={() => setCurrentPhotoIndex(index)}
+                            >
+                                <ImageFromByteArray
+                                    byteArray={fileData}
+                                    photoIndex={index}
+                                    imageScale={1}
+                                    isFrameEnabled={isFrameEnabled}
+                                    frameVariant={frameVariant}
+                                    paletteRGB={paletteRGB}
+                                />
+                            </div>
+                        );
+                })}
             </Grid2>
         </OverlayScrollbarsComponent>
     );

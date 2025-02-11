@@ -20,7 +20,8 @@ import { getFrame, hasVariant } from "../../utils/frameLoader";
 const photoStartOffset = 0x2000;
 const photoByteLength = 0x1000;
 
-// TODO: ignore empty photos in all processes (recolor, frame, download)
+// TODO: do we need to slice byteArray before passing it here?
+// TODO: do we want to hide erased photos from users?
 
 export const ImageFromByteArray = ({
     byteArray,
@@ -101,7 +102,7 @@ export const ImageFromByteArray = ({
     useEffect(() => {
         const photoStart = photoStartOffset + photoByteLength * photoIndex;
         const photoEnd = photoStart + photoByteLength;
-        const photoData = new Uint8Array(byteArray).slice(photoStart, photoEnd);
+        const photoData = byteArray.slice(photoStart, photoEnd);
 
         setFrameIndex(getFrameIndex(photoData));
 
