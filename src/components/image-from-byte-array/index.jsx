@@ -20,9 +20,6 @@ import { getFrame, hasVariant } from "../../utils/frameLoader";
 const photoStartOffset = 0x2000;
 const photoByteLength = 0x1000;
 
-// TODO: do we need to slice byteArray before passing it here?
-// TODO: do we want to hide erased photos from users?
-
 export const ImageFromByteArray = ({
     byteArray,
     photoIndex,
