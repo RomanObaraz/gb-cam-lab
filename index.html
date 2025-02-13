@@ -3,14 +3,37 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>GB Cam Lab</title>
+        <meta name="description" content="Export and edit images from Gameboy Camera save files." />
+
+        <!-- Open Graph for Social Sharing -->
+        <meta property="og:title" content="GB Cam Lab" />
+        <meta
+            property="og:description"
+            content="Export and edit images from Gameboy Camera save files."
+        />
+        <meta property="og:image" content="https://gbcamlab.vercel.app/preview.png" />
+        <meta property="og:url" content="https://gbcamlab.vercel.app/" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:title" content="GB Cam Lab" />
+        <meta
+            name="twitter:description"
+            content="Export and edit images from Gameboy Camera save files."
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://gbcamlab.vercel.app/preview.png" />
+
+        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Orbitron:wght@400..900&display=swap"
             rel="stylesheet"
         />
-        <link rel="icon" href="/src/assets/icons/favicon.svg" type="image/svg+xml" />
-        <title>GB Cam Lab</title>
+
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
         <script>
             const mode = localStorage.getItem("mui-mode") || "light";
             document.documentElement.classList.add(mode);
