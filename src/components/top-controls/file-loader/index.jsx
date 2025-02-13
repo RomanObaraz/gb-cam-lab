@@ -27,14 +27,7 @@ const CustomLabelIdle = () => {
 
 const validateFileType = (file, type) => {
     return new Promise((resolve) => {
-        console.log(`file name: ${file.name}`);
-        console.log(`file type: ${type}`);
-
-        if (!type) {
-            type = "." + file.name.split(".").pop();
-            console.log(`file type fixed: ${type}`);
-        }
-
+        type = "." + file.name.split(".").pop();
         resolve(type);
     });
 };
