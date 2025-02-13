@@ -4,7 +4,7 @@ The tool: [GB Cam Lab](https://gbcamlab.vercel.app/)
 
 A simple tool for exporting and editing photos from Gameboy Camera save files.
 
-![Preview](./preview.png)
+![Preview](./public/preview.png)
 
 If you like GB Cam Lab and want to support my work, consider [Buying me a coffee ☕](https://ko-fi.com/romanobaraz)
 
@@ -21,6 +21,9 @@ If you like GB Cam Lab and want to support my work, consider [Buying me a coffee
 
 -   **Image Scaling**  
     Scale your extracted photos to different sizes while maintaining their pixel-perfect quality.
+
+-   **Photo Frames**  
+    Toggle on/off GameBoy Camera photo frames. Choose between international and Japanese frames.
 
 ## License
 
